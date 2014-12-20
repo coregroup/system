@@ -17,9 +17,9 @@ import views.html.signupTeacher;
  * @author priscylla
  *
  */
-public class CrudTeacherController extends Controller{
+public class TeacherController extends Controller {
 	
-	private static TeacherService teacherService = new TeacherServiceImpl(new TeacherRepositoryImpl());
+private static TeacherService teacherService = new TeacherServiceImpl(new TeacherRepositoryImpl());
 	
 	/**
      * Display the 'new teacher form'.

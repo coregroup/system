@@ -17,9 +17,9 @@ import views.html.signupStudent;
  * @author priscylla
  *
  */
-public class CrudStudentController extends Controller{
+public class StudentController extends Controller {
 	
-	private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
+private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
 	
 	/**
      * Display the 'new student form'.

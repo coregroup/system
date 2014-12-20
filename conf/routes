@@ -9,12 +9,12 @@ GET     /test                       controllers.Application.index2()
 GET     /login                      controllers.Application.login()
 
 # Sign Up Student
-GET		/signupStudent				controllers.CrudStudentController.signupStudent()
-POST	/signupStudent				controllers.CrudStudentController.save()
+GET		/signupStudent				controllers.StudentController.signupStudent()
+POST	/signupStudent				controllers.StudentController.save()
 
 # Sign Up Teacher
-GET		/signupTeacher				controllers.CrudTeacherController.signupTeacher()
-POST	/signupTeacher				controllers.CrudTeacherController.save()
+GET		/signupTeacher				controllers.TeacherController.signupTeacher()
+POST	/signupTeacher				controllers.TeacherController.save()
 
 # Home page
 GET     /                           controllers.Application.index()
