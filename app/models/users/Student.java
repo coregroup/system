@@ -3,13 +3,19 @@
  */
 package models.users;
 
-import java.util.Date;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 
 /**
  * @author priscylla
  *
  */
-public class Student {
+@Entity
+@DiscriminatorValue("student")
+public class Student extends User{
+	
+	private static final long serialVersionUID = 1L;
 	
 	//private List<Course> courses; ou Colletions? 
 

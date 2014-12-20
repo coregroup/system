@@ -8,8 +8,11 @@ GET     /test                       controllers.Application.index2()
 # Login
 GET     /login                      controllers.Application.login()
 
-# Sign Up
-GET		/signupStudent				controllers.Application.signupStudent()
+# Sign Up Student
+GET		/signupStudent				controllers.CrudStudentController.signupStudent()
+POST	/signupStudent				controllers.CrudStudentController.save()
+
+# Sign Up Teacher
 GET		/signupTeacher				controllers.Application.signupTeacher()
 
 # Home page

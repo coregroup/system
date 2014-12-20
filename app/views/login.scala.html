@@ -8,9 +8,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>System</title>
+    @*************************************
+        <link rel='stylesheet' href='@routes.Assets.at("lib/bootstrap/css/bootstrap.min.css")'>
+        <link rel='stylesheet' href='@routes.Assets.at("lib/font-awesome/css/font-awesome.min.css")'>
+        
+        <script src="@routes.Assets.at("lib/jquery/jquery.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("lib/bootstrap/js/bootstrap.min.js")" type="text/javascript"></script>
+        *************************************@
 
     <!-- Bootstrap core CSS -->
     <link href='@routes.Assets.at("stylesheets/bootstrap.min.css")' rel="stylesheet">
@@ -63,7 +69,14 @@
     </div>
 
 <br><br><br><br><br><br>
-
+@if(flash.containsKey("success")) {
+	<center>
+	<div class="alert alert-success">
+        <strong>Feito! </strong> @flash.get("success")
+    </div>
+    </center>
+    }
+    
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <div id="login-overlay" class="modal-dialog">
@@ -105,7 +118,7 @@
                           <li><span class="fa fa-check text-success"></span> Aprenda de forma divertida</li>
                           <li><span class="fa fa-check text-success"></span> Acompanhe sua evolução</li>
                       </ul>
-                      <p><a href="@routes.Application.signupStudent()" class="btn btn-info btn-block">Cadastro do Aluno</a></p>
+                      <p><a href="@routes.CrudStudentController.signupStudent()" class="btn btn-info btn-block">Cadastro do Aluno</a></p>
                       
                       <ul class="list-unstyled" style="line-height: 2">
                           <li><span class="fa fa-check text-success"></span> Correção automática de atividades</li>
