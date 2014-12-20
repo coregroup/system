@@ -13,7 +13,8 @@ GET		/signupStudent				controllers.CrudStudentController.signupStudent()
 POST	/signupStudent				controllers.CrudStudentController.save()
 
 # Sign Up Teacher
-GET		/signupTeacher				controllers.Application.signupTeacher()
+GET		/signupTeacher				controllers.CrudTeacherController.signupTeacher()
+POST	/signupTeacher				controllers.CrudTeacherController.save()
 
 # Home page
 GET     /                           controllers.Application.index()

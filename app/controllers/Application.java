@@ -25,9 +25,6 @@ public class Application extends Controller {
     	return ok(login.render());
     }
     
-    public static Result signupTeacher() {
-    	return ok(signupTeacher.render());
-    }
     ////////////////////////////
     public static Result index() {
         return ok(index.render());

@@ -3,18 +3,23 @@
  */
 package controllers;
 
-import play.mvc.*;
-import play.data.*;
-import static play.data.Form.*;
-import play.data.*;
-import views.html.*;
-import models.users.*;;
+import static play.data.Form.form;
+import models.users.Student;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import repositories.users.impl.StudentRepositoryImpl;
+import services.users.StudentService;
+import services.users.impl.StudentServiceImpl;
+import views.html.signupStudent;
 
 /**
  * @author priscylla
  *
  */
 public class CrudStudentController extends Controller{
+	
+	private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
 	
 	/**
      * Display the 'new student form'.
@@ -45,7 +50,8 @@ public class CrudStudentController extends Controller{
         	
             return badRequest(signupStudent.render(studentForm));
         }
-        studentForm.get().save();
+        
+        studentService.save(studentForm.get());
         flash("success", "Estudante " + studentForm.get().fullname + " cadastrado(a) com sucesso!");
         return redirect(routes.Application.login());
     }
