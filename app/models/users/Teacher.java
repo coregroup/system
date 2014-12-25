@@ -20,5 +20,8 @@ public class Teacher extends User{
 	@MinLength(value = 6)
 	public String teachingArea;
 	//private List<Course> courses; ou Colletions?
+	
+	public static Finder<Long, Teacher> find = new Finder(Long.class,
+			Teacher.class);
 
 }

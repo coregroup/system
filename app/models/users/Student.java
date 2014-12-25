@@ -18,5 +18,9 @@ public class Student extends User{
 	private static final long serialVersionUID = 1L;
 	
 	//private List<Course> courses; ou Colletions? 
+	
+	public static Finder<Long, Student> find = new Finder(Long.class,
+			Student.class);
+	
 
 }

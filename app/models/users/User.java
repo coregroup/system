@@ -48,6 +48,8 @@ public abstract class User extends Model{
 	@Required
 	@Formats.DateTime(pattern="yyyy-MM-dd")
 	public Date dateOfBirth;
-
+	
+	
+	public static Finder<Long, User> find = new Finder(Long.class, User.class);	
 
 }

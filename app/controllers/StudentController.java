@@ -19,7 +19,7 @@ import views.html.signupStudent;
  */
 public class StudentController extends Controller {
 	
-private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
+	private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
 	
 	/**
      * Display the 'new student form'.
@@ -53,7 +53,7 @@ private static StudentService studentService = new StudentServiceImpl(new Studen
         
         studentService.save(studentForm.get());
         flash("success", "Estudante " + studentForm.get().fullname + " cadastrado(a) com sucesso!");
-        return redirect(routes.Application.login());
+        return redirect(routes.LoginController.login());
     }
     
     /**

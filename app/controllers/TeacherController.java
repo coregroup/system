@@ -19,7 +19,7 @@ import views.html.signupTeacher;
  */
 public class TeacherController extends Controller {
 	
-private static TeacherService teacherService = new TeacherServiceImpl(new TeacherRepositoryImpl());
+	private static TeacherService teacherService = new TeacherServiceImpl(new TeacherRepositoryImpl());
 	
 	/**
      * Display the 'new teacher form'.
@@ -52,8 +52,8 @@ private static TeacherService teacherService = new TeacherServiceImpl(new Teache
         }
         
         teacherService.save(teacherForm.get());
-        flash("success", "Professor " + teacherForm.get().fullname + " cadastrado(a) com sucesso!");
-        return redirect(routes.Application.login());
+        flash("success", "Professor(a) " + teacherForm.get().fullname + " cadastrado(a) com sucesso!");
+        return redirect(routes.LoginController.login());
     }
 
 }

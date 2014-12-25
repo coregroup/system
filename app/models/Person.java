@@ -1,6 +1,8 @@
 package models;
 
+import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,7 +10,8 @@ import javax.persistence.Id;
 public class Person extends Model {
 
 	@Id
-	public String id;
-
+	public Long id;
+	
+	@Required
 	public String name;
 }

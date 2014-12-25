@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table person (
-  id                        varchar(255) not null,
+  id                        bigint auto_increment not null,
   name                      varchar(255),
   constraint pk_person primary key (id))
 ;

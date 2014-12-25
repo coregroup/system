@@ -1,5 +1,7 @@
 @()
 
+@import helper._ 
+
 @main2("System") {
 
 @if(flash.containsKey("success")) {
@@ -8,7 +10,7 @@
         <strong>Feito! </strong> @flash.get("success")
     </div>
     </center>
-    }
+}
     
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -17,11 +19,12 @@
           <div class="modal-header">
               <h4 class="modal-title" id="myModalLabel">Faça Login e Comece a Usar o Sistema!</h4>
           </div>
+          
           <div class="modal-body">
               <div class="row">
                   <div class="col-xs-6">
                       <div class="well">
-                          <form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+                      	  
                               <div class="form-group">
                                   <label for="email" class="control-label">Email</label>
                                   <input type="text" class="form-control" id="email" name="email" value="" required="" title="Por favor, insira seu email">
@@ -40,8 +43,8 @@
                                   <p class="help-block">(se você estiver usando um computador público, não marque essa opção)</p>
                               </div>
                               <button type="submit" class="btn btn-success btn-block">Entrar</button>
-                              <a href="/forgot/" class="btn btn-default btn-block">Esqueci a Senha</a>
-                          </form>
+                              <a href="#" class="btn btn-default btn-block">Esqueci a Senha</a>
+                        
                       </div>
                   </div>
                   <div class="col-xs-6">
