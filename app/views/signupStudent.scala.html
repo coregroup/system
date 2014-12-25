@@ -74,6 +74,17 @@
 			                '_help -> "Formato: dd/mm/aaaa."
 			          )
 				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Brazilian states -->
+				      <label>Estado</label><br>
+				      <select name="state">
+							@for(state <- State.values) {
+								<option value="@state.name">@state.name</option>
+							}
+					  </select>
+				    </div>
+					<br><br>
 				 
 				    <div class="control-group">
 				      <!-- Button -->

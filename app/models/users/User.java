@@ -6,12 +6,15 @@ package models.users;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import models.State;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
@@ -49,7 +52,19 @@ public abstract class User extends Model{
 	@Formats.DateTime(pattern="yyyy-MM-dd")
 	public Date dateOfBirth;
 	
+	@Enumerated(EnumType.STRING)
+	private State state;
 	
-	public static Finder<Long, User> find = new Finder(Long.class, User.class);	
+	
+	public static Finder<Long, User> find = new Finder(Long.class, User.class);
+
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
 
 }
