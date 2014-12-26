@@ -35,10 +35,6 @@ public class TeacherController extends Controller {
     public static Result save() {
         Form<Teacher> teacherForm = form(Teacher.class).bindFromRequest();
         
-        if (teacherForm.field("fullname").valueOr("").isEmpty()) {
-        	teacherForm.reject("fullname", "Este campo é obrigatório");
-		}
-        
         if (!teacherForm.field("password").valueOr("").isEmpty()) {
 			if (!teacherForm.field("password").valueOr("")
 					.equals(teacherForm.field("password_confirm").value())) {

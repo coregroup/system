@@ -35,10 +35,6 @@ public class StudentController extends Controller {
     public static Result save() {
         Form<Student> studentForm = form(Student.class).bindFromRequest();
         
-        if (studentForm.field("fullname").valueOr("").isEmpty()) {
-        	studentForm.reject("fullname", "Este campo é obrigatório");
-		}
-        
         if (!studentForm.field("password").valueOr("").isEmpty()) {
 			if (!studentForm.field("password").valueOr("")
 					.equals(studentForm.field("password_confirm").value())) {
@@ -47,7 +43,6 @@ public class StudentController extends Controller {
 		}
         
         if(studentForm.hasErrors()) {
-        	
             return badRequest(signupStudent.render(studentForm));
         }
         

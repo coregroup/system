@@ -3,6 +3,7 @@
  */
 package models.users;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.validation.constraints.Past;
 
 import models.State;
 import play.data.validation.Constraints.Email;
@@ -48,9 +50,10 @@ public abstract class User extends Model{
 	@MinLength(value = 6)
 	public String password;
 	
+	//@Formats.DateTime(pattern="yyyy-MM-dd")
 	@Required
-	@Formats.DateTime(pattern="yyyy-MM-dd")
-	public Date dateOfBirth;
+	@Past
+	public Calendar dateOfBirth;
 	
 	@Enumerated(EnumType.STRING)
 	private State state;
