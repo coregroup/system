@@ -16,6 +16,9 @@ POST	/signupStudent				controllers.StudentController.save()
 GET		/signupTeacher				controllers.TeacherController.signupTeacher()
 POST	/signupTeacher				controllers.TeacherController.save()
 
+# Dashboard
+GET     /studentDashboard           controllers.Application.studentDashboard()
+
 # Home page
 GET     /                           controllers.Application.index()
 POST    /person                     controllers.Application.addPerson()
