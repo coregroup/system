@@ -4,6 +4,7 @@
 package controllers;
 
 import controllers.authentication.UserAuthenticatedSecured;
+import converters.ConvertPasswordToSHA;
 import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
@@ -33,7 +34,7 @@ public class LoginController extends Controller{
     	String email = requestForm.data().get("email");
     	String password = requestForm.data().get("password");
     	
-    	User user = loginService.exists(email, password);
+    	User user = loginService.exists(email, ConvertPasswordToSHA.convert(password));
     	
     	if(user != null){
     		session().put("email", user.getEmail());

@@ -4,6 +4,7 @@
 package controllers;
 
 import static play.data.Form.form;
+import converters.ConvertPasswordToSHA;
 import models.users.Teacher;
 import play.data.Form;
 import play.mvc.Controller;
@@ -47,6 +48,7 @@ public class TeacherController extends Controller {
             return badRequest(signupTeacher.render(teacherForm));
         }
         
+        teacherForm.get().setPassword(ConvertPasswordToSHA.convert(teacherForm.get().getPassword()));
         teacherService.save(teacherForm.get());
         flash("success", "Professor(a) " + teacherForm.get().fullname + " cadastrado(a) com sucesso!");
         return redirect(routes.LoginController.login());
