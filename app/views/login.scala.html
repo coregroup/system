@@ -1,4 +1,4 @@
-@()
+@(userForm: DynamicForm)
 
 @import helper._ 
 
@@ -20,20 +20,26 @@
               <h4 class="modal-title" id="myModalLabel">Faça Login e Comece a Usar o Sistema!</h4>
           </div>
           
+          @if(userForm.hasGlobalErrors || userForm.hasErrors) { 
+			<div class="alert alert-danger">
+        		<strong>Aviso:</strong> @userForm.globalError.message
+    		</div>
+		  }
+          
           <div class="modal-body">
               <div class="row">
                   <div class="col-xs-6">
                       <div class="well">
-                      	  
+                      	  @form(routes.LoginController.signin()) {
                               <div class="form-group">
-                                  <label for="email" class="control-label">Email</label>
-                                  <input type="text" class="form-control" id="email" name="email" value="" required="" title="Por favor, insira seu email">
-                                  <span class="help-block"></span>
+                                  <!-- fullname -->
+							      @inputText(userForm("email"))
                               </div>
                               <div class="form-group">
-                                  <label for="password" class="control-label">Senha</label>
-                                  <input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
-                                  <span class="help-block"></span>
+                                  @inputPassword(
+						                userForm("password"), 
+						                '_label -> "Senha"
+						          )
                               </div>
                               <div id="loginErrorMsg" class="alert alert-error hide">Email ou senha inválidos</div>
                               <div class="checkbox">
@@ -44,7 +50,7 @@
                               </div>
                               <button type="submit" class="btn btn-success btn-block">Entrar</button>
                               <a href="#" class="btn btn-default btn-block">Esqueci a Senha</a>
-                        
+                        }
                       </div>
                   </div>
                   <div class="col-xs-6">

@@ -30,4 +30,10 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	}
 
+	@Override
+	public Student exists(String email, String password) {
+		Student student = Student.find.where().eq("email", email).eq("password", password).findUnique();
+		return student;
+	}
+
 }

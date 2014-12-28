@@ -29,4 +29,10 @@ public class TeacherRepositoryImpl implements TeacherRepository {
 		
 	}
 
+	@Override
+	public Teacher exists(String email, String password) {
+		Teacher teacher = Teacher.find.where().eq("email", email).eq("password", password).findUnique();
+		return teacher;
+	}
+
 }

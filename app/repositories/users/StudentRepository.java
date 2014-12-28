@@ -16,5 +16,7 @@ public interface StudentRepository {
 	public void delete(Student student);
 	
 	public void update(Student student);
+	
+	public Student exists(String email, String password);
 
 }
