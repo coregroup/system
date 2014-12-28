@@ -26,14 +26,7 @@ public class LoginController extends Controller{
     
     public static Result login() {
     	return ok(login.render(form));
-    }
-    
-    //TODO
-    @Security.Authenticated(UserAuthenticatedSecured.class)
-    public static Result studentDashboard() {
-    	return ok(views.html.dashboard.studentDashboard.render());
-    }
-    
+    }    
     
     public static Result signin(){
     	Form<Dynamic> requestForm = form.bindFromRequest();
@@ -44,7 +37,7 @@ public class LoginController extends Controller{
     	
     	if(user != null){
     		session().put("email", user.getEmail());
-    		return redirect(controllers.routes.LoginController.studentDashboard());
+    		return redirect(controllers.routes.DashboardController.studentDashboard());
     	}
     	else {
     		DynamicForm formDeErro = form.fill(requestForm.data());

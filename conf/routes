@@ -19,7 +19,7 @@ GET		/signupTeacher				controllers.TeacherController.signupTeacher()
 POST	/signupTeacher				controllers.TeacherController.save()
 
 # Dashboard
-GET     /studentDashboard           controllers.LoginController.studentDashboard()
+GET     /studentDashboard           controllers.DashboardController.studentDashboard()
 
 # Home page
 GET     /                           controllers.Application.index()
