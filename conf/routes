@@ -8,6 +8,7 @@ GET     /test                       controllers.Application.index2()
 # Login
 GET     /login                      controllers.LoginController.login()
 POST	/login						controllers.LoginController.signin()
+GET		/logout						controllers.LoginController.logout()
 
 # Sign Up Student
 GET		/signupStudent				controllers.StudentController.signupStudent()
@@ -18,7 +19,7 @@ GET		/signupTeacher				controllers.TeacherController.signupTeacher()
 POST	/signupTeacher				controllers.TeacherController.save()
 
 # Dashboard
-GET     /studentDashboard           controllers.Application.studentDashboard()
+GET     /studentDashboard           controllers.LoginController.studentDashboard()
 
 # Home page
 GET     /                           controllers.Application.index()

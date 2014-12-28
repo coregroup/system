@@ -3,6 +3,7 @@
  */
 package controllers;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
@@ -12,6 +13,7 @@ import play.mvc.Result;
 import services.users.LoginService;
 import services.users.impl.LoginServiceImpl;
 import views.html.login;
+import play.mvc.Security;
 
 /**
  * @author priscylla
@@ -26,6 +28,13 @@ public class LoginController extends Controller{
     	return ok(login.render(form));
     }
     
+    //TODO
+    @Security.Authenticated(UserAuthenticatedSecured.class)
+    public static Result studentDashboard() {
+    	return ok(views.html.dashboard.studentDashboard.render());
+    }
+    
+    
     public static Result signin(){
     	Form<Dynamic> requestForm = form.bindFromRequest();
     	String email = requestForm.data().get("email");
@@ -33,13 +42,23 @@ public class LoginController extends Controller{
     	
     	User user = loginService.exists(email, password);
     	
-    	if(user != null)
-    		return redirect(controllers.routes.Application.studentDashboard());//TODO
+    	if(user != null){
+    		session().put("email", user.getEmail());
+    		return redirect(controllers.routes.LoginController.studentDashboard());
+    	}
     	else {
     		DynamicForm formDeErro = form.fill(requestForm.data());
     		formDeErro.reject("O email ou senha estão incorretos");
     		return forbidden(views.html.login.render(formDeErro));
     	}
+    }
+    
+    public static Result logout() {
+        session().clear();
+        flash("success", "Você saiu do sistema com sucesso!");
+        return redirect(
+            routes.Application.index2()
+        );
     }
 
 }

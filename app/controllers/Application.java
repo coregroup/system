@@ -19,13 +19,7 @@ public class Application extends Controller {
 
     public static Result index2() {
         return ok(index2.render());
-    }
-    
-    public static Result studentDashboard() {
-    	//return TODO;
-    	return ok(views.html.dashboard.studentDashboard.render());
-    }
-    
+    }    
     
     ////////////////////////////
     public static Result index() {

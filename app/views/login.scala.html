@@ -33,7 +33,10 @@
                       	  @form(routes.LoginController.signin()) {
                               <div class="form-group">
                                   <!-- fullname -->
-							      @inputText(userForm("email"))
+							      @inputText(
+							      		userForm("email"),
+							      		'_label -> "Email"
+							      )
                               </div>
                               <div class="form-group">
                                   @inputPassword(
