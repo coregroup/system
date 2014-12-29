@@ -17,11 +17,26 @@ public class Teacher extends User{
 	public String institution;
 	
 	@Required
-	@MinLength(value = 6)
 	public String teachingArea;
 	//private List<Course> courses; ou Colletions?
 	
 	public static Finder<Long, Teacher> find = new Finder(Long.class,
 			Teacher.class);
+
+	public String getInstitution() {
+		return institution;
+	}
+
+	public void setInstitution(String institution) {
+		this.institution = institution;
+	}
+
+	public String getTeachingArea() {
+		return teachingArea;
+	}
+
+	public void setTeachingArea(String teachingArea) {
+		this.teachingArea = teachingArea;
+	}
 
 }

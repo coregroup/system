@@ -3,8 +3,6 @@
  */
 package controllers;
 
-import controllers.authentication.UserAuthenticatedSecured;
-import converters.ConvertPasswordToSHA;
 import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
@@ -14,7 +12,7 @@ import play.mvc.Result;
 import services.users.LoginService;
 import services.users.impl.LoginServiceImpl;
 import views.html.login;
-import play.mvc.Security;
+import converters.ConvertPasswordToSHA;
 
 /**
  * @author priscylla
@@ -51,7 +49,7 @@ public class LoginController extends Controller{
         session().clear();
         flash("success", "Você saiu do sistema com sucesso!");
         return redirect(
-            routes.Application.index2()
+            routes.Application.index()
         );
     }
 
