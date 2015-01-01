@@ -21,6 +21,14 @@ public class Student extends User{
 	
 	public static Finder<Long, Student> find = new Finder(Long.class,
 			Student.class);
+
+	
+	@Override
+	public String getType() {
+		return Student.class.getSimpleName();
+	}
+	
+	
 	
 
 }

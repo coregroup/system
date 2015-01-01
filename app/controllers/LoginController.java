@@ -3,6 +3,8 @@
  */
 package controllers;
 
+import java.util.Calendar;
+
 import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
@@ -10,7 +12,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.users.LoginService;
+import services.users.UserService;
 import services.users.impl.LoginServiceImpl;
+import services.users.impl.UserServiceImpl;
 import views.html.login;
 import converters.ConvertPasswordToSHA;
 
@@ -22,6 +26,7 @@ public class LoginController extends Controller{
 	
 	private static DynamicForm form = Form.form();
 	private static LoginService loginService = new LoginServiceImpl();
+	private static UserService userServive = new UserServiceImpl(); 
     
     public static Result login() {
     	return ok(login.render(form));
@@ -36,6 +41,7 @@ public class LoginController extends Controller{
     	
     	if(user != null){
     		session().put("email", user.getEmail());
+    		userServive.logged(user);
     		return redirect(controllers.routes.DashboardController.studentDashboard());
     	}
     	else {

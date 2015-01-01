@@ -21,6 +21,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void save(Teacher teacher) {
+		teacher.setActive(true);
 		teacherRepository.save(teacher);
 	}
 
@@ -32,8 +33,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void update(Teacher teacher) {
-		// TODO Auto-generated method stub
-		
+		teacher.update();		
 	}
 
 }

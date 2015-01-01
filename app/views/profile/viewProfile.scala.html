@@ -1,4 +1,6 @@
-@()
+@(user: models.users.User)
+
+@import converters.ConvertUserToTeacher
 
 @dashboard.bodyDashboard {
 	
@@ -11,7 +13,7 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Sheena Kristin A.Eschor</h3>
+              <h3 class="panel-title">@user.getFullname()</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -21,47 +23,53 @@
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
+                    
+                      <tr>
+                        <td>Status</td>
+                        <td>@user.getType()</td>
+                      </tr>
 
                       <tr>
                         <td>Último acesso em</td>
-                        <td>06/23/2013</td>
+                        <td>@user.getLastAccess().getTime()</td>
                       </tr>
 
                       <tr>
                         <td>Data de Aniversário</td>
-                        <td>01 de Jan</td>
+                        <td>@user.getDateOfBirth().get(Calendar.DAY_OF_MONTH) @user.getDateOfBirth().getDisplayName(Calendar.MONTH, Calendar.LONG,new Locale("pt","BR"))</td>
                       </tr>
                    
                       <tr>
                         <td>Sexo</td>
-                        <td>Masculino</td>
+                        <td>@user.getGender()</td>
                       </tr>
 
                       <tr>
                         <td>Estado</td>
-                        <td>Alagoas</td>
+                        <td>@user.getState()</td>
                       </tr>
 
-		      <tr>
+		      		  <tr>
                         <td>Cursos Recentes</td>
-                        <td>
-				OBI<br>
-				OBM<br>
-                        </td>
-                           
+                        <td> OBI<br> OBM<br> </td>
                       </tr>
+                      
+                      
+                      @if(user.getType.equals("Teacher")){
+                      		@teacherDetails(ConvertUserToTeacher.convert(user))
+                      }
                      
                     </tbody>
                   </table>
-
+				  
                 </div>
               </div>
             </div>
                  <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i> Enviar Mensagem</a>
                         <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Deletar Usuário</a>
                         </span>
                     </div>
             

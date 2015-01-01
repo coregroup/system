@@ -16,10 +16,14 @@ create table user (
   email                     varchar(255),
   password                  varchar(255),
   date_of_birth             datetime,
+  active                    tinyint(1) default 0,
+  last_access               datetime,
   state                     varchar(19),
+  gender                    varchar(10),
   institution               varchar(255),
   teaching_area             varchar(255),
   constraint ck_user_state check (state in ('Acre','Alagoas','Amapa','Amazonas','Bahia','Ceara','Distrito_Federal','Espirito_Santo','Goias','Maranhao','Mato_Grosso','Mato_Grosso_do_Sul','Minas_Gerais','Para','Paraiba','Parana','Pernambuco','Piaui','Rio_de_Janeiro','Rio_Grande_do_Norte','Rio_Grande_do_Sul','Rondonia','Roraima','Santa_Catarina','Sao_Paulo','Sergipe','Tocantins')),
+  constraint ck_user_gender check (gender in ('MASCULINO','FEMININO','UNANSWERED')),
   constraint pk_user primary key (id))
 ;
 

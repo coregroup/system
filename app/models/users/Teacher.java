@@ -38,5 +38,10 @@ public class Teacher extends User{
 	public void setTeachingArea(String teachingArea) {
 		this.teachingArea = teachingArea;
 	}
+	
+	@Override
+	public String getType() {
+		return Teacher.class.getSimpleName();
+	}
 
 }

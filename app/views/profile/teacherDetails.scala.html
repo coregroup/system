@@ -1,0 +1,11 @@
+@(teacher: models.users.Teacher)
+
+		<tr>
+			<td>Instituição</td>
+			<td>@teacher.getInstitution()</td>
+		</tr>
+		
+		<tr>
+			<td>Áreas de Atuação</td>
+			<td>@teacher.getTeachingArea()</td>
+		</tr>

@@ -22,6 +22,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public void save(Student student) {
+		student.setActive(true);
 		this.studentRepository.save(student);
 	}
 
@@ -34,8 +35,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void update(Student student) {
-		// TODO Auto-generated method stub
-
+		student.update();
 	}
 
 }

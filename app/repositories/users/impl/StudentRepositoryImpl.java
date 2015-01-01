@@ -26,8 +26,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
 	@Override
 	public void update(Student student) {
-		// TODO Auto-generated method stub
-
+		student.update();
 	}
 
 	@Override

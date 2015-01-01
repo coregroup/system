@@ -16,6 +16,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.validation.constraints.Past;
 
+import models.Gender;
 import models.State;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
@@ -55,8 +56,15 @@ public abstract class User extends Model{
 	@Past
 	public Calendar dateOfBirth;
 	
+	public boolean active;
+	
+	public Calendar lastAccess;
+	
 	@Enumerated(EnumType.STRING)
 	private State state;
+	
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 	
 	
 	public static Finder<Long, User> find = new Finder(Long.class, User.class);
@@ -102,12 +110,58 @@ public abstract class User extends Model{
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	/**
+	 * @return the active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @return the lastAccess
+	 */
+	public Calendar getLastAccess() {
+		return lastAccess.getInstance();
+	}
+
+	/**
+	 * @param lastAccess the lastAccess to set
+	 */
+	public void setLastAccess(Calendar lastAccess) {
+		this.lastAccess = lastAccess;
+	}
+
 	public State getState() {
 		return state;
 	}
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	/**
+	 * @return the gender
+	 */
+	public Gender getGender() {
+		return gender;
+	}
+
+	/**
+	 * @param gender the gender to set
+	 */
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public String getType(){
+		return User.class.getSimpleName();
 	}
 
 }
