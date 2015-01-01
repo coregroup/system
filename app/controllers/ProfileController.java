@@ -25,5 +25,11 @@ public class ProfileController extends Controller{
 		User user = userService.findByEmail(email);
 		return ok(views.html.profile.viewProfile.render(user));
 	}
+	
+//	public static Result edit(){
+//		String email = session().get("email");
+//		User user = userService.findByEmail(email);
+//		return ok(views.html.profile.edit.render(user));
+//	}
 
 }

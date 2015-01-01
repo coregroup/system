@@ -1,4 +1,101 @@
-@()
+@(studentForm: Form[models.users.Student])
+
+@import helper._
 
 @dashboard.bodyDashboard {
+
+	
+<fieldset>
+<center>
+
+@if(studentForm.hasGlobalErrors || studentForm.hasErrors) { 
+	<div class="alert alert-warning">
+        <strong>Aviso:</strong> Algumas informações foram preenchidas incorretamente, preencha o formulário 
+        novamente para realizar seu cadastro no sistema.
+    </div>
+}
+
+</center> 
+</fieldset>
+
+<div id="login-overlay" class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              
+              @form(routes.StudentController.save()) {
+				  <fieldset>
+				    <div id="legend">
+				      <legend class="">Cadastro do Aluno</legend>
+				    </div>
+				    <div class="control-group">
+				      <!-- fullname -->
+				      @inputText(
+			                studentForm("fullname"), 
+			                '_label -> "Nome", 
+			                '_help -> "Necessário para todos os certificados que você obtiver."
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- E-mail -->
+				      @inputText(
+			                studentForm("email"), 
+			                '_label -> "Email", 
+			                '_help -> "Seu email será utilizado para login."
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Password-->
+				      @inputPassword(
+			                studentForm("password"), 
+			                '_label -> "Senha",
+			                '_help -> "A senha deve ter no mínimo 6 caracteres. "
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Password -->
+				      <div class="clearfix  " id="password_confirm">
+					    <label for="repeatPassword">Repita a senha</label>
+					    <div class="input">
+					    <input type="password" id="password_confirm" name="password_confirm" value="@studentForm("password").value">
+					        <span class="help-inline"></span>
+					        <span class="help-block">Por favor, repita a sua senha novamente.</span> 
+					  </div>
+				    </div>
+	                
+	                <div class="control-group">
+				      <!-- date of birth -->
+				      @inputDate(
+			                studentForm("dateOfBirth"), 
+			                '_label -> "Data de Nascimento",
+			                '_help -> "Formato: dd/mm/aaaa."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Brazilian states -->
+				      <label>Estado</label><br>
+				      <select name="state">
+							@for(state <- State.values) {
+								<option value="@state.name">@state.name</option>
+							}
+					  </select>
+				    </div>
+					<br><br>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Cadastrar</button>
+				      </div>
+				    </div>
+				  </fieldset>
+			}
+              
+          </div>
+      </div>
+</div>
+
 }
