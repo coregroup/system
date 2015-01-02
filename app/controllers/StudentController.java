@@ -7,12 +7,9 @@ import static play.data.Form.form;
 
 import java.text.ParseException;
 
-import converters.ConvertPasswordToSHA;
-import converters.Html5CalendarFormatter;
 import models.Gender;
 import models.State;
 import models.users.Student;
-import models.users.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -22,6 +19,8 @@ import services.users.UserService;
 import services.users.impl.StudentServiceImpl;
 import services.users.impl.UserServiceImpl;
 import views.html.signupStudent;
+import converters.ConvertPasswordToSHA;
+import converters.Html5CalendarFormatter;
 
 /**
  * @author priscylla
@@ -104,25 +103,5 @@ public class StudentController extends Controller {
         flash("success", "Perfil atualizado com sucesso!");
         return redirect(routes.ProfileController.view());
     }
-//    
-//    
-//    public static Result edit() {
-//    	
-//    	String email = session().get("email");
-//		User user = userService.findByEmail(email);
-//		
-//        Form<Student> studentForm = form(Student.class).bindFromRequest();
-//        	
-//        if(studentForm.hasErrors()) {
-//            return badRequest(editProfileStudent.render(studentForm));
-//        }
-//        
-//        studentService.update(studentForm.get());
-//        
-//        flash("success", "Perfil atualizado com sucesso!");
-//        return redirect(routes.ProfileController.view());
-//    }
-    
-    
 
 }

@@ -77,7 +77,11 @@
                  <div class="panel-footer">
                         <a href="#" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i> Enviar Mensagem</a>
                         <span class="pull-right">
-                            <a href='@routes.StudentController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        	@if(user.getType.equals("Teacher")){
+                        		<a href='@routes.TeacherController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        	} else {
+                        		<a href='@routes.StudentController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        	}
                             <a href="#" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Deletar Usuário</a>
                         </span>
                     </div>

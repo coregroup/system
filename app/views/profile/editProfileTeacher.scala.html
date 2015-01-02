@@ -1,0 +1,97 @@
+@(teacherForm: Form[models.users.Teacher])
+
+@import helper._
+
+@dashboard.bodyDashboard {
+
+<div id="login-overlay" class="modal-dialog">
+@if(teacherForm.hasGlobalErrors || teacherForm.hasErrors) { 
+	<div class="alert alert-warning">
+        <strong>Aviso:</strong> Algumas informações foram preenchidas incorretamente, preencha o formulário 
+        novamente para atualizar seu perfil no sistema.
+    </div>
+}
+
+              
+              @form(routes.TeacherController.update()) {
+				  <fieldset>
+				    <div id="legend">
+				      <legend class="">Edição do Perfil</legend>
+				    </div>
+				    <div class="control-group">
+				      <!-- fullname -->
+				      @inputText(
+			                teacherForm("fullname"), 
+			                '_label -> "Nome", 
+			                '_help -> "Necessário para todos os certificados que você obtiver."
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- E-mail -->
+				      @inputText(
+			                teacherForm("email"), 
+			                '_label -> "Email", 
+			                '_help -> "Seu email será utilizado para login."
+			          )
+				    </div>
+	                
+	                <div class="control-group">
+				      <!-- date of birth -->
+				      @inputDate(
+			                teacherForm("dateOfBirth"), 
+			                '_label -> "Data de Nascimento",
+			                '_help -> "Formato: dd/mm/aaaa."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Brazilian states -->
+				      @select(
+                			teacherForm("state"), 
+                			options(State.options), 
+                			'_label -> "Estado", '_default -> "-- Escolha um Estado --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Gender -->
+				      @select(
+                			teacherForm("gender"), 
+                			options(Gender.options), 
+                			'_label -> "Sexo", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- institution -->
+				      @inputText(
+				                teacherForm("institution"), 
+				                '_label -> "Instituição de Ensino", 
+				                '_help -> "Caso não seja vinculado a nenhuma instituição, digite Autônomo.",
+				                '_error -> teacherForm.globalError
+				          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- teaching area -->
+				      @inputText(
+				                teacherForm("teachingArea"), 
+				                '_label -> "Área de Atuação", 
+				                '_help -> "Área na qual é formado ou atual. Exs: Informática, Pedagogia, Matemática...",
+				                '_error -> teacherForm.globalError
+				          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar</button>
+				      </div>
+				    </div>
+				  </fieldset>
+			}
+
+}
