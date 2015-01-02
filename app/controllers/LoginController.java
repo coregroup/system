@@ -39,7 +39,7 @@ public class LoginController extends Controller{
     	
     	User user = loginService.exists(email, ConvertPasswordToSHA.convert(password));
     	
-    	if(user != null){
+    	if(user != null && user.isActive()){
     		session().put("email", user.getEmail());
     		userServive.logged(user);
     		return redirect(controllers.routes.DashboardController.studentDashboard());
