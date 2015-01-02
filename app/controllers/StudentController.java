@@ -58,6 +58,10 @@ public class StudentController extends Controller {
     public static Result save() {
         Form<Student> studentForm = form(Student.class).bindFromRequest();
         
+        if(userService.findByEmail(studentForm.field("email").valueOr(""))!=null){
+        	studentForm.reject("email", "Já existe um usuário cadastrado com esse email.");
+        }
+        
         if (!studentForm.field("password").valueOr("").isEmpty()) {
 			if (!studentForm.field("password").valueOr("")
 					.equals(studentForm.field("password_confirm").value())) {

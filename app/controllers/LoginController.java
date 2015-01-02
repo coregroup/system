@@ -3,8 +3,6 @@
  */
 package controllers;
 
-import java.util.Calendar;
-
 import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;

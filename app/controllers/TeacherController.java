@@ -58,6 +58,10 @@ public class TeacherController extends Controller {
     public static Result save() {
         Form<Teacher> teacherForm = form(Teacher.class).bindFromRequest();
         
+        if(userService.findByEmail(teacherForm.field("email").valueOr(""))!=null){
+        	teacherForm.reject("email", "Já existe um usuário cadastrado com esse email.");
+        }
+        
         if (!teacherForm.field("password").valueOr("").isEmpty()) {
 			if (!teacherForm.field("password").valueOr("")
 					.equals(teacherForm.field("password_confirm").value())) {
