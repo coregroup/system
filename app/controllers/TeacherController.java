@@ -13,12 +13,14 @@ import models.users.Teacher;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import repositories.users.impl.TeacherRepositoryImpl;
 import services.users.TeacherService;
 import services.users.UserService;
 import services.users.impl.TeacherServiceImpl;
 import services.users.impl.UserServiceImpl;
 import views.html.signupTeacher;
+import controllers.authentication.UserAuthenticatedSecured;
 import converters.ConvertPasswordToSHA;
 import converters.Html5CalendarFormatter;
 
@@ -39,6 +41,7 @@ public class TeacherController extends Controller {
     	return ok(signupTeacher.render(teacherForm));
     }
 	
+	@Security.Authenticated(UserAuthenticatedSecured.class)
 	public static Result delete(){
 		String email = session().get("email");
 		Teacher teacher = (Teacher) userService.findByEmail(email);
@@ -73,6 +76,7 @@ public class TeacherController extends Controller {
         return redirect(routes.LoginController.login());
     }
     
+	@Security.Authenticated(UserAuthenticatedSecured.class)
     public static Result edit(){
     	String email = session().get("email");
 		Teacher teacher = (Teacher) userService.findByEmail(email);
@@ -81,6 +85,7 @@ public class TeacherController extends Controller {
     	return ok(views.html.profile.editProfileTeacher.render(teacherForm));
     }
     
+	@Security.Authenticated(UserAuthenticatedSecured.class)
     public static Result update(){
     	Form<Teacher> teacherForm = form(Teacher.class).bindFromRequest();
     	

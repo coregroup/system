@@ -13,12 +13,14 @@ import models.users.Student;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import repositories.users.impl.StudentRepositoryImpl;
 import services.users.StudentService;
 import services.users.UserService;
 import services.users.impl.StudentServiceImpl;
 import services.users.impl.UserServiceImpl;
 import views.html.signupStudent;
+import controllers.authentication.UserAuthenticatedSecured;
 import converters.ConvertPasswordToSHA;
 import converters.Html5CalendarFormatter;
 
@@ -39,6 +41,7 @@ public class StudentController extends Controller {
     	return ok(signupStudent.render(studentForm));
     }
 	
+	@Security.Authenticated(UserAuthenticatedSecured.class)
 	public static Result delete() {
 		String email = session().get("email");
 		Student student = (Student) userService.findByEmail(email);
@@ -72,7 +75,7 @@ public class StudentController extends Controller {
         return redirect(routes.LoginController.login());
     }
     
-	
+    @Security.Authenticated(UserAuthenticatedSecured.class)
     public static Result edit(){
     	String email = session().get("email");
 		Student user = (Student) userService.findByEmail(email);
@@ -81,6 +84,7 @@ public class StudentController extends Controller {
     	return ok(views.html.profile.editProfileStudent.render(studentForm));
     }
     
+    @Security.Authenticated(UserAuthenticatedSecured.class)
     public static Result update(){
     	Form<Student> studentForm = form(Student.class).bindFromRequest();
     	
