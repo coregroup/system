@@ -1,0 +1,80 @@
+@(studentForm: Form[models.users.Student])
+
+@import helper._
+
+@dashboard.bodyDashboard {
+
+<div id="login-overlay" class="modal-dialog">
+@if(studentForm.hasGlobalErrors || studentForm.hasErrors) { 
+	<div class="alert alert-warning">
+        <strong>Aviso:</strong> Algumas informações foram preenchidas incorretamente, preencha o formulário 
+        novamente para atualizar seu perfil no sistema.
+    </div>
+}
+
+              
+              @form(routes.StudentController.update()) {
+				  <fieldset>
+				    <div id="legend">
+				      <legend class="">Edição do Perfil</legend>
+				    </div>
+				    <div class="control-group">
+				      <!-- fullname -->
+				      @inputText(
+			                studentForm("fullname"), 
+			                '_label -> "Nome", 
+			                '_help -> "Necessário para todos os certificados que você obtiver."
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- E-mail -->
+				      @inputText(
+			                studentForm("email"), 
+			                '_label -> "Email", 
+			                '_help -> "Seu email será utilizado para login."
+			          )
+				    </div>
+	                
+	                <div class="control-group">
+				      <!-- date of birth -->
+				      @inputDate(
+			                studentForm("dateOfBirth"), 
+			                '_label -> "Data de Nascimento",
+			                '_help -> "Formato: dd/mm/aaaa."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Brazilian states -->
+				      @select(
+                			studentForm("state"), 
+                			options(State.options), 
+                			'_label -> "Estado", '_default -> "-- Escolha um Estado --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Gender -->
+				      @select(
+                			studentForm("gender"), 
+                			options(Gender.options), 
+                			'_label -> "Sexo", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar</button>
+				      </div>
+				    </div>
+				  </fieldset>
+			}
+              
+      
+      
+
+}

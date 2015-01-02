@@ -3,6 +3,9 @@
  */
 package models;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * @author priscylla
  *
@@ -30,6 +33,14 @@ public enum State {
                     }
             }
             return null;
+    }
+    
+    public static Map<String,String> options() {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(State state: values()) {
+            options.put(state.name(), state.name());
+        }
+        return options;
     }
 
 }

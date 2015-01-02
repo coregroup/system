@@ -7,9 +7,18 @@
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
 <div class="container">
+
       <div class="row">
+	
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" >
-   
+   			
+   			@if(flash.containsKey("success")) {
+				<center>
+				<div class="alert alert-success">
+		        	<strong>Feito! </strong> @flash.get("success")
+		    	</div>
+		    	</center>
+	  		}
    
           <div class="panel panel-info">
             <div class="panel-heading">
@@ -68,7 +77,7 @@
                  <div class="panel-footer">
                         <a href="#" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i> Enviar Mensagem</a>
                         <span class="pull-right">
-                            <a href="#" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                            <a href='@routes.StudentController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
                             <a href="#" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i> Deletar Usuário</a>
                         </span>
                     </div>

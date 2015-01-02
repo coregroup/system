@@ -23,6 +23,8 @@ GET     /studentDashboard           controllers.DashboardController.studentDashb
 
 # Profile
 GET		/profile					controllers.ProfileController.view()
+GET		/profile/student/edit		controllers.StudentController.edit()
+POST	/profile/student/edit		controllers.StudentController.update()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

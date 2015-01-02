@@ -3,13 +3,16 @@
  */
 package controllers;
 
+import static play.data.Form.form;
+import models.users.Student;
 import models.users.User;
-import controllers.authentication.UserAuthenticatedSecured;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import services.users.UserService;
 import services.users.impl.UserServiceImpl;
+import controllers.authentication.UserAuthenticatedSecured;
 
 /**
  * @author priscylla
@@ -24,12 +27,6 @@ public class ProfileController extends Controller{
 		String email = session().get("email");
 		User user = userService.findByEmail(email);
 		return ok(views.html.profile.viewProfile.render(user));
-	}
-	
-//	public static Result edit(){
-//		String email = session().get("email");
-//		User user = userService.findByEmail(email);
-//		return ok(views.html.profile.edit.render(user));
-//	}
+	}	
 
 }

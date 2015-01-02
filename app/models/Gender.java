@@ -3,6 +3,9 @@
  */
 package models;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * @author priscylla
  *
@@ -23,6 +26,14 @@ public enum Gender {
                 }
         }
         return null;
-}
+	}
+	
+	public static Map<String,String> options() {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(Gender gender: values()) {
+            options.put(gender.name(), gender.name());
+        }
+        return options;
+    }
 
 }
