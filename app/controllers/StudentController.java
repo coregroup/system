@@ -39,6 +39,16 @@ public class StudentController extends Controller {
     	return ok(signupStudent.render(studentForm));
     }
 	
+	public static Result delete() {
+		String email = session().get("email");
+		Student student = (Student) userService.findByEmail(email);
+		
+		studentService.delete(student);
+		session().clear();
+		flash("success", "Perfil excluido com sucesso!");
+		return redirect(routes.LoginController.login());
+	}
+	
     /**
      * Handle the 'new student form' submission 
      */

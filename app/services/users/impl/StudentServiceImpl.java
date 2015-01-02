@@ -29,13 +29,13 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public void delete(Student student) {
-		// TODO Auto-generated method stub
-
+		student.setActive(false);
+		studentRepository.update(student);
 	}
 
 	@Override
 	public void update(Student student) {
-		student.update();
+		studentRepository.update(student);
 	}
 
 }

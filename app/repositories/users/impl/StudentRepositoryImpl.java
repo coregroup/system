@@ -20,8 +20,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	
 	@Override
 	public void delete(Student student) {
-		// TODO Auto-generated method stub
-
+		student.delete();
 	}
 
 	@Override

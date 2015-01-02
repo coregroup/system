@@ -27,13 +27,13 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void delete(Teacher teacher) {
-		// TODO Auto-generated method stub
-		
+		teacher.setActive(false);
+		teacherRepository.update(teacher);
 	}
 
 	@Override
 	public void update(Teacher teacher) {
-		teacher.update();		
+		teacherRepository.update(teacher);
 	}
 
 }

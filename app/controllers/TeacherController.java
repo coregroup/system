@@ -7,11 +7,8 @@ import static play.data.Form.form;
 
 import java.text.ParseException;
 
-import converters.ConvertPasswordToSHA;
-import converters.Html5CalendarFormatter;
 import models.Gender;
 import models.State;
-import models.users.Student;
 import models.users.Teacher;
 import play.data.Form;
 import play.mvc.Controller;
@@ -22,6 +19,8 @@ import services.users.UserService;
 import services.users.impl.TeacherServiceImpl;
 import services.users.impl.UserServiceImpl;
 import views.html.signupTeacher;
+import converters.ConvertPasswordToSHA;
+import converters.Html5CalendarFormatter;
 
 /**
  * @author priscylla
@@ -39,6 +38,16 @@ public class TeacherController extends Controller {
 		Form<Teacher> teacherForm = form(Teacher.class);
     	return ok(signupTeacher.render(teacherForm));
     }
+	
+	public static Result delete(){
+		String email = session().get("email");
+		Teacher teacher = (Teacher) userService.findByEmail(email);
+		
+		teacherService.delete(teacher);
+		session().clear();
+		flash("success", "Perfil excluido com sucesso!");
+		return redirect(routes.LoginController.login());
+	}
 	
     /**
      * Handle the 'new teacher form' submission 

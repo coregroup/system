@@ -1,0 +1,32 @@
+@(user: models.users.User)
+
+@import helper._
+
+@import converters.ConvertUserToTeacher
+
+				<a href="#modal-dialog" class="btn btn-sm btn-danger" data-toggle="modal" type="button"><i class="glyphicon glyphicon-remove"></i> Excluir Perfil</a>
+
+				<div id="modal-dialog" class="modal">
+						<div class="modal-dialog">
+					      <div class="modal-content">
+					        <div class="modal-header">
+					            <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+					             <h3>Você tem certeza?</h3>
+					        </div>
+					        <div class="modal-body">
+					             <p>Lembre! Após excluir o seu perfil, você não terá mais acesso ao sistema!</p>
+					        </div>
+					        <div class="modal-footer">
+					          @if(user.getType.equals("Teacher")){
+					          		@form(routes.TeacherController.delete()) {
+					          			<button class="btn btn-sm btn-danger">Excluir Perfil</button>
+					          		}
+					          } else {
+					          		@form(routes.StudentController.delete()) {
+					          			<button class="btn btn-sm btn-danger">Excluir Perfil</button>
+					          		}
+					          }
+					        </div>
+					      </div>
+					    </div>
+					</div>

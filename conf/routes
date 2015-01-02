@@ -27,6 +27,8 @@ GET		/profile/student/edit		controllers.StudentController.edit()
 POST	/profile/student/edit		controllers.StudentController.update()
 GET		/profile/teacher/edit		controllers.TeacherController.edit()
 POST	/profile/teacher/edit		controllers.TeacherController.update()
+POST	/profile/student/delete		controllers.StudentController.delete()
+POST	/profile/teacher/delete		controllers.TeacherController.delete()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

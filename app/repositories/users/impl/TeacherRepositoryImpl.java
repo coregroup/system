@@ -19,8 +19,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
 
 	@Override
 	public void delete(Teacher teacher) {
-		// TODO Auto-generated method stub
-		
+		teacher.delete();
 	}
 
 	@Override
