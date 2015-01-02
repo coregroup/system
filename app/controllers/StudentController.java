@@ -10,7 +10,10 @@ import java.text.ParseException;
 import models.Gender;
 import models.State;
 import models.users.Student;
+import models.users.User;
+import play.data.DynamicForm;
 import play.data.Form;
+import play.data.DynamicForm.Dynamic;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -32,6 +35,7 @@ public class StudentController extends Controller {
 	
 	private static StudentService studentService = new StudentServiceImpl(new StudentRepositoryImpl());
 	private static UserService userService = new UserServiceImpl();
+	private static DynamicForm form = Form.form();
 	
 	/**
      * Display the 'new student form'.
@@ -122,4 +126,33 @@ public class StudentController extends Controller {
         return redirect(routes.ProfileController.view());
     }
 
+    @Security.Authenticated(UserAuthenticatedSecured.class)
+    public static Result editPassword(){
+    	return ok(views.html.profile.changePasswordStudent.render(form));
+    }
+    
+    @Security.Authenticated(UserAuthenticatedSecured.class)
+    public static Result updatePassword(){
+    	Form<Dynamic> requestForm = form.bindFromRequest();
+    	String currentPassword = requestForm.data().get("currentPassword");
+    	String newPassword = requestForm.data().get("newPassword");
+    	String confirmPassword = requestForm.data().get("confirmPassword");
+    	
+    	String email = session().get("email");
+		Student user = (Student) userService.findByEmail(email);
+    	
+		if(newPassword.equals(confirmPassword)) {
+			if(ConvertPasswordToSHA.convert(currentPassword).equals(user.getPassword())){
+				user.setPassword(ConvertPasswordToSHA.convert(newPassword));
+				studentService.update(user);
+			}
+		} else {
+			DynamicForm formDeErro = form.fill(requestForm.data());
+    		formDeErro.reject("As senhas não conferem");
+    		return forbidden(views.html.login.render(formDeErro));
+		}
+    	
+    	flash("success", "Perfil atualizado com sucesso!");
+        return redirect(routes.ProfileController.view());
+    }
 }
