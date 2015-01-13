@@ -20,8 +20,7 @@ public class Teacher extends User{
 	public String teachingArea;
 	//private List<Course> courses; ou Colletions?
 	
-	public static Finder<Long, Teacher> find = new Finder(Long.class,
-			Teacher.class);
+	
 
 	public String getInstitution() {
 		return institution;

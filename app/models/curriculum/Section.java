@@ -7,13 +7,12 @@ import java.util.List;
 
 import models.users.Student;
 import models.users.Teacher;
-import play.db.ebean.Model;
 
 /**
  * @author priscylla
  *
  */
-public class Section extends Model{
+public class Section {
 	
 	private String name;
 	private String description;

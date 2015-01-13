@@ -4,7 +4,6 @@
 package models.users;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.validation.constraints.Past;
 
 import models.Gender;
@@ -21,8 +21,6 @@ import models.State;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
-import play.data.format.*;
-import play.db.ebean.Model;
 
 
 /**
@@ -30,13 +28,14 @@ import play.db.ebean.Model;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User extends Model{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "User")
+public abstract class User {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
 	
 	@Required
@@ -67,48 +66,96 @@ public abstract class User extends Model{
 	private Gender gender;
 	
 	
-	public static Finder<Long, User> find = new Finder(Long.class, User.class);
 
-	
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+
+
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+
+
+	/**
+	 * @return the fullname
+	 */
 	public String getFullname() {
 		return fullname;
 	}
 
+
+
+	/**
+	 * @param fullname the fullname to set
+	 */
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
 
+
+
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+
+
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
+
+	/**
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+
+
+	/**
+	 * @param password the password to set
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+
+
+	/**
+	 * @return the dateOfBirth
+	 */
 	public Calendar getDateOfBirth() {
 		return dateOfBirth;
 	}
 
+
+
+	/**
+	 * @param dateOfBirth the dateOfBirth to set
+	 */
 	public void setDateOfBirth(Calendar dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+
+
 
 	/**
 	 * @return the active
@@ -117,6 +164,8 @@ public abstract class User extends Model{
 		return active;
 	}
 
+
+
 	/**
 	 * @param active the active to set
 	 */
@@ -124,12 +173,16 @@ public abstract class User extends Model{
 		this.active = active;
 	}
 
+
+
 	/**
 	 * @return the lastAccess
 	 */
 	public Calendar getLastAccess() {
-		return lastAccess.getInstance();
+		return lastAccess;
 	}
+
+
 
 	/**
 	 * @param lastAccess the lastAccess to set
@@ -138,14 +191,26 @@ public abstract class User extends Model{
 		this.lastAccess = lastAccess;
 	}
 
+
+
+	/**
+	 * @return the state
+	 */
 	public State getState() {
 		return state;
 	}
 
+
+
+	/**
+	 * @param state the state to set
+	 */
 	public void setState(State state) {
 		this.state = state;
 	}
-	
+
+
+
 	/**
 	 * @return the gender
 	 */
@@ -153,12 +218,16 @@ public abstract class User extends Model{
 		return gender;
 	}
 
+
+
 	/**
 	 * @param gender the gender to set
 	 */
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+
 
 	public String getType(){
 		return User.class.getSimpleName();

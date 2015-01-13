@@ -10,10 +10,10 @@ import java.text.ParseException;
 import models.Gender;
 import models.State;
 import models.users.Student;
-import models.users.User;
 import play.data.DynamicForm;
-import play.data.Form;
 import play.data.DynamicForm.Dynamic;
+import play.data.Form;
+import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -46,6 +46,7 @@ public class StudentController extends Controller {
     }
 	
 	@Security.Authenticated(UserAuthenticatedSecured.class)
+	@Transactional
 	public static Result delete() {
 		String email = session().get("email");
 		Student student = (Student) userService.findByEmail(email);
@@ -59,6 +60,7 @@ public class StudentController extends Controller {
     /**
      * Handle the 'new student form' submission 
      */
+	@Transactional
     public static Result save() {
         Form<Student> studentForm = form(Student.class).bindFromRequest();
         
@@ -84,6 +86,7 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
+    @Transactional
     public static Result edit(){
     	String email = session().get("email");
 		Student user = (Student) userService.findByEmail(email);
@@ -93,6 +96,7 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
+    @Transactional
     public static Result update(){
     	Form<Student> studentForm = form(Student.class).bindFromRequest();
     	
@@ -132,6 +136,7 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
+    @Transactional
     public static Result updatePassword(){
     	Form<Dynamic> requestForm = form.bindFromRequest();
     	String currentPassword = requestForm.data().get("currentPassword");
