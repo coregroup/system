@@ -34,6 +34,14 @@ GET		/profile/student/password	controllers.StudentController.editPassword()
 POST	/profile/student/password	controllers.StudentController.updatePassword()
 GET		/profile/teacher/password	controllers.TeacherController.editPassword()
 POST	/profile/teacher/password	controllers.TeacherController.updatePassword()
+
+# Experimento
+GET		/questions					controllers.ExperimentoController.index()
+POST	/questions/sub/:id/:valor			controllers.ExperimentoController.submeter(id: Long, valor: Integer)
+GET		/questions/next				controllers.ExperimentoController.next(id: Long)
+GET		/questions/dica/:id/:valor			controllers.ExperimentoController.dica(id: Long, valor: Integer)
+GET		/questions/desistir					controllers.ExperimentoController.desistir(id: Long, valor: Integer)
+GET		/questions/finish					controllers.ExperimentoController.finish()
 		
 
 # Map static resources from the /public folder to the /assets URL path

@@ -1,6 +1,7 @@
 @(user: models.users.User)
 
 @import converters.ConvertUserToTeacher
+@import converters.ConvertUserToStudent
 
 @dashboard.bodyDashboard {
 	
@@ -66,6 +67,8 @@
                       
                       @if(user.getType.equals("Teacher")){
                       		@teacherDetails(ConvertUserToTeacher.convert(user))
+                      } else {
+                      		@studentDetails(ConvertUserToStudent.convert(user))
                       }
                      
                     </tbody>

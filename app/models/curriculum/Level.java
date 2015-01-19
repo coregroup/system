@@ -3,6 +3,8 @@
  */
 package models.curriculum;
 
+import models.curriculum.question.Question;
+
 /**
  * @author priscylla
  *

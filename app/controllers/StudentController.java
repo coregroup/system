@@ -80,6 +80,7 @@ public class StudentController extends Controller {
         }
         
         studentForm.get().setPassword(ConvertPasswordToSHA.convert(studentForm.get().getPassword()));
+        studentForm.get().setModel("5,5,5,5,5");//TODO
         studentService.save(studentForm.get());
         flash("success", "Estudante " + studentForm.get().fullname + " cadastrado(a) com sucesso!");
         return redirect(routes.LoginController.login());
@@ -123,6 +124,7 @@ public class StudentController extends Controller {
 		}
 		student.setState(State.getState(studentForm.field("state").value()));
 		student.setGender(Gender.getGender(studentForm.field("gender").value()));
+		student.setTurma(studentForm.field("turma").value());
 		
 		studentService.update(student);
 		
