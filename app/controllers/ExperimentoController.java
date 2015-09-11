@@ -81,23 +81,18 @@ public class ExperimentoController extends Controller{
 				StudentModel modelo = new StudentModel();
 				student.setModel(modelo.newModel(student, valor));
 				studentService.update(student);
-				//Salva solução correta no log
+				
 				ServiceLog log = new ServiceLog();
 				log.save(question, student, solucaoEstudante, true, null, Calendar.getInstance(), ""+modelo.getValue(student), false);
 				
 				flash("success", "Você acertou a questão anterior! Tente agora essa nova questão!");
 				Long nextId = (long)(id.intValue() + 1);
-				
-				TypedQuery<Question> query2 = JPA.em().createQuery("SELECT q FROM Question q WHERE q.id = :id", Question.class);
-				Question questionNova = query.setParameter("id", nextId).getSingleResult();
-				log.save(questionNova, student, null, false, null, Calendar.getInstance(), ""+modelo.getValue(student), false);
-				
 				return redirect(routes.ExperimentoController.next(nextId));
 			}
 			/////////
 			
 		} catch (NoResultException e){
-			return redirect(routes.ExperimentoController.finish());
+			return TODO;
 		}
 		
 		//O que fazer em caso de resposta errada
