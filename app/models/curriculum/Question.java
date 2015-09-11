@@ -7,10 +7,9 @@ package models.curriculum;
  * @author priscylla
  *
  */
-public class Level {
+public abstract class Question {
 	
 	private Long id;
-	private int number;
-	private Question question;
+	private String enunciation;
 
 }
