@@ -3,14 +3,6 @@
 @import converters.ConvertUserToTeacher
 
 @dashboard.bodyDashboard {
-	
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-	<div class="container">
-
-      <div class="row">
-	
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" >
    			
    			@if(flash.containsKey("success")) {
 				<center>
@@ -21,83 +13,88 @@
 	  		}
    
           <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">@user.getFullname()</h3>
-            </div>
+            	<div class="panel-heading">
+              		<h3 class="panel-title">@user.getFullname()</h3>
+            	</div> <!-- fechar panel-heading -->
             <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" class="img-circle">
-                </div>
+              	<div class="row">
+                		<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic"
+                 			src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100" 
+                 			class="img-circle">
+                		</div> <!-- fechar col-md-3 col-lg-3  -->
                 
-                <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
-                    <tbody>
-                    
-                      <tr>
-                        <td>Status</td>
-                        <td>@user.getType()</td>
-                      </tr>
+                		<div class=" col-md-9 col-lg-9 ">
+                  			<table class="table table-user-information">
+                    			<tbody>
+                      				<tr>
+                        				<td>Status</td>
+                        				<td>@user.getType()</td>
+                      				</tr>
 
-                      <tr>
-                        <td>Último acesso em</td>
-                        <td>@user.getLastAccess().getTime()</td>
-                      </tr>
+                      				<tr>
+                        				<td>Último acesso em</td>
+                        				<td>@user.getLastAccess().getTime()</td>
+                      				</tr>
 
-                      <tr>
-                        <td>Data de Aniversário</td>
-                        <td>@user.getDateOfBirth().get(Calendar.DAY_OF_MONTH) @user.getDateOfBirth().getDisplayName(Calendar.MONTH, Calendar.LONG,new Locale("pt","BR"))</td>
-                      </tr>
+                      				<tr>
+                        				<td>Data de Aniversário</td>
+                        				<td>@user.getDateOfBirth().get(Calendar.DAY_OF_MONTH) 
+                        					de 
+                        					@user.getDateOfBirth().getDisplayName(Calendar.MONTH, Calendar.LONG,new Locale("pt","BR"))
+                        				</td>
+                      				</tr>
                    
-                      <tr>
-                        <td>Sexo</td>
-                        <td>@user.getGender()</td>
-                      </tr>
+                      				<tr>
+                        				<td>Sexo</td>
+                        				<td>@user.getGender()</td>
+                      				</tr>
 
-                      <tr>
-                        <td>Estado</td>
-                        <td>@user.getState()</td>
-                      </tr>
+                      				<tr>
+                        				<td>Estado</td>
+                        				<td>@user.getState()</td>
+                      				</tr>
 
-		      		  <tr>
-                        <td>Cursos Recentes</td>
-                        <td> OBI<br> OBM<br> </td>
-                      </tr>
+		      		  				<tr>
+                        				<td>Cursos Recentes</td>
+                        				<td> OBI<br> OBM<br> </td>
+                      				</tr>
                       
                       
-                      @if(user.getType.equals("Teacher")){
-                      		@teacherDetails(ConvertUserToTeacher.convert(user))
-                      }
+                      				@if(user.getType.equals("Teacher")){
+                      					@teacherDetails(ConvertUserToTeacher.convert(user))
+                      				}
                      
-                    </tbody>
-                  </table>
+                    			</tbody>
+                  			</table>
 				  
-				  @if(user.getType.equals("Teacher")){
-				  	<a href='@routes.TeacherController.editPassword()' class="btn btn-primary">Mudar senha</a>
-				  } else {
-				  	<a href='@routes.StudentController.editPassword()' class="btn btn-primary">Mudar senha</a>
-				  }
+				  			@if(user.getType.equals("Teacher")){
+				  				<a href='@routes.TeacherController.editPassword()' class="btn btn-primary">Mudar senha</a>
+				  			} else {
+				  				<a href='@routes.StudentController.editPassword()' class="btn btn-primary">Mudar senha</a>
+				  			}
 				  
-                </div>
-              </div>
-            </div>
-                 <div class="panel-footer">
-                        <a href="#" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i> Enviar Mensagem</a>
-                        <span class="pull-right">
-                        	@if(user.getType.equals("Teacher")){
-                        		<a href='@routes.TeacherController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                        	} else {
-                        		<a href='@routes.StudentController.edit()' type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> Editar</a>
-                        	}
-                        	
-                        	@deleteProfile(user)
-                        	
-                        </span>
-                    </div>
+                		</div> <!-- fechar  col-md-9 col-lg-9  -->
+              	</div> <!--  fechar col-md-9 col-lg-9  -->
+            </div> <!-- fechar  col-md-9 col-lg-9  -->
             
-          </div>
-        </div>
-      </div>
-    </div>	
+            <div class="panel-footer">
+            	<a href="#" type="button" class="btn btn-sm btn-primary">
+            		<i class="glyphicon glyphicon-envelope"></i> Enviar Mensagem</a>
+                <span class="pull-right">
+                	@if(user.getType.equals("Teacher")){
+                		<a href='@routes.TeacherController.edit()' type="button" class="btn btn-sm btn-warning">
+                			<i class="glyphicon glyphicon-edit"></i> Editar</a>
+                	} else {
+                		<a href='@routes.StudentController.edit()' type="button" class="btn btn-sm btn-warning">
+                			<i class="glyphicon glyphicon-edit"></i> Editar</a>
+                	}
+                	
+                	@deleteProfile(user)
+                </span>
+            </div> <!-- fechar panel-footer -->
+            
+          </div> <!-- fechar panel panel-info -->
+    
 
 
 }
