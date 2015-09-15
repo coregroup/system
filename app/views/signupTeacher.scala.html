@@ -11,7 +11,7 @@
 	<div class="alert alert-warning">
         <strong>Aviso:</strong> Algumas informações foram preenchidas incorretamente, preencha o formulário 
         novamente para realizar seu cadastro no sistema.
-    </div>
+    </div> <!-- fechar alert alert-warning -->
 }
 
 </center> 
@@ -26,7 +26,7 @@
 			  <fieldset>
 			    <div id="legend">
 			      <legend class="">Cadastro do Professor</legend>
-			    </div>
+			    </div> <!-- fechar legend -->
 			    <div class="control-group">
 			      <!-- fullname -->
 			      @inputText(
@@ -35,7 +35,7 @@
 			                '_help -> "Necessário para todos os certificados que você obtiver.",
 			                '_error -> teacherForm.globalError
 			          )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			 
 			    <div class="control-group">
 			      <!-- E-mail -->
@@ -45,7 +45,7 @@
 			                '_help -> "Seu email será utilizado para login.",
 			                '_error -> teacherForm.globalError
 			          )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			 
 			    <div class="control-group">
 			      <!-- Password-->
@@ -54,18 +54,19 @@
 			                '_label -> "Senha",
 			                '_help -> "A senha deve ter no mínimo 6 caracteres. "
 			          )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			 
 			    <div class="control-group">
 			      <!-- Password -->
-			      <div class="clearfix  " id="password_confirm">
+			      	<div class="clearfix  " id="password_confirm">
 				  	    <label for="repeatPassword">Repita a senha</label>
 				  	    <div class="input">
-					    <input type="password" id="password_confirm" name="password_confirm" value="@teacherForm("password").value">
+					    	<input type="password" id="password_confirm" name="password_confirm" value="@teacherForm("password").value">
 					        <span class="help-inline"></span>
 					        <span class="help-block">Por favor, repita a sua senha novamente.</span> 
-				  </div>
-			    </div>
+				  		</div> <!-- fechar input -->
+			    	</div> <!-- fechar password_confirm -->
+			    </div> <!-- fechar control-group -->
 			    
                 
                 <div class="control-group">
@@ -75,7 +76,7 @@
 			                '_label -> "Data de Nascimento",
 			                '_help -> "Formato: dd/mm/aaaa."
 			       )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			    
 			    <div class="control-group">
 			      <!-- institution -->
@@ -85,7 +86,7 @@
 			                '_help -> "Caso não seja vinculado a nenhuma instituição, digite Autônomo.",
 			                '_error -> teacherForm.globalError
 			          )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			    
 			    <div class="control-group">
 			      <!-- teaching area -->
@@ -95,20 +96,20 @@
 			                '_help -> "Área na qual é formado ou atual. Exs: Informática, Pedagogia, Matemática...",
 			                '_error -> teacherForm.globalError
 			          )
-			    </div>
+			    </div> <!-- fechar control-group -->
 			 
 			    <div class="control-group">
-			      <!-- Button -->
-			      <div class="controls">
-			        <button class="btn btn-success">Cadastrar</button>
-			      </div>
-			    </div>
+			      	<!-- Button -->
+			      	<div class="controls">
+			        		<button class="btn btn-success">Cadastrar</button>
+			      	</div> <!-- fechar controls -->
+			    </div> <!-- fechar control-groups -->
 			  </fieldset>
 			  
 			} <!-- fechar form -->
               
-          </div>
-      </div>
-</div>
+          </div> <!-- fechar modal-header -->
+      </div> <!-- fechar modal-content -->
+</div> <!-- fechar modal-dialog -->
 
 }
