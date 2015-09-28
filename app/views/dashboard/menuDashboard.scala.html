@@ -1,8 +1,10 @@
+@(opcao: String)
+
 <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Meus Cursos</a></li>
-            <li><a href="@routes.ProfileController.view()">Meu Perfil</a></li>
+            <li class="@("active".when(opcao == "home"))"><a href="@routes.DashboardController.studentDashboard()">Home <span class="sr-only">(current)</span></a></li>
+            <li class="@("active".when(opcao == "courses"))"><a href="#">Meus Cursos</a></li>
+            <li class="@("active".when(opcao == "profile"))"><a href="@routes.ProfileController.view()">Meu Perfil</a></li>
             <li><a href="@routes.LoginController.logout()">Sair</a></li>
           </ul>
 </div>
