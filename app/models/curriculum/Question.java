@@ -28,6 +28,8 @@ import play.data.validation.Constraints.Required;
 @Entity
 public class Question {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
@@ -53,6 +55,8 @@ public class Question {
 	@Required
 	@Enumerated(EnumType.STRING)
 	public CorrectionType correctionType;
+	
+	public boolean available;
 
 	public Long getId() {
 		return id;
@@ -109,6 +113,13 @@ public class Question {
 	public void setCorrectionType(CorrectionType correctionType) {
 		this.correctionType = correctionType;
 	}
-	
 
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+	
 }

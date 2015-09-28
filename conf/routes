@@ -34,7 +34,11 @@ GET		/profile/student/password	controllers.StudentController.editPassword()
 POST	/profile/student/password	controllers.StudentController.updatePassword()
 GET		/profile/teacher/password	controllers.TeacherController.editPassword()
 POST	/profile/teacher/password	controllers.TeacherController.updatePassword()
-		
+
+
+# Questions
+GET		/question/text/create		controllers.questions.TextQuestionController.create()
+POST	/question/text/save			controllers.questions.TextQuestionController.save()		
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

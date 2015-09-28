@@ -21,6 +21,8 @@ import play.data.validation.Constraints.Required;
 @Entity
 public class Topic {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
