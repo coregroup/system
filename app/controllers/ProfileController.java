@@ -4,7 +4,6 @@
 package controllers;
 
 import models.users.User;
-import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -21,7 +20,6 @@ public class ProfileController extends Controller{
 	
 	private static UserService userService = new UserServiceImpl();
 	
-	@Transactional(readOnly=true)
 	public static Result view(){
 		String email = session().get("email");
 		User user = userService.findByEmail(email);

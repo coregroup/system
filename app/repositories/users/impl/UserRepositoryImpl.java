@@ -3,12 +3,10 @@
  */
 package repositories.users.impl;
 
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-
 import models.users.User;
 import repositories.users.UserRepository;
-import play.db.jpa.JPA;
+
+import com.avaje.ebean.Ebean;
 
 /**
  * @author priscylla
@@ -18,18 +16,13 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User findByEmail(String email) {
-		TypedQuery<User> query = JPA.em().createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-		try{
-			return query.setParameter("email", email).getSingleResult();
-		} catch (NoResultException e){
-			return null;
-		}
+		User user = Ebean.find(User.class).where().eq("email", email).findUnique();
+		return user;
 	}
 
 	@Override
 	public void update(User user) {
-		JPA.em().merge(user);
-		JPA.em().flush();
+		Ebean.update(user);
 	}
 
 }

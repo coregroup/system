@@ -3,13 +3,10 @@
  */
 package repositories.users.impl;
 
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-
 import models.users.Teacher;
-import models.users.User;
-import play.db.jpa.JPA;
 import repositories.users.TeacherRepository;
+
+import com.avaje.ebean.Ebean;
 
 /**
  * @author priscylla
@@ -19,31 +16,26 @@ public class TeacherRepositoryImpl implements TeacherRepository {
 
 	@Override
 	public void save(Teacher teacher) {
-		JPA.em().persist(teacher);
+		Ebean.save(teacher);
 	}
 
 	@Override
 	public void delete(Teacher teacher) {
-//		teacher.delete();
+//		TODO
 	}
 
 	@Override
 	public void update(Teacher teacher) {
-		JPA.em().merge(teacher);
-		JPA.em().flush();
+		Ebean.update(teacher);
 	}
 
 	@Override
 	public Teacher exists(String email, String password) {
-		TypedQuery<User> query = JPA.em().createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
-		try{
-			User user = query.setParameter("email", email).getSingleResult(); 
-			if(user instanceof Teacher)
-			return (Teacher) user;
-		} catch (NoResultException e){
+		Teacher teacher = Ebean.find(Teacher.class).where().eq("email", email).findUnique();
+		if(teacher!=null && teacher.getPassword().equals(password))
+			return teacher;
+		else
 			return null;
-		}
-		return null;
 	}
 
 }

@@ -22,7 +22,6 @@ import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 
-
 /**
  * @author priscylla
  *

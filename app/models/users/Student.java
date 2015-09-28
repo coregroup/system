@@ -17,14 +17,10 @@ public class Student extends User{
 	
 	private static final long serialVersionUID = 1L;
 	
-	//private List<Course> courses; ou Colletions?
-	
 	@Override
 	public String getType() {
 		return Student.class.getSimpleName();
 	}
-	
-	
 	
 
 }

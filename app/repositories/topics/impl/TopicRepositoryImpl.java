@@ -3,7 +3,9 @@
  */
 package repositories.topics.impl;
 
-import play.db.jpa.JPA;
+//import play.db.jpa.JPA;
+import com.avaje.ebean.Ebean;
+
 import models.curriculum.Topic;
 import repositories.topics.TopicRepository;
 
@@ -18,7 +20,7 @@ public class TopicRepositoryImpl implements TopicRepository {
 	 */
 	@Override
 	public void save(Topic topic) {
-		JPA.em().persist(topic);
+		Ebean.save(topic);
 	}
 
 	/* (non-Javadoc)
@@ -27,7 +29,6 @@ public class TopicRepositoryImpl implements TopicRepository {
 	@Override
 	public void delete(Topic topic) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/* (non-Javadoc)
@@ -35,8 +36,7 @@ public class TopicRepositoryImpl implements TopicRepository {
 	 */
 	@Override
 	public void update(Topic topic) {
-		JPA.em().merge(topic);
-		JPA.em().flush();
+		Ebean.update(topic);
 	}
 
 }

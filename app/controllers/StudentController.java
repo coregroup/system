@@ -13,7 +13,6 @@ import models.users.Student;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
 import play.data.Form;
-import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -46,7 +45,6 @@ public class StudentController extends Controller {
     }
 	
 	@Security.Authenticated(UserAuthenticatedSecured.class)
-	@Transactional
 	public static Result delete() {
 		String email = session().get("email");
 		Student student = (Student) userService.findByEmail(email);
@@ -60,7 +58,6 @@ public class StudentController extends Controller {
     /**
      * Handle the 'new student form' submission 
      */
-	@Transactional
     public static Result save() {
         Form<Student> studentForm = form(Student.class).bindFromRequest();
         
@@ -86,7 +83,6 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
-    @Transactional
     public static Result edit(){
     	String email = session().get("email");
 		Student user = (Student) userService.findByEmail(email);
@@ -96,7 +92,6 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
-    @Transactional
     public static Result update(){
     	Form<Student> studentForm = form(Student.class).bindFromRequest();
     	
@@ -136,7 +131,6 @@ public class StudentController extends Controller {
     }
     
     @Security.Authenticated(UserAuthenticatedSecured.class)
-    @Transactional
     public static Result updatePassword(){
     	Form<Dynamic> requestForm = form.bindFromRequest();
     	String currentPassword = requestForm.data().get("currentPassword");
@@ -150,11 +144,15 @@ public class StudentController extends Controller {
 			if(ConvertPasswordToSHA.convert(currentPassword).equals(user.getPassword())){
 				user.setPassword(ConvertPasswordToSHA.convert(newPassword));
 				studentService.update(user);
+			} else {
+				DynamicForm formDeErro = form.fill(requestForm.data());
+	    		formDeErro.reject("Sua senha atual não confere.");
+	    		return forbidden(views.html.profile.changePasswordStudent.render(formDeErro));
 			}
 		} else {
 			DynamicForm formDeErro = form.fill(requestForm.data());
     		formDeErro.reject("As senhas não conferem");
-    		return forbidden(views.html.login.render(formDeErro));
+    		return forbidden(views.html.profile.changePasswordStudent.render(formDeErro));
 		}
     	
     	flash("success", "Perfil atualizado com sucesso!");

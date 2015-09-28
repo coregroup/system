@@ -3,7 +3,8 @@
  */
 package repositories.questions.impl;
 
-import play.db.jpa.JPA;
+import com.avaje.ebean.Ebean;
+
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
 
@@ -18,7 +19,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 	 */
 	@Override
 	public void save(Question question) {
-		JPA.em().persist(question);
+		Ebean.save(question);
 	}
 
 	/* (non-Javadoc)
@@ -34,8 +35,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 	 */
 	@Override
 	public void update(Question question) {
-		JPA.em().merge(question);
-		JPA.em().flush();
+		Ebean.update(question);
 	}
 
 }

@@ -7,7 +7,6 @@ import models.users.User;
 import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
 import play.data.Form;
-import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.users.LoginService;
@@ -31,7 +30,6 @@ public class LoginController extends Controller{
     	return ok(login.render(form));
     }    
     
-    @Transactional
     public static Result signin(){
     	Form<Dynamic> requestForm = form.bindFromRequest();
     	String email = requestForm.data().get("email");
