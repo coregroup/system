@@ -4,5 +4,21 @@
 
 @dashboard.bodyDashboard("questoes") {
 
+
+<div id="login-overlay" class="modal-dialog">
+
+@if(questionForm.hasGlobalErrors || questionForm.hasErrors) { 
+	<div class="alert alert-warning">
+        <strong>Aviso:</strong> As informações não foram preenchidas corretamente.
+    </div>
+}
+
+              
+              @form(controllers.questions.routes.TextQuestionController.save()) {
+
+			  }
+              
+ </div>
+
 	
 }

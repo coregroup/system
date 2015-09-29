@@ -4,6 +4,7 @@
 package models.users;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,11 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Past;
 
 import models.Gender;
 import models.State;
+import models.curriculum.Solution;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
@@ -63,6 +66,9 @@ public abstract class User {
 	
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	
+	@OneToMany
+	public List<Solution> solutions;
 	
 	
 
@@ -227,9 +233,24 @@ public abstract class User {
 	}
 
 
+	/**
+	 * @return the solutions
+	 */
+	public List<Solution> getSolutions() {
+		return solutions;
+	}
+
+
+	/**
+	 * @param solutions the solutions to set
+	 */
+	public void setSolutions(List<Solution> solutions) {
+		this.solutions = solutions;
+	}
 
 	public String getType(){
 		return User.class.getSimpleName();
 	}
+
 
 }

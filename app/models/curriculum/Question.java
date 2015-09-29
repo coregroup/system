@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import models.CorrectionType;
 import models.Level;
@@ -57,6 +58,9 @@ public class Question {
 	public CorrectionType correctionType;
 	
 	public boolean available;
+	
+	@OneToMany
+	public List<Solution> usersSolutions;
 
 	public Long getId() {
 		return id;
@@ -120,6 +124,14 @@ public class Question {
 
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+
+	public List<Solution> getUsersSolutions() {
+		return usersSolutions;
+	}
+
+	public void setUsersSolutions(List<Solution> usersSolutions) {
+		this.usersSolutions = usersSolutions;
 	}
 	
 }

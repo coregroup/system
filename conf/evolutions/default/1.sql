@@ -17,6 +17,16 @@ create table question (
   constraint pk_question primary key (id))
 ;
 
+create table solution (
+  id                        bigint auto_increment not null,
+  question_id               bigint,
+  user_id                   bigint,
+  date                      datetime,
+  answer                    varchar(255),
+  evaluation                tinyint(1) default 0,
+  constraint pk_solution primary key (id))
+;
+
 create table topic (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -47,6 +57,10 @@ create table question_topic (
   topic_id                       bigint not null,
   constraint pk_question_topic primary key (question_id, topic_id))
 ;
+alter table solution add constraint fk_solution_question_1 foreign key (question_id) references question (id) on delete restrict on update restrict;
+create index ix_solution_question_1 on solution (question_id);
+alter table solution add constraint fk_solution_user_2 foreign key (user_id) references User (id) on delete restrict on update restrict;
+create index ix_solution_user_2 on solution (user_id);
 
 
 
@@ -61,6 +75,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table question;
 
 drop table question_topic;
+
+drop table solution;
 
 drop table topic;
 
