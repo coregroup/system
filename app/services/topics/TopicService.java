@@ -1,7 +1,7 @@
 /**
  * 
  */
-package repositories.topics;
+package services.topics;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import models.curriculum.Topic;
  * @author Priscylla
  *
  */
-public interface TopicRepository {
+public interface TopicService {
 	
 	public void save(Topic topic);
 	

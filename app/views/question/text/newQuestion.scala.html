@@ -1,24 +1,106 @@
-@(questionForm: Form[models.curriculum.Question])
+@(questionForm: Form[models.curriculum.Question], topicos: List[models.curriculum.Topic])
 
 @import helper._
 
 @dashboard.bodyDashboard("questoes") {
 
-
-<div id="login-overlay" class="modal-dialog">
-
 @if(questionForm.hasGlobalErrors || questionForm.hasErrors) { 
-	<div class="alert alert-warning">
-        <strong>Aviso:</strong> As informações não foram preenchidas corretamente.
+	<div class="alert alert-info">
+        <strong>Aviso:</strong> Todos os campos do formulário são obrigatórios, com exceção de <b><i>Resposta Correta</i></b>
+        caso você escolha a correção <b><i>Manual</i></b>.
     </div>
-}
-
-              
+    @if(questionForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@questionForm.globalError.message
+    	</div>
+    }
+} 
               @form(controllers.questions.routes.TextQuestionController.save()) {
-
+					<fieldset>
+				    <div id="legend">
+				      <legend class="">Criação de Nova Questão</legend>
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                questionForm("name"), 
+			                '_label -> "Título da Questão",
+			                'size -> 60, 
+			                '_help -> "Sugestão: Utilize títulos curtos."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Level -->
+				      @select(
+                			questionForm("level"), 
+                			options(Level.options), 
+                			'_label -> "Nível de Dificuldade", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Statement -->
+				      @textarea(
+			                questionForm("statement"), 
+			                '_label -> "Enunciado", 
+			                'rows -> 5,
+    						'cols -> 60,
+			                '_help -> "Escreva o enunciado da questão."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- answer -->
+				      @inputText(
+			                questionForm("answer"), 
+			                '_label -> "Resposta Correta",
+			                'size -> 60, 
+			                '_help -> "Cuidado, pois a resposta do aluno será comparada a essa."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- CorrectionType -->
+				      @select(
+                			questionForm("correctionType"), 
+                			options(CorrectionType.options), 
+                			'_label -> "Tipo de Correção", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				    
+				    <b>Tópicos da Questão</b>
+				    <div class="row">
+						<div class="col-sm-5">
+							<select name="from[]" id="multiselect" class="form-control" size="8" multiple="multiple">
+								@for(topico <- topicos){
+									<option value="@topico.getId()"> @topico.getName() </option>
+								}
+							</select>
+						</div>
+				
+						<div class="col-sm-2">
+							<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+							<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+						</div>
+				
+						<div class="col-sm-5">
+							<select name="listTopics" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+						</div>
+					</div>
+				  
+				 	<br><br>
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar </button>
+				      </div>
+				    </div>
+				  </fieldset>			
+			
 			  }
-              
- </div>
-
 	
 }

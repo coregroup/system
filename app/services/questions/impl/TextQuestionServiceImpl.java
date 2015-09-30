@@ -3,6 +3,7 @@
  */
 package services.questions.impl;
 
+import models.QuestionType;
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
 import services.questions.TextQuestionService;
@@ -24,6 +25,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
 	 */
 	@Override
 	public void save(Question question) {
+		question.setQuestionType(QuestionType.TEXT);
 		this.questionRepository.save(question);
 	}
 

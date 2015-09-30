@@ -5,6 +5,7 @@
 
 create table question (
   id                        bigint auto_increment not null,
+  name                      varchar(255),
   level                     varchar(7),
   statement                 varchar(255),
   answer                    varchar(255),

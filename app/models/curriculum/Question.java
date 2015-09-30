@@ -35,6 +35,10 @@ public class Question {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
 	
+	@Required
+	public String name;
+	
+	@Required
 	@Enumerated(EnumType.STRING)
 	public Level level;
 	
@@ -46,14 +50,11 @@ public class Question {
 	@MinLength(value = 6)
 	public String statement;
 	
-	@Required
 	public String answer;
 	
-	@Required
 	@Enumerated(EnumType.STRING)
 	public QuestionType questionType;
 	
-	@Required
 	@Enumerated(EnumType.STRING)
 	public CorrectionType correctionType;
 	
@@ -133,5 +134,14 @@ public class Question {
 	public void setUsersSolutions(List<Solution> usersSolutions) {
 		this.usersSolutions = usersSolutions;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	
 }
