@@ -44,16 +44,16 @@ public class ParagraphQuestionController extends Controller{
 		
 		if(questionForm.hasErrors()){
 			questionForm.reject("* ALGUM CAMPO OBRIGATÓRIO NÃO FOI PREENCHIDO");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
 		}
 		if(request.body().asFormUrlEncoded().get("listTopics")==null){
 			questionForm.reject("* OS TÓPICOS DA QUESTÃO NÃO FORAM ESCOLHIDOS");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
 		}
 		if(questionForm.field("correctionType").value().equals((CorrectionType.AUTOMATIC.name()))){
 			questionForm.reject("* NESSE MOMENTO O SISTEMA NÃO SUPORTA A CORREÇÃO AUTOMÁTICA PARA ESSE"
 					+ "TIPO DE QUESTÃO.");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
 		}
 		
 		List<Topic> selectedTopics = new ArrayList<Topic>();

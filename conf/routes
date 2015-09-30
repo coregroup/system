@@ -51,5 +51,9 @@ POST	/question/paragraph/save		controllers.questions.ParagraphQuestionController
 GET		/question/truefalse/create		controllers.questions.TrueFalseQuestionController.create()
 POST	/question/truefalse/save		controllers.questions.TrueFalseQuestionController.save()
 
+# Multiple Choice
+GET		/question/multiplechoice/create		controllers.questions.MultipleChoiceQuestionController.create()
+POST	/question/multiplechoice/save		controllers.questions.MultipleChoiceQuestionController.save()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

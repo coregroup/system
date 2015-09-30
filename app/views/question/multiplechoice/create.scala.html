@@ -1,0 +1,152 @@
+@(questionForm: DynamicForm, topicos: List[models.curriculum.Topic])
+
+@import helper._
+
+@dashboard.bodyDashboard("questoes") {
+
+@if(questionForm.hasGlobalErrors || questionForm.hasErrors) { 
+	<div class="alert alert-info">
+        <strong>Aviso:</strong> Todos os campos do formulário são obrigatórios.
+    </div>
+    @if(questionForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@questionForm.globalError.message
+    	</div>
+    }
+} 
+              @form(controllers.questions.routes.MultipleChoiceQuestionController.save()) {
+					<fieldset>
+				    <div id="legend">
+				      <legend class="">Criação de Nova Questão</legend>
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                questionForm("name"), 
+			                '_label -> "Título da Questão",
+			                'size -> 60, 
+			                '_help -> "Sugestão: Utilize títulos curtos."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- Level -->
+				      @select(
+                			questionForm("level"), 
+                			options(Level.options), 
+                			'_label -> "Nível de Dificuldade", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Statement -->
+				      @textarea(
+			                questionForm("statement"), 
+			                '_label -> "Enunciado", 
+			                'rows -> 5,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- A -->
+				      @textarea(
+			                questionForm("optionA"), 
+			                '_label -> "Digite a opção A", 
+			                'rows -> 3,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- B -->
+				      @textarea(
+			                questionForm("optionB"), 
+			                '_label -> "Digite a opção B", 
+			                'rows -> 3,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- C -->
+				      @textarea(
+			                questionForm("optionC"), 
+			                '_label -> "Digite a opção C", 
+			                'rows -> 3,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- D -->
+				      @textarea(
+			                questionForm("optionD"), 
+			                '_label -> "Digite a opção D", 
+			                'rows -> 3,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- E -->
+				      @textarea(
+			                questionForm("optionE"), 
+			                '_label -> "Digite a opção E", 
+			                'rows -> 3,
+    						'cols -> 60
+			          )
+				    </div>
+				    
+				    <b>Selecione a Resposta Correta</b><br>
+				    <label class="radio-inline">
+					  <input type="radio" name="answer" id="answer" value="1"> A
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="answer" id="answer" value="2"> B
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="answer" id="answer" value="3"> C
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="answer" id="answer" value="4"> D
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="answer" id="answer" value="5"> E
+					</label>
+					<br><br>
+				    
+				    <b>Tópicos da Questão</b>
+				    <div class="row">
+						<div class="col-sm-5">
+							<select name="from[]" id="multiselect" class="form-control" size="8" multiple="multiple">
+								@for(topico <- topicos){
+									<option value="@topico.getId()"> @topico.getName() </option>
+								}
+							</select>
+						</div>
+				
+						<div class="col-sm-2">
+							<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+							<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+						</div>
+				
+						<div class="col-sm-5">
+							<select name="listTopics" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+						</div>
+					</div>
+				  
+				 	<br><br>
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar </button>
+				      </div>
+				    </div>
+				  </fieldset>			
+			
+			  }
+	
+}
