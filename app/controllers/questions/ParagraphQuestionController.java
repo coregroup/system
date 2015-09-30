@@ -13,13 +13,11 @@ import models.curriculum.Question;
 import models.curriculum.Topic;
 import play.data.Form;
 import play.mvc.Controller;
-import play.mvc.Result;
 import play.mvc.Http.Request;
+import play.mvc.Result;
 import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.ParagraphQuestionService;
-import services.questions.TextQuestionService;
 import services.questions.impl.ParagraphQuestionServiceImpl;
-import services.questions.impl.TextQuestionServiceImpl;
 import services.topics.TopicService;
 import services.topics.impl.TopicServiceImpl;
 
