@@ -41,7 +41,11 @@ GET		/question					controllers.questions.QuestionController.index()
 
 # Text Question
 GET		/question/text/create		controllers.questions.TextQuestionController.create()
-POST	/question/text/save			controllers.questions.TextQuestionController.save()		
+POST	/question/text/save			controllers.questions.TextQuestionController.save()
+
+# Paragraph Text Question
+GET		/question/paragraph/create		controllers.questions.ParagraphQuestionController.create()
+POST	/question/paragraph/save		controllers.questions.ParagraphQuestionController.save()		
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
