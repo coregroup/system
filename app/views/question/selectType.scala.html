@@ -1,0 +1,30 @@
+@()
+
+@import helper._
+
+@dashboard.bodyDashboard("questoes") {
+
+<div id="login-overlay" class="modal-dialog">
+
+@if(flash.containsKey("success")) {
+	<center>
+		<div class="alert alert-success">
+			@flash.get("success")
+		</div>
+	</center>
+}
+	  		
+<center>
+	<h2>Criar Nova Questão</h2>
+	<h3>Selecione o Tipo da Questão:</h3>
+</center>
+<a href="@controllers.questions.routes.TextQuestionController.create()" role="button" class="btn btn-primary btn-lg btn-block">Resposta de Texto Curto</a>
+<a href="#" role="button" class="btn btn-default btn-lg btn-block">Resposta Texto Longo</a>
+<a href="#" role="button" class="btn btn-primary btn-lg btn-block">Verdadeiro ou Falso</a>
+<a href="#" role="button" class="btn btn-default btn-lg btn-block">Múltipla Escolha</a>
+<a href="#" role="button" class="btn btn-primary btn-lg btn-block">Checkboxes</a>
+<a href="#" role="button" class="btn btn-default btn-lg btn-block">Update de Arquivo</a>
+<a href="#" role="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Resposta em Escala</a>
+<a href="#" role="button" class="btn btn-default btn-lg btn-block" disabled="disabled">Resposta com Datas</a>
+</div>
+}

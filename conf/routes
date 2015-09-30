@@ -37,6 +37,9 @@ POST	/profile/teacher/password	controllers.TeacherController.updatePassword()
 
 
 # Questions
+GET		/question					controllers.questions.QuestionController.index()
+
+# Text Question
 GET		/question/text/create		controllers.questions.TextQuestionController.create()
 POST	/question/text/save			controllers.questions.TextQuestionController.save()		
 

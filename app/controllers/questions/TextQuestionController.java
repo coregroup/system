@@ -68,7 +68,9 @@ public class TextQuestionController extends Controller{
 		question.setAvailable(true);
 		question.setTopics(selectedTopics);
 		questionService.save(question);
-		return TODO;
+		
+		flash("success", "Questão cadastrada com sucesso!");
+		return redirect(controllers.questions.routes.QuestionController.index());
 	}
 
 }
