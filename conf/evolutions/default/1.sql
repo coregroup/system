@@ -13,7 +13,7 @@ create table question (
   correction_type           varchar(9),
   available                 tinyint(1) default 0,
   constraint ck_question_level check (level in ('FACIL','MEDIO','DIFICIL')),
-  constraint ck_question_question_type check (question_type in ('TEXT','PARAGRAPH_TEXT','MULTIPLE_CHOICE','CHECKBOXES','SCALE','UPDATE','DATE','TRUE_FALSE')),
+  constraint ck_question_question_type check (question_type in ('TEXT','PARAGRAPH_TEXT','MULTIPLE_CHOICE','CHECKBOXES','SCALE','UPLOAD','DATE','TRUE_FALSE')),
   constraint ck_question_correction_type check (correction_type in ('MANUAL','AUTOMATIC')),
   constraint pk_question primary key (id))
 ;
