@@ -6,11 +6,10 @@ package repositories.topics.impl;
 //import play.db.jpa.JPA;
 import java.util.List;
 
-import com.avaje.ebean.Ebean;
-
 import models.curriculum.Topic;
-import models.users.User;
 import repositories.topics.TopicRepository;
+
+import com.avaje.ebean.Ebean;
 
 /**
  * @author Priscylla

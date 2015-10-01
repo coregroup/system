@@ -36,7 +36,7 @@ GET		/profile/teacher/password	controllers.TeacherController.editPassword()
 POST	/profile/teacher/password	controllers.TeacherController.updatePassword()
 
 
-# Questions
+# ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()
 
 # Text Question
@@ -58,6 +58,10 @@ POST	/question/multiplechoice/save		controllers.questions.MultipleChoiceQuestion
 # Upload Question
 GET		/question/upload/create		controllers.questions.UploadQuestionController.create()
 POST	/question/upload/save		controllers.questions.UploadQuestionController.save()
+
+# ######################### Resolution
+GET		/resolution/question		controllers.resolution.ResolutionController.index()
+POST	/resolution/submit			controllers.resolution.ResolutionController.submit()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

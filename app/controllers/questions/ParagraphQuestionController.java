@@ -8,11 +8,13 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.CorrectionType;
 import models.curriculum.Question;
 import models.curriculum.Topic;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Security;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 import repositories.questions.impl.QuestionRepositoryImpl;
@@ -25,6 +27,7 @@ import services.topics.impl.TopicServiceImpl;
  * @author Priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class ParagraphQuestionController extends Controller{
 	
 	private static Form<Question> paragraphQuestionForm = Form.form(Question.class);

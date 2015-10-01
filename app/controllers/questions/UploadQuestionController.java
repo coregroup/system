@@ -12,10 +12,12 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.curriculum.Question;
 import models.curriculum.Topic;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Security;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.Request;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -31,6 +33,7 @@ import services.topics.impl.TopicServiceImpl;
  * @author Priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class UploadQuestionController extends Controller {
 	
 	private static Form<Question> uploadQuestionForm = Form.form(Question.class);

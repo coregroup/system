@@ -1,0 +1,25 @@
+@(question: models.curriculum.Question, solutionForm: DynamicForm)
+
+@import helper._
+
+<div id="login-overlay" class="modal-dialog">
+
+@form(controllers.resolution.routes.ResolutionController.submit()) {
+	<fieldset>
+		<div id="legend">
+			<legend class="">Exercícios</legend>
+		</div>
+		
+		<dl>
+  			<dt>Enunciado</dt>
+  			<dd>@question.getStatement()</dd>
+		</dl>
+		
+		<dl>
+  			<dt>Solução</dt>
+  			<dd>
+  				<input type="text" class="form-control" id="answer" placeholder="Insira sua resposta">
+  			</dd>
+		</dl>
+}
+</div>

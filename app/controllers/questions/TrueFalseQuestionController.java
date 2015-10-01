@@ -6,6 +6,7 @@ package controllers.questions;
 import java.util.ArrayList;
 import java.util.List;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.CorrectionType;
 import models.Level;
 import models.curriculum.Question;
@@ -14,6 +15,7 @@ import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
 import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Security;
 import play.mvc.Http.Request;
 import play.mvc.Result;
 import repositories.questions.impl.QuestionRepositoryImpl;
@@ -26,6 +28,7 @@ import services.topics.impl.TopicServiceImpl;
  * @author Priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class TrueFalseQuestionController extends Controller{
 	
 	private static DynamicForm form = Form.form();

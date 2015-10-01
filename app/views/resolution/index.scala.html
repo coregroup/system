@@ -1,0 +1,13 @@
+@(question: models.curriculum.Question, solutionForm: DynamicForm)
+
+@import helper._
+
+@dashboard.bodyDashboard("resolution") {
+	
+	@if(question.getQuestionType.name().equals("TEXT")){
+		@textQuestion(question, solutionForm)
+	} else {
+		
+	}
+
+}
