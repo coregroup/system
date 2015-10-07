@@ -3,11 +3,38 @@
 @import helper._
 
 @dashboard.bodyDashboard("resolution") {
+
+<div id="login-overlay" class="modal-dialog">
+	
+	@if(flash.containsKey("success")) {
+				<center>
+				<div class="alert alert-success">
+		        	<strong>Parabéns! </strong> @flash.get("success")
+		    	</div>
+		    	</center>
+	  		}
+	  		@if(flash.containsKey("error")) {
+				<center>
+				<div class="alert alert-danger">
+		        	<strong>Ops! </strong> @flash.get("error")
+		    	</div>
+		    	</center>
+	  		}
+	  		@if(flash.containsKey("warning")) {
+				<center>
+				<div class="alert alert-warning">
+		        	<strong>Atenção! </strong> @flash.get("warning")
+		    	</div>
+		    	</center>
+	  		}
+	  		
 	
 	@if(question.getQuestionType.name().equals("TEXT")){
 		@textQuestion(question, solutionForm)
 	} else {
 		
 	}
+
+</div>
 
 }

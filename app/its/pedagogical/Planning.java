@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pedagogical;
+package its.pedagogical;
 
 import models.curriculum.Question;
 

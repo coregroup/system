@@ -62,6 +62,8 @@ POST	/question/upload/save		controllers.questions.UploadQuestionController.save(
 # ######################### Resolution
 GET		/resolution/question		controllers.resolution.ResolutionController.index()
 POST	/resolution/submit			controllers.resolution.ResolutionController.submit(id: Long)
+GET		/resolution/next			controllers.resolution.ResolutionController.next(id: Long)
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

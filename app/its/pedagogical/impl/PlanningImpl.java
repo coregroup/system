@@ -1,20 +1,20 @@
 /**
  * 
  */
-package pedagogical.impl;
+package its.pedagogical.impl;
 
 import java.util.List;
 
-import models.curriculum.Question;
-import pedagogical.Planning;
 import repositories.questions.QuestionRepository;
+import models.curriculum.Question;
+import its.pedagogical.Planning;
 
 /**
  * @author Priscylla
  *
  */
 public class PlanningImpl implements Planning {
-	
+
 	private QuestionRepository questionRepository;
 
 	public PlanningImpl(QuestionRepository questionRepository) {

@@ -2,7 +2,7 @@
 
 @import helper._
 
-<div id="login-overlay" class="modal-dialog">
+
 
 @form(controllers.resolution.routes.ResolutionController.submit(question.getId())) {
 	<fieldset>
@@ -16,12 +16,11 @@
 		</dl>
 		
 		<dl>
-  			<dt>Solução</dt>
-  			<dd>
-  				<input type="text" class="form-control" id="answer" placeholder="Insira sua resposta">
-  			</dd>
+  			@inputText(
+							      		solutionForm("answer"),
+							      		'_label -> "Solução"
+							      )
 		</dl>
 		
 		<button class="btn btn-success">Submeter Solução</button>
 }
-</div>
