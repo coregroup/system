@@ -32,7 +32,9 @@
 	@if(question.getQuestionType.name().equals("TEXT")){
 		@textQuestion(question, solutionForm)
 	} else {
-		
+		@if(question.getQuestionType.name().equals("PARAGRAPH_TEXT")){
+			@paragraphQuestion(question, solutionForm)
+		}
 	}
 
 </div>

@@ -16,10 +16,12 @@
 		</dl>
 		
 		<dl>
-  			@inputText(
-							      		solutionForm("answer"),
-							      		'_label -> "Resposta"
-							      )
+		@textarea(
+			                solutionForm("answer"), 
+			                '_label -> "Resposta",
+			                'rows -> 5,
+    						'cols -> 60
+			          )
 		</dl>
 		
 		<button class="btn btn-success">Submeter Solução</button>

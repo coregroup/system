@@ -10,6 +10,7 @@ import its.pedagogical.impl.PlanningImpl;
 
 import java.util.Calendar;
 
+import models.CorrectionType;
 import models.curriculum.Question;
 import models.curriculum.Solution;
 import models.users.Student;
@@ -69,6 +70,12 @@ public class ResolutionController extends Controller {
     	boolean isCorrect = evaluator.evaluate(solution);
     	solution.setEvaluation(isCorrect);
     	solutionService.save(solution);
+    	
+    	if(solution.getQuestion().getCorrectionType().equals(CorrectionType.MANUAL)){
+    		flash("success", "Sua resposta será corrigida MANUALMENTE pelo Professor."
+    				+ "Tente agora essa nova questão!");
+    		return redirect(controllers.resolution.routes.ResolutionController.next(id));
+    	}
     	
     	if(isCorrect){
     		flash("success", "Você acertou a questão anterior! Tente agora essa nova questão!");
