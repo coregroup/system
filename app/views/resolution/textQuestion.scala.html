@@ -4,7 +4,7 @@
 
 <div id="login-overlay" class="modal-dialog">
 
-@form(controllers.resolution.routes.ResolutionController.submit()) {
+@form(controllers.resolution.routes.ResolutionController.submit(question.getId())) {
 	<fieldset>
 		<div id="legend">
 			<legend class="">Exercícios</legend>
@@ -21,5 +21,7 @@
   				<input type="text" class="form-control" id="answer" placeholder="Insira sua resposta">
   			</dd>
 		</dl>
+		
+		<button class="btn btn-success">Submeter Solução</button>
 }
 </div>
