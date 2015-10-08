@@ -26,6 +26,8 @@ public class ParagraphQuestionServiceImpl implements ParagraphQuestionService {
 	@Override
 	public void save(Question question) {
 		question.setQuestionType(QuestionType.PARAGRAPH_TEXT);
+		String newStatement = "<pre>" + question.getStatement() + "</pre>";
+		question.setStatement(newStatement);
 		this.questionRepository.save(question);
 	}
 
