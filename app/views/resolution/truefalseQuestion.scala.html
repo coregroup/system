@@ -16,12 +16,11 @@
 		</dl>
 		
 		<dl>
-		@textarea(
-			                solutionForm("answer"), 
-			                '_label -> "Resposta",
-			                'rows -> 5,
-    						'cols -> 60
-			          )
+			@inputRadioGroup(
+				solutionForm("answer"),
+				options = Seq("True"->"Verdadeiro","False"->"Falso"),
+				'_label -> "Resposta"
+				)
 		</dl>
 		
 		<button class="btn btn-success">Submeter Solução</button>

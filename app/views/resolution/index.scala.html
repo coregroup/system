@@ -34,6 +34,16 @@
 	} else {
 		@if(question.getQuestionType.name().equals("PARAGRAPH_TEXT")){
 			@paragraphQuestion(question, solutionForm)
+		} else {
+			@if(question.getQuestionType.name().equals("MULTIPLE_CHOICE")){
+				@choiceQuestion(question, solutionForm)
+			} else {
+				@if(question.getQuestionType.name().equals("TRUE_FALSE")){
+					@truefalseQuestion(question, solutionForm)
+				} else {
+					
+				}
+			}			
 		}
 	}
 
