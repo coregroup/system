@@ -1,0 +1,61 @@
+@(question: models.curriculum.Question, solutionForm: DynamicForm)
+
+@import helper._
+
+<link href='@routes.Assets.at("codemirror/codemirror.css")' rel="stylesheet">
+<style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+<script src='@routes.Assets.at("codemirror/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror/addon/edit/matchbrackets.js")'></script>
+<script src='@routes.Assets.at("codemirror/mode/python/python.js")'></script>
+<script src='@routes.Assets.at("codemirror/addon/selection/active-line.js")'></script>
+
+@form(controllers.resolution.routes.ResolutionController.submit(question.getId())) {
+	<fieldset>
+		<div id="legend">
+			<legend class="">Exercícios</legend>
+		</div>
+		
+		<dl>
+  			<dt>Enunciado</dt>
+  			<dd>@Html(question.getStatement())</dd>
+		</dl>
+		
+		<dl>
+		@textarea(
+			  solutionForm("answer"), 
+			  '_label -> "Insira a sua solução no campo abaixo",
+			  'rows -> 5,
+    			'cols -> 60
+		)
+		</dl>
+		
+		
+		
+		<button class="btn btn-success">Submeter Solução</button>
+	</fieldset>
+	
+	<article>
+		<div>
+			<textarea id="code" name="code">
+				//Insira seu código aqui
+			</textarea>
+		</div>
+
+    	<script>
+      	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        	mode: {name: "python",
+            	   version: 3,
+               		singleLineStringErrors: false},
+	        lineNumbers: true,
+    	    indentUnit: 4,
+        	matchBrackets: true,
+        	styleActiveLine: true,
+  			lineWrapping: true
+    	});
+    	</script>
+
+    </article>
+	
+}
+
+
