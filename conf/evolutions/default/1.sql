@@ -3,6 +3,19 @@
 
 # --- !Ups
 
+create table course (
+  id                        bigint auto_increment not null,
+  description               varchar(255),
+  constraint pk_course primary key (id))
+;
+
+create table module (
+  id                        bigint auto_increment not null,
+  course_id                 bigint,
+  description               varchar(255),
+  constraint pk_module primary key (id))
+;
+
 create table question (
   id                        bigint auto_increment not null,
   name                      varchar(255),
@@ -16,6 +29,15 @@ create table question (
   constraint ck_question_question_type check (question_type in ('TEXT','PARAGRAPH_TEXT','MULTIPLE_CHOICE','CHECKBOXES','SCALE','UPLOAD','DATE','TRUE_FALSE')),
   constraint ck_question_correction_type check (correction_type in ('MANUAL','AUTOMATIC')),
   constraint pk_question primary key (id))
+;
+
+create table session (
+  id                        bigint auto_increment not null,
+  course_id                 bigint,
+  description               varchar(255),
+  start                     datetime,
+  end                       datetime,
+  constraint pk_session primary key (id))
 ;
 
 create table solution (
@@ -53,29 +75,75 @@ create table User (
 ;
 
 
+create table module_topic (
+  module_id                      bigint not null,
+  topic_id                       bigint not null,
+  constraint pk_module_topic primary key (module_id, topic_id))
+;
+
 create table question_topic (
   question_id                    bigint not null,
   topic_id                       bigint not null,
   constraint pk_question_topic primary key (question_id, topic_id))
 ;
-alter table solution add constraint fk_solution_question_1 foreign key (question_id) references question (id) on delete restrict on update restrict;
-create index ix_solution_question_1 on solution (question_id);
-alter table solution add constraint fk_solution_user_2 foreign key (user_id) references User (id) on delete restrict on update restrict;
-create index ix_solution_user_2 on solution (user_id);
+
+create table session_student (
+  session_id                     bigint not null,
+  student_id                     bigint not null,
+  constraint pk_session_student primary key (session_id, student_id))
+;
+
+create table session_teacher (
+  session_id                     bigint not null,
+  teacher_id                     bigint not null,
+  constraint pk_session_teacher primary key (session_id, teacher_id))
+;
+alter table module add constraint fk_module_course_1 foreign key (course_id) references course (id) on delete restrict on update restrict;
+create index ix_module_course_1 on module (course_id);
+alter table session add constraint fk_session_course_2 foreign key (course_id) references course (id) on delete restrict on update restrict;
+create index ix_session_course_2 on session (course_id);
+alter table solution add constraint fk_solution_question_3 foreign key (question_id) references question (id) on delete restrict on update restrict;
+create index ix_solution_question_3 on solution (question_id);
+alter table solution add constraint fk_solution_user_4 foreign key (user_id) references User (id) on delete restrict on update restrict;
+create index ix_solution_user_4 on solution (user_id);
 
 
+
+alter table module_topic add constraint fk_module_topic_module_01 foreign key (module_id) references module (id) on delete restrict on update restrict;
+
+alter table module_topic add constraint fk_module_topic_topic_02 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
 
 alter table question_topic add constraint fk_question_topic_question_01 foreign key (question_id) references question (id) on delete restrict on update restrict;
 
 alter table question_topic add constraint fk_question_topic_topic_02 foreign key (topic_id) references topic (id) on delete restrict on update restrict;
 
+alter table session_student add constraint fk_session_student_session_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
+
+alter table session_student add constraint fk_session_student_User_02 foreign key (student_id) references User (id) on delete restrict on update restrict;
+
+alter table session_teacher add constraint fk_session_teacher_session_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
+
+alter table session_teacher add constraint fk_session_teacher_User_02 foreign key (teacher_id) references User (id) on delete restrict on update restrict;
+
 # --- !Downs
 
 SET FOREIGN_KEY_CHECKS=0;
 
+drop table course;
+
+drop table module;
+
+drop table module_topic;
+
 drop table question;
 
 drop table question_topic;
+
+drop table session;
+
+drop table session_student;
+
+drop table session_teacher;
 
 drop table solution;
 

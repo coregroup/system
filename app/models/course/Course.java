@@ -1,7 +1,7 @@
 /**
  * 
  */
-package models.curriculum;
+package models.course;
 
 import java.util.List;
 
@@ -9,10 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-import models.course.Module;
-import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 
 /**
@@ -20,22 +18,21 @@ import play.data.validation.Constraints.Required;
  *
  */
 @Entity
-public class Topic {
-	
-	private static final long serialVersionUID = 1L;
+public class Course {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
 	
+	@OneToMany
 	@Required
-	@MinLength(value = 2)
-	public String name;
+	public List<Session> sessions;
 	
-	@ManyToMany(mappedBy="topics")
-	public List<Question> questions;
+	@Required
+	public String description;
 	
-	@ManyToMany(mappedBy="topics")
+	@OneToMany
+	@Required
 	public List<Module> modules;
 
 	public Long getId() {
@@ -46,20 +43,20 @@ public class Topic {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public List<Session> getSessions() {
+		return sessions;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
 	}
 
-	public List<Question> getQuestions() {
-		return questions;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public List<Module> getModules() {
@@ -69,5 +66,6 @@ public class Topic {
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
+	
 
 }
