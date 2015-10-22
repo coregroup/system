@@ -33,9 +33,9 @@ public class MultipleChoiceQuestionServiceImpl implements
 		question.setCorrectionType(CorrectionType.AUTOMATIC);
 		
 		question.setStatement(question.getStatement() + "<br> A. " + options.get(0) + "<br> B. "
-				+ options.get(1) + "C. <br>"
-				+ options.get(2) + "D. <br>"
-				+ options.get(3) + "E. <br>"
+				+ options.get(1) + "<br>C. "
+				+ options.get(2) + "<br>D. "
+				+ options.get(3) + "<br>E. "
 				+ options.get(4));
 		
 		

@@ -41,7 +41,9 @@
 				@if(question.getQuestionType.name().equals("TRUE_FALSE")){
 					@truefalseQuestion(question, solutionForm)
 				} else {
-					
+					@if(question.getQuestionType.name().equals("UPLOAD")){
+					@uploadQuestion(question, solutionForm)
+				}
 				}
 			}			
 		}
