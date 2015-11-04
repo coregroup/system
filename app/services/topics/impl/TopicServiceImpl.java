@@ -59,5 +59,4 @@ public class TopicServiceImpl implements TopicService {
 	public Topic findById(Long id) {
 		return topicRepository.findById(id);
 	}
-
 }

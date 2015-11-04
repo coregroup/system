@@ -20,7 +20,6 @@ public class Teacher extends User{
 	public String teachingArea;
 	//private List<Course> courses; ou Colletions?
 	
-	
 
 	public String getInstitution() {
 		return institution;
@@ -37,7 +36,7 @@ public class Teacher extends User{
 	public void setTeachingArea(String teachingArea) {
 		this.teachingArea = teachingArea;
 	}
-	
+
 	@Override
 	public String getType() {
 		return Teacher.class.getSimpleName();

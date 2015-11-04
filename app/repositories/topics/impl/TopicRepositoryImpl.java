@@ -6,6 +6,7 @@ package repositories.topics.impl;
 //import play.db.jpa.JPA;
 import java.util.List;
 
+import models.curriculum.Question;
 import models.curriculum.Topic;
 import repositories.topics.TopicRepository;
 

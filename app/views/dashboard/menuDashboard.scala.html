@@ -4,6 +4,7 @@
           <ul class="nav nav-sidebar">
             <li class="@("active".when(opcao == "home"))"><a href="@routes.DashboardController.studentDashboard()">Home <span class="sr-only">(current)</span></a></li>
             <li class="@("active".when(opcao == "profile"))"><a href="@routes.ProfileController.view()">Meu Perfil</a></li>
+            <li class="@("active".when(opcao == "modules"))"><a href="@controllers.pedagogical.routes.PlanningController.index()">Módulos</a></li>
             <li><a href="@routes.LoginController.logout()">Sair</a></li>
           </ul>
 </div>

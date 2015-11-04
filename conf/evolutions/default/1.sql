@@ -5,6 +5,7 @@
 
 create table course (
   id                        bigint auto_increment not null,
+  name                      varchar(255),
   description               varchar(255),
   constraint pk_course primary key (id))
 ;
@@ -92,12 +93,6 @@ create table session_student (
   student_id                     bigint not null,
   constraint pk_session_student primary key (session_id, student_id))
 ;
-
-create table session_teacher (
-  session_id                     bigint not null,
-  teacher_id                     bigint not null,
-  constraint pk_session_teacher primary key (session_id, teacher_id))
-;
 alter table module add constraint fk_module_course_1 foreign key (course_id) references course (id) on delete restrict on update restrict;
 create index ix_module_course_1 on module (course_id);
 alter table session add constraint fk_session_course_2 foreign key (course_id) references course (id) on delete restrict on update restrict;
@@ -121,10 +116,6 @@ alter table session_student add constraint fk_session_student_session_01 foreign
 
 alter table session_student add constraint fk_session_student_User_02 foreign key (student_id) references User (id) on delete restrict on update restrict;
 
-alter table session_teacher add constraint fk_session_teacher_session_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
-
-alter table session_teacher add constraint fk_session_teacher_User_02 foreign key (teacher_id) references User (id) on delete restrict on update restrict;
-
 # --- !Downs
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -142,8 +133,6 @@ drop table question_topic;
 drop table session;
 
 drop table session_student;
-
-drop table session_teacher;
 
 drop table solution;
 

@@ -1,0 +1,53 @@
+@(courseForm: Form[models.course.Course])
+
+@import helper._
+
+@dashboard.bodyDashboard("course") {
+
+@if(courseForm.hasGlobalErrors || courseForm.hasErrors) { 
+	<div class="alert alert-info">
+        <strong>Aviso:</strong> Todos os campos do formulário são obrigatórios.
+    </div>
+    @if(courseForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@courseForm.globalError.message
+    	</div>
+    }
+} 
+              @form(controllers.course.routes.CourseController.save()) {
+					<fieldset>
+				    <div id="legend">
+				      <legend class="">Criação de um Novo Curso</legend>
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                courseForm("name"), 
+			                '_label -> "Nome do Curso",
+			                'size -> 60, 
+			                '_help -> "Sugestão: Utilize nomes curtos."
+			          )
+				    </div>
+				 
+				    <div class="control-group">
+				      <!-- Statement -->
+				      @textarea(
+			                courseForm("description"), 
+			                '_label -> "Descrição do Curso", 
+			                'rows -> 5,
+    						'cols -> 60
+			          )
+				    </div>				    
+				  
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar </button>
+				      </div>
+				    </div>
+				  </fieldset>			
+			
+			  }
+	
+}

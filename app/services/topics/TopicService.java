@@ -5,6 +5,7 @@ package services.topics;
 
 import java.util.List;
 
+import models.curriculum.Question;
 import models.curriculum.Topic;
 
 /**
@@ -22,5 +23,7 @@ public interface TopicService {
 	public List<Topic> findAll();
 	
 	public Topic findById(Long id);
+	
+//	public List<Question> getQuestions(Topic topic);
 
 }

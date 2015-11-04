@@ -64,6 +64,16 @@ GET		/resolution/question		controllers.resolution.ResolutionController.index()
 POST	/resolution/submit			controllers.resolution.ResolutionController.submit(id: Long)
 GET		/resolution/next			controllers.resolution.ResolutionController.next(id: Long)
 
+# ##################### Course
+GET		/course/create				controllers.course.CourseController.create()
+POST	/course/save				controllers.course.CourseController.save()
+
+# ################ Planning
+GET		/modules					controllers.pedagogical.PlanningController.index()
+
+# ####################### Experimento
+GET		/modules/one				controllers.experimento.Modulo1Controller.index()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

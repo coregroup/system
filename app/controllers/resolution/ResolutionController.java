@@ -90,13 +90,22 @@ public class ResolutionController extends Controller {
 	}
 	
 	public static Result next(Long id){
+		QuestionService questionService = new QuestionServiceImpl();
+		Question question = questionService.findById(id);
 		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
-		Question question = planning.nextQuestion(id);
-		if(question == null){
-			// Acabaram os exercícios
-			return TODO;
+		Question nextQuestion = planning.nextQuestion(question.getTopics().get(0), id);
+		if(nextQuestion == null){
+			flash("success", "Você finalizou todas as questões do módulo!");
+			return redirect(controllers.pedagogical.routes.PlanningController.index());
 		}
-		return ok(views.html.resolution.index.render(question, form));
+		return ok(views.html.resolution.index.render(nextQuestion, form));
+//		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
+//		Question question = planning.nextQuestion(id);
+//		if(question == null){
+//			// Acabaram os exercícios
+//			return TODO;
+//		}
+//		return ok(views.html.resolution.index.render(question, form));
 	}
 
 }

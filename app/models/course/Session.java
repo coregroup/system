@@ -46,10 +46,6 @@ public class Session {
 	@ManyToMany
     @JoinTable(name = "session_student", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
 	public List<Student> students;
-	
-	@ManyToMany
-    @JoinTable(name = "session_teacher", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "teacher_id"))
-	public List<Teacher> teachers;
 
 	public Long getId() {
 		return id;
@@ -97,14 +93,6 @@ public class Session {
 
 	public void setStudents(List<Student> students) {
 		this.students = students;
-	}
-
-	public List<Teacher> getTeachers() {
-		return teachers;
-	}
-
-	public void setTeachers(List<Teacher> teachers) {
-		this.teachers = teachers;
 	}
 
 }

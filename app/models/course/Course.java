@@ -25,15 +25,26 @@ public class Course {
 	public Long id;
 	
 	@OneToMany
-	@Required
 	public List<Session> sessions;
+	
+	
+	@Required
+	public String name;
 	
 	@Required
 	public String description;
 	
 	@OneToMany
-	@Required
 	public List<Module> modules;
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;

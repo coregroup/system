@@ -1,0 +1,23 @@
+@()
+
+@import helper._
+
+@dashboard.bodyDashboard("modules") {
+
+<div id="login-overlay" class="modal-dialog">
+
+@if(flash.containsKey("success")) {
+	<center>
+		<div class="alert alert-success">
+			@flash.get("success")
+		</div>
+	</center>
+}
+	  		
+<center>
+	<h2>Resolução de Exercícios</h2>
+	<h3>Selecione o Módulo:</h3>
+</center>
+<a href="@controllers.experimento.routes.Modulo1Controller.index()" role="button" class="btn btn-primary btn-lg btn-block">MÓDULO I: O COMPUTADOR E A RESOLUÇÃO DE PROBLEMAS</a>
+</div>
+}
