@@ -9,6 +9,9 @@ import models.curriculum.Question;
 import models.curriculum.Solution;
 import models.curriculum.Topic;
 import models.users.Student;
+
+import com.avaje.ebean.Ebean;
+
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
@@ -19,9 +22,7 @@ import services.topics.impl.TopicServiceImpl;
 import services.users.UserService;
 import services.users.impl.UserServiceImpl;
 
-import com.avaje.ebean.Ebean;
-
-public class Modulo1Controller extends Controller{
+public class Modulo2Controller extends Controller{
 	
 	private static DynamicForm form = Form.form();
 	private static UserService userService = new UserServiceImpl();
@@ -29,7 +30,7 @@ public class Modulo1Controller extends Controller{
 	public static Result index(){
 		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
 		TopicService topicService = new TopicServiceImpl();
-		Topic topic = topicService.findById(new Long(5));
+		Topic topic = topicService.findById(new Long(6));
 		Question question = planning.nextQuestion(topic);
 		
 		///////////////////////

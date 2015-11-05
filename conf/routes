@@ -73,6 +73,7 @@ GET		/modules					controllers.pedagogical.PlanningController.index()
 
 # ####################### Experimento
 GET		/modules/one				controllers.experimento.Modulo1Controller.index()
+GET		/modules/two				controllers.experimento.Modulo2Controller.index()
 
 
 # Map static resources from the /public folder to the /assets URL path
