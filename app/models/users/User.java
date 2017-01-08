@@ -31,7 +31,7 @@ import play.data.validation.Constraints.Required;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "User")
+@Table(name = "user")
 public abstract class User {
 	
 	private static final long serialVersionUID = 1L;

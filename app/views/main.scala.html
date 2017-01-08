@@ -10,7 +10,7 @@
     <meta name="description" content="Aprenda de forma divertida e online. Vários cursos prontos e gratuitos">
     <meta name="author" content="CORE Group">
 
-    <title>System</title>
+    <title>@title</title>
     
 
    <!-- Bootstrap core CSS -->
@@ -21,6 +21,9 @@
 
     <!-- Custom styles for this template -->
     <link href='@routes.Assets.at("stylesheets/carousel.css")' rel="stylesheet">
+     
+    <!-- Custom styles for this template -->
+    <link href='@routes.Assets.at("stylesheets/cover.css")' rel="stylesheet">
     
   </head>
 <!-- BODY ================================================== -->
@@ -31,10 +34,13 @@
 
 <br><br><br><br>
 
+<!-- PAGE CONTENT ================================================== -->
 @content
 
 <!-- FOOTER ================================================== -->
+<div class="container marketing">
 @footer()
+</div>
 
 
     <!-- Bootstrap core JavaScript
