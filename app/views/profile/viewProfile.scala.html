@@ -38,10 +38,14 @@
 
                       				<tr>
                         				<td>Data de Aniversário</td>
+                        				@if(user.getDateOfBirth()==null){
+                        					<td>Não Informada</td>
+                        				} else {
                         				<td>@user.getDateOfBirth().get(Calendar.DAY_OF_MONTH) 
                         					de 
                         					@user.getDateOfBirth().getDisplayName(Calendar.MONTH, Calendar.LONG,new Locale("pt","BR"))
                         				</td>
+                        				}
                       				</tr>
                    
                       				<tr>

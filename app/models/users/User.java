@@ -53,7 +53,6 @@ public abstract class User {
 	public String password;
 	
 	//@Formats.DateTime(pattern="yyyy-MM-dd")
-	@Required
 	@Past
 	public Calendar dateOfBirth;
 	
