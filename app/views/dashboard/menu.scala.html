@@ -1,4 +1,4 @@
-@(opcao: String)
+@(userType: String)
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -13,8 +13,8 @@
         </div> <!-- fechar div navbar-header -->
         <div id="navbar" class="navbar-collapse collapse">
           	<ul class="nav navbar-nav">
-            	<li class="@("active".when(opcao == "student"))"><a href="@routes.DashboardController.studentDashboard()">Estudante</a></li>
-            	<li class="@("active".when(opcao == "teacher"))"><a href="#">Professor</a></li>
+            	<li class="@("active".when(userType == "student"))"><a href="@routes.DashboardController.studentDashboard()">Estudante</a></li>
+            	<li class="@("active".when(userType == "teacher"))"><a href="#">Professor</a></li>
           	</ul>
           	<form class="navbar-form navbar-right">
             	<input type="text" class="form-control" placeholder="Procurar por cursos...">

@@ -40,7 +40,7 @@ public class LoginController extends Controller{
     	if(user != null && user.isActive()){
     		session().put("email", user.getEmail());
     		userServive.logged(user);
-    		return redirect(controllers.routes.DashboardController.studentDashboard());
+    		return redirect(controllers.routes.DashboardController.dashboard());
     	}
     	else {
     		DynamicForm formDeErro = form.fill(requestForm.data());

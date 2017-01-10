@@ -1,4 +1,4 @@
-@(opcao: String)(content: Html)
+@(userType: String)(content: Html)
 
 <!DOCTYPE html>
 <!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
@@ -40,20 +40,14 @@
 
   <body>
 
-	@mainDashboard(opcao)
+	@menu(userType)
 
-    <div class="container-fluid">
-      	<div class="row">
-	  		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	  		
-        		@menuDashboard(opcao)
+    <div class="container">
+    	<br>
+    	@content
 		
-        		@content
-		
-	    		@footer()
-	      
-        	</div>
-      	</div>
+	    @footer()
+      	
     </div>
 
     <!-- Bootstrap core JavaScript
