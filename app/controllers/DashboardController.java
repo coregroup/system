@@ -32,8 +32,10 @@ public class DashboardController extends Controller {
 		
 		if (user instanceof Student){
 			return redirect(controllers.routes.DashboardController.studentDashboard());
+		} else {
+			return redirect(controllers.routes.DashboardController.teacherDashboard());
 		}
-		return TODO; //DASHBOARD do professor ainda não implementada
+		
 	}
 	
     public static Result studentDashboard() {
@@ -42,7 +44,8 @@ public class DashboardController extends Controller {
     }
     
     public static Result teacherDashboard(){
-    	return TODO;
+    	return ok(views.html.dashboard.teacher.index.render());
+    	//return TODO;
     }
 
 }
