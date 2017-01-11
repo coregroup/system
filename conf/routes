@@ -37,6 +37,13 @@ POST	/profile/student/password	controllers.StudentController.updatePassword()
 GET		/profile/teacher/password	controllers.TeacherController.editPassword()
 POST	/profile/teacher/password	controllers.TeacherController.updatePassword()
 
+# ##################### Course
+GET		/course						controllers.course.CourseController.index()
+GET 	/course/list				controllers.course.CourseController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+GET		/course/create				controllers.course.CourseController.create()
+POST	/course/save				controllers.course.CourseController.save()
+
 
 # ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()
@@ -65,10 +72,6 @@ POST	/question/upload/save		controllers.questions.UploadQuestionController.save(
 GET		/resolution/question		controllers.resolution.ResolutionController.index()
 POST	/resolution/submit			controllers.resolution.ResolutionController.submit(id: Long)
 GET		/resolution/next			controllers.resolution.ResolutionController.next(id: Long)
-
-# ##################### Course
-GET		/course/create				controllers.course.CourseController.create()
-POST	/course/save				controllers.course.CourseController.save()
 
 # ################ Planning
 GET		/modules					controllers.pedagogical.PlanningController.index()

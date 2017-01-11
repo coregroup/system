@@ -5,7 +5,6 @@ package services.topics;
 
 import java.util.List;
 
-import models.curriculum.Question;
 import models.curriculum.Topic;
 
 /**

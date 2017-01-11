@@ -6,6 +6,7 @@ import models.course.Course;
 import repositories.courses.CourseRepository;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.PagingList;
 
 public class CourseRepositoryImpl implements CourseRepository {
 
@@ -35,6 +36,14 @@ public class CourseRepositoryImpl implements CourseRepository {
 	public Course findById(Long id) {
 		Course course = Ebean.find(Course.class).where().eq("id", id.toString()).findUnique();
 		return course;
+	}
+	
+	@Override
+	public PagingList<Course> page(int page, int pageSize, String sortBy, String order, String filter){
+		return Ebean.find(Course.class).where()
+		.ilike("name", "%" + filter + "%")
+        .orderBy(sortBy + " " + order)
+        .findPagingList(pageSize);
 	}
 
 }
