@@ -38,4 +38,10 @@ public class StudentServiceImpl implements StudentService {
 		studentRepository.update(student);
 	}
 
+
+	@Override
+	public Student findByEmail(String email) {
+		return studentRepository.findByEmail(email);
+	}
+
 }

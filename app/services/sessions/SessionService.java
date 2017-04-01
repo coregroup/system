@@ -2,6 +2,8 @@ package services.sessions;
 
 import java.util.List;
 
+import com.avaje.ebean.PagingList;
+
 import models.course.Session;
 import models.users.Student;
 
@@ -18,5 +20,7 @@ public interface SessionService {
 	public Session findById(Long id);
 	
 	public Session findByStudent(Student student);
+	
+	public PagingList<Session> page(int page, int pageSize, String sortBy, String order, String filter);
 
 }

@@ -6,6 +6,7 @@ import models.course.Session;
 import repositories.sessions.SessionRepository;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.PagingList;
 
 public class SessionRepositoryImpl implements SessionRepository {
 
@@ -34,6 +35,14 @@ public class SessionRepositoryImpl implements SessionRepository {
 	public Session findById(Long id) {
 		Session session = Ebean.find(Session.class).where().eq("id", id.toString()).findUnique();
 		return session;
+	}
+
+	@Override
+	public PagingList<Session> page(int page, int pageSize, String sortBy, String order, String filter) {
+		return Ebean.find(Session.class).where()
+				.ilike("name", "%" + filter + "%")
+		        .orderBy(sortBy + " " + order)
+		        .findPagingList(pageSize);
 	}
 
 }

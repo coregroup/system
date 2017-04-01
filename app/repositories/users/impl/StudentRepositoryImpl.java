@@ -3,10 +3,10 @@
  */
 package repositories.users.impl;
 
+import com.avaje.ebean.Ebean;
+
 import models.users.Student;
 import repositories.users.StudentRepository;
-
-import com.avaje.ebean.Ebean;
 
 /**
  * @author priscylla
@@ -38,6 +38,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 			return student;
 		else
 			return null;
+	}
+
+	@Override
+	public Student findByEmail(String email) {
+		Student student = Ebean.find(Student.class).where().eq("email", email).findUnique();
+		return student;
 	}
 
 }

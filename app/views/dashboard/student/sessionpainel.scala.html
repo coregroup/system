@@ -1,0 +1,40 @@
+@(student: models.users.Student)
+
+
+<div class="col-lg-4">
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title"><i class="fa fa-graduation-cap fa-fw"></i> Cursos/Turmas </h3>
+    </div>
+	<div class="panel-body">
+	@if(student.getSessions.isEmpty()) {
+    	<div class="well">
+            <em>Nenhum resultado encontrado.</em>
+        </div>
+        
+	} else {
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover table-striped">
+            	<thead>
+	                <tr>
+	                	<th>Curso</th>
+	                    <th>Turma</th>
+	                    <th> </th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr>
+	                	<td>@student.getSessions.get(0).getCourse.getName()</td>
+	                    <td>@student.getSessions.get(0).getName()</td>
+	                    <td><a href="@controllers.course.routes.StudentSessionController.index(student.getSessions.get(0).getId())">Entrar</a></td>
+	                </tr>
+                </tbody>
+			</table>
+		</div>
+		<div class="text-right">
+			<a href="#">Ver Todas as Turmas <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    }
+	</div>
+	</div>
+</div>

@@ -35,13 +35,17 @@ public class Session {
 	public Course course;
 	
 	@Required
-	public String description;
+	public String name;
 	
 	@Required
 	public Calendar start;
 	
 	@Required
 	public Calendar end;
+	
+	@ManyToOne
+	@Required
+	public Teacher teacher;
 	
 	@ManyToMany
     @JoinTable(name = "session_student", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
@@ -63,12 +67,12 @@ public class Session {
 		this.course = course;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Calendar getStart() {
@@ -85,6 +89,14 @@ public class Session {
 
 	public void setEnd(Calendar end) {
 		this.end = end;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 	public List<Student> getStudents() {

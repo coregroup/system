@@ -13,7 +13,7 @@ body {
 
 @media(min-width:768px) {
     body {
-        margin-top: 00px; /** diferença da altura do inicio do conteúdo do body pro menu superior**/
+        margin-top: 50px; /** diferença da altura do inicio do conteúdo do body pro menu superior**/
     }
 }
 

@@ -1,100 +1,74 @@
 @(userType: String)(content: Html)
 
 <!DOCTYPE html>
-<!-- saved from url=(0043)http://getbootstrap.com/examples/dashboard/ -->
 <html lang="en">
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Aprenda de forma divertida e online. Vários cursos prontos e gratuitos">
-    <meta name="author" content="CORE Group">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
     <title>Marvin</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href='@routes.Assets.at("stylesheets/bootstrap.min.css")' rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link href='@routes.Assets.at("stylesheets/sb-admin.css")' rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href='@routes.Assets.at("stylesheets/dashboard.css")' rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href='@routes.Assets.at("stylesheets/plugins/morris.css")' rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src='@routes.Assets.at("javascripts/ie-emulation-modes-warning.js")'></script>
+    <!-- Custom Fonts -->
+    <link href='@routes.Assets.at("font-awesome/css/font-awesome.min.css")' rel="stylesheet" type="text/css">
 
-    
-  <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
-.en-markup-crop-options {
-    top: 18px !important;
-    left: 50% !important;
-    margin-left: -100px !important;
-    width: 200px !important;
-    border: 2px rgba(255,255,255,.38) solid !important;
-    border-radius: 4px !important;
-}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-.en-markup-crop-options div div:first-of-type {
-    margin-left: 0px !important;
-}
-</style></head>
+</head>
 
-  <body>
+<body>
 
-	@menu(userType)
-	
-	
-	<div id="page-wrapper">
+    <div id="wrapper">
 
-        <div class="container">
-	    	
-	    	@content
-			
-		    @footer()
-	      	
-	    </div>
-	</div>
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            
+            @menu(userType){  }
+            
+            <!-- /.navbar-collapse -->
+        </nav>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                @content
+                
+                @footer()
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
     <script src='@routes.Assets.at("javascripts/jquery.min.js")'></script>
+
+    <!-- Bootstrap Core JavaScript -->
     <script src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
-    <script src='@routes.Assets.at("javascripts/docs.min.js")'></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src='@routes.Assets.at("javascripts/ie10-viewport-bug-workaround.js")'></script>
-    
-    <!-- Usado nas páginas que possuem o componente para selecionar múltiplos elementos de uma lista-->
-    <script src='@routes.Assets.at("javascripts/multiselect.min.js")'></script>
-	<script src='@routes.Assets.at("javascripts/multiselect_adaptacao.js")'></script>
-  
-
-<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" title=""
- style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;"
-  data-original-title="Copy to clipboard">
-      	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge"
-      	 	width="100%" height="100%">
-      	 			<param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1419685844347">
-      	 			<param name="allowScriptAccess" value="sameDomain">
-      	 			<param name="scale" value="exactfit">
-      	 			<param name="loop" value="false">
-      	 			<param name="menu" value="false">         
-      	 			<param name="quality" value="best">         
-      	 			<param name="bgcolor" value="#ffffff">         
-      	 			<param name="wmode" value="transparent">         
-      	 			<param name="flashvars" value="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com">        
-      	 			<embed src="/assets/flash/ZeroClipboard.swf?noCache=1419685844347" loop="false" menu="false"
-      	  				quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge"
-      	   				allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash"
-      	    			wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer"
-      	     			flashvars="trustedOrigins=getbootstrap.com%2C%2F%2Fgetbootstrap.com%2Chttp%3A%2F%2Fgetbootstrap.com"
-      	      			scale="exactfit">                
-      	</object>
-</div>
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"
- preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;">
- 	<defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text>
-</svg>
-
 
 </body>
+
 </html>

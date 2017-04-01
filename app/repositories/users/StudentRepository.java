@@ -18,5 +18,7 @@ public interface StudentRepository {
 	public void update(Student student);
 	
 	public Student exists(String email, String password);
+	
+	public Student findByEmail(String email);
 
 }

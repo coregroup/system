@@ -1,5 +1,7 @@
 package controllers.course;
 
+import static play.data.Form.form;
+
 import models.course.Course;
 import play.data.Form;
 import play.mvc.Controller;
@@ -9,8 +11,7 @@ import services.course.impl.CourseServiceImpl;
 
 public class CourseController extends Controller{
 	
-	private static Form<Course> courseForm = Form.form(Course.class);
-	
+	private static Form<Course> courseForm = Form.form(Course.class);	
 	
 	public static Result index(){
 		return redirect(controllers.course.routes.CourseController.list(0, "name", "asc", ""));
@@ -28,7 +29,16 @@ public class CourseController extends Controller{
 	}
 	
 	public static Result save(){
-		return TODO;
+		Form<Course> courseForm = form(Course.class).bindFromRequest();
+		if(courseForm.hasErrors()) {
+            return badRequest(views.html.course.create.render(courseForm));
+        }
+		CourseService service = new CourseServiceImpl();
+		service.save(courseForm.get());
+        
+        flash("success", "Curso cadastrado com sucesso");
+
+		return redirect(controllers.course.routes.CourseController.index());
 	}
 
 }

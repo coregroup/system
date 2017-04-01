@@ -44,6 +44,13 @@ GET 	/course/list				controllers.course.CourseController.list(p:Int ?= 0, s ?= "
 GET		/course/create				controllers.course.CourseController.create()
 POST	/course/save				controllers.course.CourseController.save()
 
+# ##################### Session
+GET		/session					controllers.course.SessionController.index()
+GET		/session/list				controllers.course.SessionController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# ##################### Student Session Page
+GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
+
 
 # ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()

@@ -1,8 +1,12 @@
 package models.users;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
+import models.course.Session;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 
@@ -18,8 +22,9 @@ public class Teacher extends User{
 	
 	@Required
 	public String teachingArea;
-	//private List<Course> courses; ou Colletions?
 	
+	@OneToMany
+	public List<Session> sessions;
 
 	public String getInstitution() {
 		return institution;
@@ -35,6 +40,14 @@ public class Teacher extends User{
 
 	public void setTeachingArea(String teachingArea) {
 		this.teachingArea = teachingArea;
+	}
+
+	public List<Session> getSessions() {
+		return sessions;
+	}
+
+	public void setSessions(List<Session> sessions) {
+		this.sessions = sessions;
 	}
 
 	@Override

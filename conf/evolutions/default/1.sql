@@ -35,9 +35,10 @@ create table question (
 create table session (
   id                        bigint auto_increment not null,
   course_id                 bigint,
-  description               varchar(255),
+  name                      varchar(255),
   start                     datetime,
   end                       datetime,
+  teacher_id                bigint,
   constraint pk_session primary key (id))
 ;
 
@@ -57,7 +58,7 @@ create table topic (
   constraint pk_topic primary key (id))
 ;
 
-create table User (
+create table user (
   dtype                     varchar(10) not null,
   id                        bigint auto_increment not null,
   fullname                  varchar(255),
@@ -70,9 +71,9 @@ create table User (
   gender                    varchar(10),
   institution               varchar(255),
   teaching_area             varchar(255),
-  constraint ck_User_state check (state in ('Acre','Alagoas','Amapa','Amazonas','Bahia','Ceara','Distrito_Federal','Espirito_Santo','Goias','Maranhao','Mato_Grosso','Mato_Grosso_do_Sul','Minas_Gerais','Para','Paraiba','Parana','Pernambuco','Piaui','Rio_de_Janeiro','Rio_Grande_do_Norte','Rio_Grande_do_Sul','Rondonia','Roraima','Santa_Catarina','Sao_Paulo','Sergipe','Tocantins')),
-  constraint ck_User_gender check (gender in ('MASCULINO','FEMININO','UNANSWERED')),
-  constraint pk_User primary key (id))
+  constraint ck_user_state check (state in ('Acre','Alagoas','Amapa','Amazonas','Bahia','Ceara','Distrito_Federal','Espirito_Santo','Goias','Maranhao','Mato_Grosso','Mato_Grosso_do_Sul','Minas_Gerais','Para','Paraiba','Parana','Pernambuco','Piaui','Rio_de_Janeiro','Rio_Grande_do_Norte','Rio_Grande_do_Sul','Rondonia','Roraima','Santa_Catarina','Sao_Paulo','Sergipe','Tocantins')),
+  constraint ck_user_gender check (gender in ('MASCULINO','FEMININO','UNANSWERED')),
+  constraint pk_user primary key (id))
 ;
 
 
@@ -97,10 +98,12 @@ alter table module add constraint fk_module_course_1 foreign key (course_id) ref
 create index ix_module_course_1 on module (course_id);
 alter table session add constraint fk_session_course_2 foreign key (course_id) references course (id) on delete restrict on update restrict;
 create index ix_session_course_2 on session (course_id);
-alter table solution add constraint fk_solution_question_3 foreign key (question_id) references question (id) on delete restrict on update restrict;
-create index ix_solution_question_3 on solution (question_id);
-alter table solution add constraint fk_solution_user_4 foreign key (user_id) references User (id) on delete restrict on update restrict;
-create index ix_solution_user_4 on solution (user_id);
+alter table session add constraint fk_session_teacher_3 foreign key (teacher_id) references user (id) on delete restrict on update restrict;
+create index ix_session_teacher_3 on session (teacher_id);
+alter table solution add constraint fk_solution_question_4 foreign key (question_id) references question (id) on delete restrict on update restrict;
+create index ix_solution_question_4 on solution (question_id);
+alter table solution add constraint fk_solution_user_5 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_solution_user_5 on solution (user_id);
 
 
 
@@ -114,7 +117,7 @@ alter table question_topic add constraint fk_question_topic_topic_02 foreign key
 
 alter table session_student add constraint fk_session_student_session_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
 
-alter table session_student add constraint fk_session_student_User_02 foreign key (student_id) references User (id) on delete restrict on update restrict;
+alter table session_student add constraint fk_session_student_user_02 foreign key (student_id) references user (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -138,7 +141,7 @@ drop table solution;
 
 drop table topic;
 
-drop table User;
+drop table user;
 
 SET FOREIGN_KEY_CHECKS=1;
 
