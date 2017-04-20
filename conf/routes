@@ -43,6 +43,11 @@ GET 	/course/list				controllers.course.CourseController.list(p:Int ?= 0, s ?= "
 
 GET		/course/create				controllers.course.CourseController.create()
 POST	/course/save				controllers.course.CourseController.save()
+GET		/course/details/:id			controllers.course.CourseController.details(id:Long)
+
+# ##################### Module
+GET		/module/create				controllers.course.ModuleController.create()
+POST	/module/save				controllers.course.ModuleController.save()
 
 # ##################### Session
 GET		/session					controllers.course.SessionController.index()
@@ -50,7 +55,9 @@ GET		/session/list				controllers.course.SessionController.list(p:Int ?= 0, s ?=
 
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
-
+########## Por alguma razão eu parei na linha acima #############################
+########################################
+###########################################
 
 # ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()

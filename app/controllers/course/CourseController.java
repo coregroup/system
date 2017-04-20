@@ -38,7 +38,13 @@ public class CourseController extends Controller{
         
         flash("success", "Curso cadastrado com sucesso");
 
-		return redirect(controllers.course.routes.CourseController.index());
+		return redirect(controllers.course.routes.CourseController.list(0, "name", "asc", ""));
+	}
+	
+	public static Result details(Long id){
+		CourseService service = new CourseServiceImpl();
+		Course course = service.findById(id);
+		return ok(views.html.course.details.render(course));
 	}
 
 }

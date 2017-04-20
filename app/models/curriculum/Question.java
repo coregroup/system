@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import models.CorrectionType;
 import models.Level;
 import models.QuestionType;
+import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 
@@ -48,6 +49,7 @@ public class Question {
 	
 	@Required
 	@MinLength(value = 6)
+	@MaxLength(value = 1023)
 	public String statement;
 	
 	public String answer;

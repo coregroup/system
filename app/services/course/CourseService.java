@@ -16,5 +16,7 @@ public interface CourseService {
 	public void save(Course course);
 	
 	public PagingList<Course> page(int page, int pageSize, String sortBy, String order, String filter);
+	
+	public Course findById(Long id);
 
 }

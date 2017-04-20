@@ -64,11 +64,12 @@ public class ResolutionController extends Controller {
     	
     	Solution solution = new Solution();
     	solution.setAnswer(answer);
-    	solution.setDate(Calendar.getInstance());
+    	solution.setEndTime(Calendar.getInstance()); //TODO
     	solution.setQuestion(questionService.findById(id));
     	solution.setUser(student);
     	boolean isCorrect = evaluator.evaluate(solution);
-    	solution.setEvaluation(isCorrect);
+    	double evaluation = (isCorrect) ? 1 : 0; //TODO
+    	solution.setEvaluation(evaluation); // TODO
     	solutionService.save(solution);
     	
     	if(solution.getQuestion().getCorrectionType().equals(CorrectionType.MANUAL)){

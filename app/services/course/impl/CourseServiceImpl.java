@@ -38,4 +38,9 @@ public class CourseServiceImpl implements CourseService {
 		return repository.page(page, pageSize, sortBy, order, filter);
 	}
 
+	@Override
+	public Course findById(Long id) {
+		return repository.findById(id);
+	}
+
 }

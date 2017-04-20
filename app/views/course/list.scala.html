@@ -52,12 +52,12 @@
                 </div>
 	<!-- End Page Heading -->
 	
-	<h2 class="page-header">Resultados Encontrados: @currentPage.getTotalRowCount</h2>
+	<h2>Resultados Encontrados: @currentPage.getTotalRowCount</h2>
 	
 
     @if(flash.containsKey("success")) {
-        <div class="alert-message warning">
-            <strong>Done!</strong> @flash.get("success")
+        <div class="alert alert-success">
+            <strong>Feito!</strong> @flash.get("success")
         </div>
 	} 
 
@@ -92,7 +92,7 @@
 
                 @for(course <- currentPage.getAsList()) {
                     <tr>
-                        <td><a href="#">@course.name</a></td>
+                        <td><a href="@controllers.course.routes.CourseController.details(course.id)">@course.name</a></td>
                         <td>@course.description</td>
                     </tr>
                 }

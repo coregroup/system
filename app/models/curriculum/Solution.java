@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import models.users.User;
-import play.data.validation.Constraints.Required;
 
 /**
  * @author Priscylla
@@ -29,14 +28,15 @@ public class Solution {
 	public Question question;
 	
 	@ManyToOne
-	public User user;
+	public User user; 
 	
-	@Required
-	public Calendar date;
+	public Calendar startTime;
+	
+	public Calendar endTime;
 	
 	public String answer;
 	
-	public boolean evaluation;
+	public double evaluation;
 
 	public Long getId() {
 		return id;
@@ -62,14 +62,22 @@ public class Solution {
 		this.user = user;
 	}
 
-	public Calendar getDate() {
-		return date;
+	public Calendar getStartTime() {
+		return startTime;
 	}
 
-	public void setDate(Calendar date) {
-		this.date = date;
+	public void setStartTime(Calendar date) {
+		this.startTime = date;
 	}
 
+	public Calendar getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Calendar date) {
+		this.endTime = date;
+	}
+	
 	public String getAnswer() {
 		return answer;
 	}
@@ -78,11 +86,11 @@ public class Solution {
 		this.answer = answer;
 	}
 
-	public boolean isEvaluation() {
+	public double isEvaluation() {
 		return evaluation;
 	}
 
-	public void setEvaluation(boolean evaluation) {
+	public void setEvaluation(double evaluation) {
 		this.evaluation = evaluation;
 	}
 	

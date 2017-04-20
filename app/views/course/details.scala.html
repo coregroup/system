@@ -1,0 +1,66 @@
+@(course: models.course.Course)
+
+@import helper._
+
+@dashboard.index("teacher") {
+
+	<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Cursos</h1>
+                        <ol class="breadcrumb">
+                            <li>
+                            	<i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-graduation-cap"></i><a href="@controllers.course.routes.CourseController.index()"> Cursos</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-book"></i> @course.name
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+	
+	
+	<h2 class="sub-header"> @course.name </h2>
+	
+	<a class="btn btn-success" id="add" 
+        	href="@controllers.course.routes.ModuleController.create()">Criar Módulo</a>
+        	
+        	
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> <b> Descrição </b> </td>
+                  <td> @course.description </td>
+                </tr>
+                <tr>
+                  <td> <b> Módulos </b> </td>
+                  <td> @for(module <- course.modules) { @module.getDescription() <br> } </td>
+                </tr>
+                <tr>
+                  <td> <b> Sessões </b> </td>
+                  <td> @for(session <- course.sessions) { @session.getName() } <br> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+	
+	
+	
+	<!-- Custom styles for this template -->
+	<link href='@routes.Assets.at("stylesheets/sb-admin.css")' rel="stylesheet">
+    <link href='@routes.Assets.at("stylesheets/plugins/morris.css")' rel="stylesheet">
+    <link href='@routes.Assets.at("font-awesome/css/font-awesome.min.css")' rel="stylesheet" type="text/css">
+
+
+}

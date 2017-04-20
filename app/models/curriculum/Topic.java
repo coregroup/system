@@ -6,10 +6,13 @@ package models.curriculum;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import models.course.Module;
 import play.data.validation.Constraints.MinLength;
@@ -32,6 +35,10 @@ public class Topic {
 	@MinLength(value = 2)
 	public String name;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "father_id", insertable = true, updatable = true, nullable = true)
+	public Topic fatherTopic;
+	
 	@ManyToMany(mappedBy="topics")
 	public List<Question> questions;
 	
@@ -52,6 +59,14 @@ public class Topic {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Topic getFatherTopic() {
+		return fatherTopic;
+	}
+
+	public void setFatherTopic(Topic fatherTopic) {
+		this.fatherTopic = fatherTopic;
 	}
 
 	public List<Question> getQuestions() {
