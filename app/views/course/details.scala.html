@@ -24,10 +24,17 @@
 	<!-- End Page Heading -->
 	
 	
+	@if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <strong>Feito!</strong> @flash.get("success")
+        </div>
+	} 
+	
+	
 	<h2 class="sub-header"> @course.name </h2>
 	
 	<a class="btn btn-success" id="add" 
-        	href="@controllers.course.routes.ModuleController.create()">Criar Módulo</a>
+        	href="@controllers.course.routes.ModuleController.create(course.id)">Criar Módulo</a>
         	
         	
           <div class="table-responsive">

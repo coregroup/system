@@ -46,8 +46,8 @@ POST	/course/save				controllers.course.CourseController.save()
 GET		/course/details/:id			controllers.course.CourseController.details(id:Long)
 
 # ##################### Module
-GET		/module/create				controllers.course.ModuleController.create()
-POST	/module/save				controllers.course.ModuleController.save()
+GET		/course/:id/module/create				controllers.course.ModuleController.create(id:Long)
+POST	/course/:id/module/save				controllers.course.ModuleController.save(id:Long)
 
 # ##################### Session
 GET		/session					controllers.course.SessionController.index()

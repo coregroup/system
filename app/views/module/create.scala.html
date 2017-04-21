@@ -1,0 +1,89 @@
+@(moduleForm: Form[models.course.Module], topicos: List[models.curriculum.Topic])
+
+@import helper._
+
+@dashboard.index("teacher") {
+
+
+<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Cursos</h1>
+                        <ol class="breadcrumb">
+                            <li>
+                            	<i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-graduation-cap"></i><a href="@controllers.course.routes.CourseController.index()"> Cursos</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-book"></i>
+                                <a href="@controllers.course.routes.CourseController.details(moduleForm.get().course.id)"> @moduleForm.get().course.name </a>
+                            </li>
+                            <li class="active">
+                                Criação de Módulo
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+
+
+@if(moduleForm.hasGlobalErrors || moduleForm.hasErrors) { 
+	<div class="alert alert-info">
+        <strong>Aviso:</strong> Todos os campos do formulário são obrigatórios.
+    </div>
+    @if(moduleForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@moduleForm.globalError.message
+    	</div>
+    }
+} 
+              @form(controllers.course.routes.ModuleController.save(moduleForm.get().course.id)) {
+					<fieldset>
+				    <div id="legend">
+				      <legend class="">Criação de um Novo Módulo</legend>
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                moduleForm("description"), 
+			                '_label -> "Nome do Módulo",
+			                'size -> 60, 
+			                '_help -> "Sugestão: Utilize nomes curtos."
+			          )
+				    </div>
+				    
+				    <b>Tópicos da Questão</b>
+				    <div class="row">
+						<div class="col-sm-5">
+							<select name="from[]" id="multiselect" class="form-control" size="8" multiple="multiple">
+								@for(topico <- topicos){
+									<option value="@topico.getId()"> @topico.getName() </option>
+								}
+							</select>
+						</div>
+				
+						<div class="col-sm-2">
+							<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+							<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+						</div>
+				
+						<div class="col-sm-5">
+							<select name="listTopics" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
+						</div>
+					</div>
+				  
+				  	<br><br>
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar </button>
+				      </div>
+				    </div>
+				  </fieldset>			
+			
+			  }
+	
+}
