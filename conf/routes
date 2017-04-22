@@ -52,6 +52,12 @@ POST	/course/:id/module/save				controllers.course.ModuleController.save(id:Long
 # ##################### Session
 GET		/session					controllers.course.SessionController.index()
 GET		/session/list				controllers.course.SessionController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/session/create				controllers.course.SessionController.create()
+POST	/session/save				controllers.course.SessionController.save()
+
+GET		/session/:id/students/list	controllers.course.SessionController.studentList(id:Long)
+GET		/session/:id/students/add	controllers.course.SessionController.studentAdd(id:Long, p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/session/:id/students/save/  controllers.course.SessionController.studentSave(id:Long, email:String)
 
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				

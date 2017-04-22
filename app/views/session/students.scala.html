@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.PagingList[models.course.Session], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(sessionId: Long, currentPage: com.avaje.ebean.PagingList[models.users.Student], currentSortBy: String, currentOrder: String, currentFilter: String)
 
 @****************************************
 * Helper generating navigation links    *
@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    controllers.course.routes.SessionController.list(newPage, sortBy, order, currentFilter)
+    controllers.course.routes.SessionController.studentAdd(sessionId, newPage, sortBy, order, currentFilter)
     
 }
 
@@ -52,7 +52,7 @@
                 </div>
 	<!-- End Page Heading -->
 	
-	<h2>Resultados Encontrados: @currentPage.getTotalRowCount</h2>
+	<h2 class="page-header">Resultados Encontrados: @currentPage.getTotalRowCount</h2>
 	
 
     @if(flash.containsKey("success")) {
@@ -68,9 +68,6 @@
             <input type="submit" id="searchsubmit" value="Buscar" class="btn btn-primary">
         </form>
         
-        <a class="btn btn-success" id="add" 
-        	href="@controllers.course.routes.SessionController.create()">Criar Nova Sessão</a>
-        
 	</div>
 	
 	@if(currentPage.getTotalRowCount == 0) {
@@ -84,17 +81,30 @@
 		<table class="table table-striped">
             <thead>
                 <tr>
-                    @header("name", "Nome da Sessão")
-                    @header("course", "Curso")
+                    @header("fullname", "Nome")
+                    @header("email", "Email")
                 </tr>
             </thead>
             <tbody>
 
-                @for(session <- currentPage.getAsList()) {
+                @for(student <- currentPage.getAsList()) {
                     <tr>
-                        <td><a href="#">@session.name</a></td>
-                        <td> @session.course.getName() </td>
-                        <td><a class="btn btn-info btn-xs" href="@controllers.course.routes.SessionController.studentList(session.id)"> Adicionar alunos</a></td>
+                        <td> @student.fullname </td>
+                        <td> @student.email </td>
+                        <td>
+                         	@if(student.sessions.isEmpty()){
+                        	 	<a class="btn btn-success btn-xs" 
+                        	 		href="@controllers.course.routes.SessionController.studentSave(sessionId, student.email)"> Adicionar</a>
+                        	 } 
+                        	@for(session <- student.sessions) {
+                        		 @if(session.getId()==sessionId){
+                        		 	<span class="label label-default"> Já adicionado</span>
+                        		 } else { 
+                        		 	<a class="btn btn-success btn-xs" 
+                        		 		href="@controllers.course.routes.SessionController.studentSave(sessionId, student.email)"> Adicionar</a>
+                        		 } 
+                        	 }
+                        </td>
                     </tr>
                 }
 

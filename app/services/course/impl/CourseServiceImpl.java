@@ -3,6 +3,8 @@
  */
 package services.course.impl;
 
+import java.util.List;
+
 import com.avaje.ebean.PagingList;
 
 import models.course.Course;
@@ -41,6 +43,11 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public Course findById(Long id) {
 		return repository.findById(id);
+	}
+
+	@Override
+	public List<Course> findAll() {
+		return repository.findAll();
 	}
 
 }

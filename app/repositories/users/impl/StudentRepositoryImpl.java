@@ -4,7 +4,9 @@
 package repositories.users.impl;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.PagingList;
 
+import models.course.Course;
 import models.users.Student;
 import repositories.users.StudentRepository;
 
@@ -44,6 +46,14 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public Student findByEmail(String email) {
 		Student student = Ebean.find(Student.class).where().eq("email", email).findUnique();
 		return student;
+	}
+
+	@Override
+	public PagingList<Student> page(int page, int pageSize, String sortBy, String order, String filter) {
+		return Ebean.find(Student.class).where()
+				.ilike("fullname", "%" + filter + "%")
+		        .orderBy(sortBy + " " + order)
+		        .findPagingList(pageSize);
 	}
 
 }

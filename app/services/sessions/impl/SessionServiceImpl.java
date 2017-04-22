@@ -64,8 +64,7 @@ public class SessionServiceImpl implements SessionService {
 	 */
 	@Override
 	public Session findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id);
 	}
 
 	/* (non-Javadoc)

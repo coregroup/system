@@ -1,0 +1,53 @@
+@(sessionForm: Form[models.course.Session], courses: List[models.course.Course])
+
+
+@import helper._
+
+@dashboard.index("") {
+
+@if(sessionForm.hasGlobalErrors || sessionForm.hasErrors) { 
+	<div class="alert alert-info">
+        <strong>Aviso:</strong> Todos os campos do formulário são obrigatórios.
+    </div>
+    @if(sessionForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@sessionForm.globalError.message
+    	</div>
+    }
+} 
+              @form(controllers.course.routes.SessionController.save()) {
+					<fieldset>
+				    <div id="legend">
+				      <legend class="">Criação de uma Nova Sessão</legend>
+				    </div>
+				    
+				    <div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                sessionForm("name"), 
+			                '_label -> "Nome do Sessão",
+			                'size -> 60, 
+			                '_help -> "Sugestão: Utilize nomes curtos."
+			          )
+				    </div>
+				    
+				    <div class="control-group">
+				    @select(
+    					field = sessionForm("course"),
+    					options = courses.map(course => course.id.toString -> course.name),
+    					'_label -> "Curso",
+    					'_default -> "Choose One"
+ 					)
+				    </div>				 
+				  
+				    <div class="control-group">
+				      <!-- Button -->
+				      <div class="controls">
+				        <button class="btn btn-success">Salvar </button>
+				      </div>
+				    </div>
+				  </fieldset>			
+			
+			  }
+	
+}

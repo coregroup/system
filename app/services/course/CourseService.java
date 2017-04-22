@@ -3,6 +3,8 @@
  */
 package services.course;
 
+import java.util.List;
+
 import com.avaje.ebean.PagingList;
 
 import models.course.Course;
@@ -18,5 +20,7 @@ public interface CourseService {
 	public PagingList<Course> page(int page, int pageSize, String sortBy, String order, String filter);
 	
 	public Course findById(Long id);
+	
+	public List<Course> findAll();
 
 }
