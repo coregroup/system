@@ -5,6 +5,8 @@ package repositories.questions;
 
 import java.util.List;
 
+import com.avaje.ebean.PagingList;
+
 import models.curriculum.Question;
 
 /**
@@ -22,5 +24,7 @@ public interface QuestionRepository {
 	public List<Question> findAll();
 	
 	public Question findById(Long id);
+	
+	public PagingList<Question> page(int page, int pageSize, String sortBy, String order, String filter);
 
 }

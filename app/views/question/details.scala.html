@@ -1,0 +1,51 @@
+@(question: models.curriculum.Question)
+
+@dashboard.index("") {
+
+	<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Cursos</h1>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="@controllers.questions.routes.QuestionController.index()"> Questões </a>
+                            </li>
+                            <li class="active"> @question.name
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+	
+	
+	<center>
+		<h3><span class="label label-warning"> @question.id </span></h3>
+		<h3>@question.name </h3>
+	</center>
+	
+	<hr>
+	
+      <div class="row">
+        <div class="col-md-8">
+        	<strong>Descrição: </strong><br>
+        	@Html(question.getStatement())
+        </div>
+        <div class="col-md-4">
+        	<strong>Nível: </strong> @question.level <br>
+        	<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
+        	<strong>Tipo: </strong> @question.questionType <br>
+        	<strong>Tipo de Correção: </strong> @question.correctionType <br>
+        	<strong>Resposta (para correção automática): </strong> @question.answer <br>
+        	<strong>Disponível para resolução: </strong>
+        	@if(question.available) { 
+        		<span class="label label-success">Sim</span>
+        		} else { <span class="label label-danger">Não</span> }
+        	
+        </div>
+      </div>
+	
+	
+	
+}

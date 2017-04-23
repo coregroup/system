@@ -67,6 +67,8 @@ GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)
 
 # ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()
+GET		/question/list				controllers.questions.QuestionController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/question/details/:id		controllers.questions.QuestionController.details(id:Long)
 
 # Text Question
 GET		/question/text/create		controllers.questions.TextQuestionController.create()

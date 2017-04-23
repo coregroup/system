@@ -5,10 +5,11 @@ package repositories.questions.impl;
 
 import java.util.List;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.PagingList;
+
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
-
-import com.avaje.ebean.Ebean;
 
 /**
  * @author Priscylla
@@ -51,6 +52,14 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 	public Question findById(Long id) {
 		Question question = Ebean.find(Question.class).where().eq("id", id.toString()).findUnique();
 		return question;
+	}
+
+	@Override
+	public PagingList<Question> page(int page, int pageSize, String sortBy, String order, String filter) {
+		return Ebean.find(Question.class).where()
+				.ilike("name", "%" + filter + "%")
+		        .orderBy(sortBy + " " + order)
+		        .findPagingList(pageSize);
 	}
 
 }

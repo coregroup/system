@@ -5,6 +5,8 @@ package services.questions.impl;
 
 import java.util.List;
 
+import com.avaje.ebean.PagingList;
+
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
 import repositories.questions.impl.QuestionRepositoryImpl;
@@ -16,10 +18,10 @@ import services.questions.QuestionService;
  */
 public class QuestionServiceImpl implements QuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
 	public QuestionServiceImpl() {
-		this.questionRepository = new QuestionRepositoryImpl();
+		this.repository = new QuestionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -27,7 +29,7 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	@Override
 	public List<Question> findAll() {
-		return questionRepository.findAll();
+		return repository.findAll();
 	}
 
 	/* (non-Javadoc)
@@ -35,7 +37,12 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	@Override
 	public Question findById(Long id) {
-		return questionRepository.findById(id);
+		return repository.findById(id);
+	}
+
+	@Override
+	public PagingList<Question> page(int page, int pageSize, String sortBy, String order, String filter) {
+		return repository.page(page, pageSize, sortBy, order, filter);
 	}
 
 }
