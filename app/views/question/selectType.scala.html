@@ -2,9 +2,25 @@
 
 @import helper._
 
-@dashboard.index("questoes") {
+@dashboard.index("teacher") {
 
-<div id="login-overlay" class="modal-dialog">
+<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Cursos</h1>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="@controllers.questions.routes.QuestionController.index()"> Questões </a>
+                            </li>
+                            <li class="active"> Seleção do Tipo de Questão
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+
 
 @if(flash.containsKey("success")) {
 	<center>
@@ -13,18 +29,38 @@
 		</div>
 	</center>
 }
-	  		
-<center>
-	<h2>Criar Nova Questão</h2>
-	<h3>Selecione o Tipo da Questão:</h3>
-</center>
-<a href="@controllers.questions.routes.TextQuestionController.create()" role="button" class="btn btn-primary btn-lg btn-block">Resposta de Texto Curto</a>
-<a href="@controllers.questions.routes.ParagraphQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta Texto Longo</a>
-<a href="@controllers.questions.routes.TrueFalseQuestionController.create()" role="button" class="btn btn-primary btn-lg btn-block">Verdadeiro ou Falso</a>
-<a href="@controllers.questions.routes.MultipleChoiceQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Múltipla Escolha</a>
-<a href="#" role="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Checkboxes</a>
-<a href="@controllers.questions.routes.UploadQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Update de Arquivo</a>
-<a href="#" role="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Resposta em Escala</a>
-<a href="#" role="button" class="btn btn-default btn-lg btn-block" disabled="disabled">Resposta com Datas</a>
-</div>
+
+<h3>Selecione o tipo da questão que deseja criar:</h3>
+      <div class="row">
+        <div class="col-md-4">
+        	<a href="@controllers.questions.routes.TextQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta de Texto Curto</a>
+        </div>
+        <div class="col-md-4">
+        	<a href="@controllers.questions.routes.ParagraphQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta Texto Longo</a>
+        </div>
+        <div class="col-md-4">
+        	<a href="@controllers.questions.routes.TrueFalseQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Verdadeiro ou Falso</a>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+        	<a href="@controllers.questions.routes.MultipleChoiceQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Múltipla Escolha</a>
+        </div>
+        <div class="col-md-4">
+        	<a href="@controllers.questions.routes.UploadQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Update de Arquivo</a>
+        </div>
+        <div class="col-md-4">
+        	<a href="#" role="button" class="btn btn-default btn-lg btn-block">Codificação</a>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
 }
