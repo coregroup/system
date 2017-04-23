@@ -20,7 +20,6 @@ public class QuestionController extends Controller{
 	
 	public static Result index(){
 		return redirect(controllers.questions.routes.QuestionController.list(0, "name", "asc", ""));
-		//return ok(views.html.question.selectType.render());
 	}
 	
 	public static Result list(int page, String sortBy, String order, String filter){
@@ -33,6 +32,10 @@ public class QuestionController extends Controller{
 		QuestionService service = new QuestionServiceImpl();
 		Question question = service.findById(id);
 		return ok(views.html.question.details.render(question));
+	}
+	
+	public static Result selectType(){
+		return ok(views.html.question.selectType.render());
 	}
 
 }

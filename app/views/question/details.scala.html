@@ -33,16 +33,22 @@
         	@Html(question.getStatement())
         </div>
         <div class="col-md-4">
-        	<strong>Nível: </strong> @question.level <br>
-        	<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
-        	<strong>Tipo: </strong> @question.questionType <br>
-        	<strong>Tipo de Correção: </strong> @question.correctionType <br>
-        	<strong>Resposta (para correção automática): </strong> @question.answer <br>
-        	<strong>Disponível para resolução: </strong>
-        	@if(question.available) { 
-        		<span class="label label-success">Sim</span>
-        		} else { <span class="label label-danger">Não</span> }
-        	
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Detalhes</h3>
+            	</div>
+            	<div class="panel-body">
+              		<strong>Nível: </strong> @question.level <br>
+        			<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
+        			<strong>Tipo: </strong> @question.questionType <br>
+        			<strong>Tipo de Correção: </strong> @question.correctionType <br>
+        			<strong>Resposta (para correção automática): </strong> @question.answer <br>
+        			<strong>Disponível para resolução: </strong>
+        			@if(question.available) { 
+        				<span class="label label-success">Sim</span>
+        			} else { <span class="label label-danger">Não</span> }
+            	</div>
+           	</div>        	
         </div>
       </div>
 	

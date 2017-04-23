@@ -7,7 +7,7 @@
 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Cursos</h1>
+                        <h1 class="page-header">Questões</h1>
                         <ol class="breadcrumb">
                             <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
                             <li>
@@ -21,22 +21,13 @@
                 </div>
 	<!-- End Page Heading -->
 
-
-@if(flash.containsKey("success")) {
-	<center>
-		<div class="alert alert-success">
-			@flash.get("success")
-		</div>
-	</center>
-}
-
 <h3>Selecione o tipo da questão que deseja criar:</h3>
       <div class="row">
         <div class="col-md-4">
         	<a href="@controllers.questions.routes.TextQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta de Texto Curto</a>
         </div>
         <div class="col-md-4">
-        	<a href="@controllers.questions.routes.ParagraphQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta Texto Longo</a>
+        	<a href="@controllers.questions.routes.ParagraphQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Resposta de Texto Longo</a>
         </div>
         <div class="col-md-4">
         	<a href="@controllers.questions.routes.TrueFalseQuestionController.create()" role="button" class="btn btn-default btn-lg btn-block">Verdadeiro ou Falso</a>

@@ -37,7 +37,7 @@ public class TextQuestionController extends Controller{
 		TopicService topicService = new TopicServiceImpl();
 		List<Topic> topics = topicService.findAll();
 		
-		return ok(views.html.question.text.newQuestion.render(questionForm, topics));
+		return ok(views.html.question.text.create.render(questionForm, topics));
 	}
 	
 	public static Result save(){
@@ -47,16 +47,16 @@ public class TextQuestionController extends Controller{
 		
 		if(questionForm.hasErrors()){
 			questionForm.reject("* ALGUM CAMPO OBRIGATÓRIO NÃO FOI PREENCHIDO");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.text.create.render(questionForm, topicService.findAll()));
 		}
 		if(request.body().asFormUrlEncoded().get("listTopics")==null){
 			questionForm.reject("* OS TÓPICOS DA QUESTÃO NÃO FORAM ESCOLHIDOS");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.text.create.render(questionForm, topicService.findAll()));
 		}
 		if(questionForm.field("correctionType").value().equals((CorrectionType.AUTOMATIC.name())) &&
 			questionForm.field("answer").value().equals("")){
 			questionForm.reject("* A CORREÇÃO AUTOMÁTICA EXIGE O PREENCHIMENTO DO CAMPO: RESPOSTA CORRETA ");
-			return badRequest(views.html.question.text.newQuestion.render(questionForm, topicService.findAll()));
+			return badRequest(views.html.question.text.create.render(questionForm, topicService.findAll()));
 		}
 		
 		List<Topic> selectedTopics = new ArrayList<Topic>();
@@ -73,7 +73,7 @@ public class TextQuestionController extends Controller{
 		questionService.save(question);
 		
 		flash("success", "Questão cadastrada com sucesso!");
-		return redirect(controllers.questions.routes.QuestionController.index());
+		return redirect(controllers.questions.routes.QuestionController.list(0, "name", "asc", ""));
 	}
 
 }

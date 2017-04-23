@@ -69,6 +69,7 @@ GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)
 GET		/question					controllers.questions.QuestionController.index()
 GET		/question/list				controllers.questions.QuestionController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 GET		/question/details/:id		controllers.questions.QuestionController.details(id:Long)
+GET		/question/new				controllers.questions.QuestionController.selectType()
 
 # Text Question
 GET		/question/text/create		controllers.questions.TextQuestionController.create()
