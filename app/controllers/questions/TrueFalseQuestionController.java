@@ -15,10 +15,9 @@ import play.data.DynamicForm;
 import play.data.DynamicForm.Dynamic;
 import play.data.Form;
 import play.mvc.Controller;
-import play.mvc.Security;
 import play.mvc.Http.Request;
 import play.mvc.Result;
-import repositories.questions.impl.QuestionRepositoryImpl;
+import play.mvc.Security;
 import services.questions.TrueFalseQuestionService;
 import services.questions.impl.TrueFalseQuestionServiceImpl;
 import services.topics.TopicService;
@@ -67,7 +66,7 @@ public class TrueFalseQuestionController extends Controller{
 			selectedTopics.add(topicService.findById(Long.valueOf(topico)));
 		}
 		
-		TrueFalseQuestionService questionService = new TrueFalseQuestionServiceImpl(new QuestionRepositoryImpl());
+		TrueFalseQuestionService questionService = new TrueFalseQuestionServiceImpl();
 		Question question = new Question();
 		question.setName(name);
 		question.setAnswer(answer);
@@ -80,7 +79,7 @@ public class TrueFalseQuestionController extends Controller{
 		questionService.save(question);
 
 		flash("success", "Questão cadastrada com sucesso!");
-		return redirect(controllers.questions.routes.QuestionController.index());
+		return redirect(controllers.questions.routes.QuestionController.list(0, "name", "asc", ""));
 	}
 
 }

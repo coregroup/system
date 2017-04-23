@@ -54,7 +54,7 @@ public class ParagraphQuestionController extends Controller{
 			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
 		}
 		if(questionForm.field("correctionType").value().equals((CorrectionType.AUTOMATIC.name()))){
-			questionForm.reject("* NESSE MOMENTO O SISTEMA NÃO SUPORTA A CORREÇÃO AUTOMÁTICA PARA ESSE"
+			questionForm.reject("* NESSE MOMENTO O SISTEMA NÃO SUPORTA A CORREÇÃO AUTOMÁTICA PARA ESSE "
 					+ "TIPO DE QUESTÃO.");
 			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
 		}
@@ -66,14 +66,14 @@ public class ParagraphQuestionController extends Controller{
 			selectedTopics.add(topicService.findById(Long.valueOf(topico)));
 		}
 		
-		ParagraphQuestionService questionService = new ParagraphQuestionServiceImpl(new QuestionRepositoryImpl());
+		ParagraphQuestionService questionService = new ParagraphQuestionServiceImpl();
 		Question question = questionForm.get();
 		question.setAvailable(true);
 		question.setTopics(selectedTopics);
 		questionService.save(question);
 		
 		flash("success", "Questão cadastrada com sucesso!");
-		return redirect(controllers.questions.routes.QuestionController.index());
+		return redirect(controllers.questions.routes.QuestionController.list(0, "name", "asc", ""));
 	}
 
 }

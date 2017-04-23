@@ -9,6 +9,7 @@ import models.CorrectionType;
 import models.QuestionType;
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
+import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.MultipleChoiceQuestionService;
 
 /**
@@ -18,10 +19,10 @@ import services.questions.MultipleChoiceQuestionService;
 public class MultipleChoiceQuestionServiceImpl implements
 		MultipleChoiceQuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
-	public MultipleChoiceQuestionServiceImpl(QuestionRepository questionRepository) {
-		this.questionRepository = questionRepository;
+	public MultipleChoiceQuestionServiceImpl() {
+		this.repository = new QuestionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -39,7 +40,7 @@ public class MultipleChoiceQuestionServiceImpl implements
 				+ options.get(4));
 		
 		
-		this.questionRepository.save(question);
+		this.repository.save(question);
 	}
 
 	/* (non-Javadoc)
@@ -56,8 +57,7 @@ public class MultipleChoiceQuestionServiceImpl implements
 	 */
 	@Override
 	public void update(Question question) {
-		// TODO Auto-generated method stub
-
+		repository.update(question);
 	}
 
 }

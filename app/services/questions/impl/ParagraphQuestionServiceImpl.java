@@ -6,6 +6,7 @@ package services.questions.impl;
 import models.QuestionType;
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
+import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.ParagraphQuestionService;
 
 /**
@@ -14,10 +15,10 @@ import services.questions.ParagraphQuestionService;
  */
 public class ParagraphQuestionServiceImpl implements ParagraphQuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
-	public ParagraphQuestionServiceImpl(QuestionRepository questionRepository) {
-		this.questionRepository = questionRepository;
+	public ParagraphQuestionServiceImpl() {
+		this.repository = new QuestionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -28,7 +29,7 @@ public class ParagraphQuestionServiceImpl implements ParagraphQuestionService {
 		question.setQuestionType(QuestionType.PARAGRAPH_TEXT);
 		String newStatement = "<pre>" + question.getStatement() + "</pre>";
 		question.setStatement(newStatement);
-		this.questionRepository.save(question);
+		this.repository.save(question);
 	}
 
 	/* (non-Javadoc)
@@ -45,8 +46,7 @@ public class ParagraphQuestionServiceImpl implements ParagraphQuestionService {
 	 */
 	@Override
 	public void update(Question question) {
-		// TODO Auto-generated method stub
-
+		repository.update(question);
 	}
 
 }

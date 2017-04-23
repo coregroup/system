@@ -7,6 +7,7 @@ import models.CorrectionType;
 import models.QuestionType;
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
+import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.TrueFalseQuestionService;
 
 /**
@@ -15,10 +16,10 @@ import services.questions.TrueFalseQuestionService;
  */
 public class TrueFalseQuestionServiceImpl implements TrueFalseQuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
-	public TrueFalseQuestionServiceImpl(QuestionRepository questionRepository) {
-		this.questionRepository = questionRepository;
+	public TrueFalseQuestionServiceImpl() {
+		this.repository = new QuestionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -28,7 +29,7 @@ public class TrueFalseQuestionServiceImpl implements TrueFalseQuestionService {
 	public void save(Question question) {
 		question.setQuestionType(QuestionType.TRUE_FALSE);
 		question.setCorrectionType(CorrectionType.AUTOMATIC);
-		this.questionRepository.save(question);
+		this.repository.save(question);
 	}
 
 	/* (non-Javadoc)

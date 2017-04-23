@@ -38,7 +38,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 	 */
 	@Override
 	public void update(Question question) {
-		//TODO
 		Ebean.update(question);
 	}
 

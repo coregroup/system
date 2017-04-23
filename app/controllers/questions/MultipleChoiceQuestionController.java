@@ -12,13 +12,12 @@ import models.Level;
 import models.curriculum.Question;
 import models.curriculum.Topic;
 import play.data.DynamicForm;
-import play.data.Form;
 import play.data.DynamicForm.Dynamic;
+import play.data.Form;
 import play.mvc.Controller;
+import play.mvc.Http.Request;
 import play.mvc.Result;
 import play.mvc.Security;
-import play.mvc.Http.Request;
-import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.MultipleChoiceQuestionService;
 import services.questions.impl.MultipleChoiceQuestionServiceImpl;
 import services.topics.TopicService;
@@ -76,7 +75,7 @@ public class MultipleChoiceQuestionController extends Controller{
 			selectedTopics.add(topicService.findById(Long.valueOf(topico)));
 		}
     	
-		MultipleChoiceQuestionService questionService = new MultipleChoiceQuestionServiceImpl(new QuestionRepositoryImpl());
+		MultipleChoiceQuestionService questionService = new MultipleChoiceQuestionServiceImpl();
 		
 		Question question = new Question();
 		question.setName(name);
@@ -96,7 +95,7 @@ public class MultipleChoiceQuestionController extends Controller{
 		questionService.save(question, options);
 
 		flash("success", "Questão cadastrada com sucesso!");
-		return redirect(controllers.questions.routes.QuestionController.index());
+		return redirect(controllers.questions.routes.QuestionController.list(0, "name", "asc", ""));
 	}
 
 }
