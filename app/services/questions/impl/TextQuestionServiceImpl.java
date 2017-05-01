@@ -14,10 +14,10 @@ import services.questions.TextQuestionService;
  */
 public class TextQuestionServiceImpl implements TextQuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
 	public TextQuestionServiceImpl(QuestionRepository questionRepository) {
-		this.questionRepository = questionRepository;
+		this.repository = questionRepository;
 	}
 
 	/* (non-Javadoc)
@@ -28,7 +28,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
 		question.setQuestionType(QuestionType.TEXT);
 		String newStatement = "<pre>" + question.getStatement() + "</pre>";
 		question.setStatement(newStatement);
-		this.questionRepository.save(question);
+		this.repository.save(question);
 	}
 
 	/* (non-Javadoc)
@@ -44,7 +44,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
 	 */
 	@Override
 	public void update(Question question) {
-		this.questionRepository.update(question);
+		this.repository.update(question);
 	}
 
 }

@@ -7,6 +7,7 @@ import models.CorrectionType;
 import models.QuestionType;
 import models.curriculum.Question;
 import repositories.questions.QuestionRepository;
+import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.UploadQuestionService;
 
 /**
@@ -15,10 +16,10 @@ import services.questions.UploadQuestionService;
  */
 public class UploadQuestionServiceImpl implements UploadQuestionService {
 	
-	private QuestionRepository questionRepository;
+	private QuestionRepository repository;
 
-	public UploadQuestionServiceImpl(QuestionRepository questionRepository) {
-		this.questionRepository = questionRepository;
+	public UploadQuestionServiceImpl() {
+		this.repository = new QuestionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -27,8 +28,8 @@ public class UploadQuestionServiceImpl implements UploadQuestionService {
 	@Override
 	public void save(Question question) {
 		question.setQuestionType(QuestionType.UPLOAD);
-		question.setCorrectionType(CorrectionType.AUTOMATIC);
-		this.questionRepository.save(question);
+		question.setCorrectionType(CorrectionType.MANUAL);
+		this.repository.save(question);
 	}
 
 	/* (non-Javadoc)
@@ -45,8 +46,7 @@ public class UploadQuestionServiceImpl implements UploadQuestionService {
 	 */
 	@Override
 	public void update(Question question) {
-		// TODO Auto-generated method stub
-
+		repository.update(question);
 	}
 
 }

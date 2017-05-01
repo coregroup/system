@@ -59,12 +59,6 @@ GET		/session/:id/students/list	controllers.course.SessionController.studentList
 GET		/session/:id/students/add	controllers.course.SessionController.studentAdd(id:Long, p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 GET		/session/:id/students/save/  controllers.course.SessionController.studentSave(id:Long, email:String)
 
-# ##################### Student Session Page
-GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
-########## Por alguma razão eu parei na linha acima #############################
-########################################
-###########################################
-
 # ######################### Questions
 GET		/question					controllers.questions.QuestionController.index()
 GET		/question/list				controllers.questions.QuestionController.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
@@ -90,6 +84,16 @@ POST	/question/multiplechoice/save		controllers.questions.MultipleChoiceQuestion
 # Upload Question
 GET		/question/upload/create		controllers.questions.UploadQuestionController.create()
 POST	/question/upload/save		controllers.questions.UploadQuestionController.save()
+
+# Code Question
+GET		/question/code/create		controllers.questions.CodeQuestionController.create()
+POST	/question/code/save			controllers.questions.CodeQuestionController.save()
+
+# ##################### Student Session Page
+GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
+########## Por alguma razão eu parei na linha acima #############################
+########################################
+###########################################
 
 # ######################### Resolution
 GET		/resolution/question		controllers.resolution.ResolutionController.index()

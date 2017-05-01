@@ -14,7 +14,7 @@ public enum QuestionType {
 	
 	TEXT("Texto Curto"),PARAGRAPH_TEXT("Texto Longo"),MULTIPLE_CHOICE("Múltipla Escolha"),
 	CHECKBOXES("Checkboxes"),SCALE("Escala"),UPLOAD("Upload de Arquivo"),DATE("Submeter Data"),
-	TRUE_FALSE("Verdadeiro ou Falso");
+	TRUE_FALSE("Verdadeiro ou Falso"), CODE("Codificação");
 	
 	QuestionType(String name) {
         
