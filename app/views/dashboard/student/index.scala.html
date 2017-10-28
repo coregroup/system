@@ -1,4 +1,4 @@
-@(student: models.users.Student)
+@(student: models.users.Student, modulesList: List[models.course.Module])
 
 @dashboard.index("student") {
 	
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        @modules()
+                        @modules(modulesList)
                     </div>
                     
                 </div>

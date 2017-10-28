@@ -7,6 +7,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import repositories.users.impl.StudentRepositoryImpl;
+import services.module.ModuleService;
+import services.module.impl.ModuleServiceImpl;
 import services.users.StudentService;
 import services.users.UserService;
 import services.users.impl.StudentServiceImpl;
@@ -46,9 +48,11 @@ public class DashboardController extends Controller {
     	String email = session().get("email");
     	studentService = new StudentServiceImpl(new StudentRepositoryImpl());
     	
+    	ModuleService moduleService = new ModuleServiceImpl(); 
+    	
 		Student student = studentService.findByEmail(email);
 		
-    	return ok(views.html.dashboard.student.index.render(student));
+    	return ok(views.html.dashboard.student.index.render(student, moduleService.findAll()));
     	
     }
     

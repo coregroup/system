@@ -94,5 +94,9 @@ public class ModuleController extends Controller {
 		return redirect(controllers.course.routes.CourseController.details(course.id));
 		
 	}
+	
+	public static Result list(int page, String sortBy, String order, String filter){
+		return TODO;
+	}
 
 }
