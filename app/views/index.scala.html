@@ -37,9 +37,6 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#signUp">Faça Seu Cadastro</a></li>
-                <li><a href="#about">Sobre Nós</a></li>
-                <li><a href="#joinUs">Junte a Nós</a></li>
-                <li><a href="#learnToUse">Aprenda a Usar</a></li>
                 <li><a href="@routes.LoginController.login()">Login</a></li>
               </ul>
             </div>
@@ -55,17 +52,16 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
-        <div class="item">
+        <div class="item active">
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Programação</h1>
-              <p>Curso de programação para <code>iniciantes</code> disponível no ambiente.</p>
+              <h1>Inicie seus estudos agora!</h1>
+              <p>Faça login no sistema agora e inicie seus estudos! Programação se aprende praticando, por tanto, não perca tempo. Comece agora!</p>
               <p><a class="btn btn-lg btn-primary" href="@routes.LoginController.login()" role="button">Faça Login!</a></p>
             </div>
           </div>
@@ -74,19 +70,8 @@
           <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item active">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              <h1>Faça seu cadastro de estudante!</h1>
+              <p>Faça seu cadastro de estudante e <code>aguarde</code> o professor da disciplina liberar seu acesso ao sistema.</p>
             </div>
           </div>
         </div>
@@ -129,45 +114,6 @@
       </div><!-- /.row -->
 
 
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
-	  <a id="about"></a>
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Quem somos?! <span class="text-muted">Pessoas que acreditam na educação.</span></h2>
-          <p class="lead">Somos um grupo de pesquisadores, professores e estudantes que acreditam que podem fazer algo pela educação. Criamos esse ambiente gratuito para professores e estudantes...<a href="#">leia mais</a>.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" alt="500x500" src='@routes.Assets.at("images/reunion_group.jpg")' data-holder-rendered="true">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-	  <a id="joinUs"></a>
-      <div class="row featurette">
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" alt="500x500" src='@routes.Assets.at("images/join_us.jpg")' data-holder-rendered="true">
-        </div>
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Junte-se a Nós. <span class="text-muted">Participe você também desta revolução!</span></h2>
-          <p class="lead">Utilizou nosso sistema e teve alguma ideia? Uma mudança na interface? Uma nova funcionalidade? Uma mudança em uma frase? Você compartilha das nossas ideias? Então não tenha medo! Somos um grupo aberto! <a href="#">Saiba como participar</a>.</p>
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-	  <a id="learnToUse"></a>
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" alt="500x500" src='@routes.Assets.at("images/baby.jpg")' data-holder-rendered="true">
-        </div>
-      </div>
-
-      <!-- /END THE FEATURETTES -->
 
 
       <!-- FOOTER ================================================== -->
