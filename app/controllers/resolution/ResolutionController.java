@@ -36,12 +36,29 @@ public class ResolutionController extends Controller {
 	private static DynamicForm form = Form.form();
 	private static UserService userService = new UserServiceImpl();
 	
-	public static Result index(){
-		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
-		Question question = planning.nextQuestion();
+	public static Result listAll(){
+		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
+	}
+	
+	public static Result listAllQuestions(int page, String sortBy, String order, String filter){
+		QuestionService service = new QuestionServiceImpl();
+		return ok(views.html.resolution.listQuestions.render(
+				service.page(page, 10, sortBy, order, filter), sortBy, order, filter));
+	}
+	
+	public static Result index(Long id){
+		//Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
+		//Question question = planning.nextQuestion();
+		QuestionService service = new QuestionServiceImpl();
+		Question question = service.findById(id);
 		return ok(views.html.resolution.index.render(question, form));
 	}
 	
+	/**
+	 * 
+	 * Antiga resolução que usava uma simulação de planejador pedagógico (apenas)
+	 * escolhia as questões na sequencia em que eram retornadas do BD
+	 */
 	public static Result submit(Long id){
 		
 		Form<Dynamic> requestForm = form.bindFromRequest();
