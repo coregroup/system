@@ -6,10 +6,6 @@
 
 @form(controllers.resolution.routes.ResolutionController.submit(question.getId())) {
 	<fieldset>
-		<div id="legend">
-			<legend class="">Exercícios</legend>
-		</div>
-		
 		<dl>
   			<dt>Enunciado</dt>
   			<dd>@Html(question.getStatement())</dd>
@@ -25,4 +21,5 @@
 		</dl>
 		
 		<button class="btn btn-success">Submeter Solução</button>
+	</fieldset>
 }

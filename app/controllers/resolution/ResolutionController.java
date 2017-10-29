@@ -47,8 +47,6 @@ public class ResolutionController extends Controller {
 	}
 	
 	public static Result index(Long id){
-		//Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
-		//Question question = planning.nextQuestion();
 		QuestionService service = new QuestionServiceImpl();
 		Question question = service.findById(id);
 		return ok(views.html.resolution.index.render(question, form));
@@ -96,14 +94,12 @@ public class ResolutionController extends Controller {
     	}
     	
     	if(isCorrect){
-    		flash("success", "Você acertou a questão anterior! Tente agora essa nova questão!");
-    		return redirect(controllers.resolution.routes.ResolutionController.next(id));
+    		flash("success", "Parabéns! Você acertou a solução da questão! Agora escolha outra e continue aprendendo!");
+    		return redirect(controllers.resolution.routes.ResolutionController.listAll());
     		
     	} else {
-    		DynamicForm formDeErro = form.fill(requestForm.data());
-			formDeErro.reject("Resposta Incorreta.");
-			flash("error", "Resposta Incorreta: " + answer + ". Tente Novamente.");
-			return forbidden(views.html.resolution.index.render(questionService.findById(id), formDeErro));
+			flash("error", "Resposta Incorreta! Tente Novamente.");
+			return redirect(controllers.resolution.routes.ResolutionController.index(id));
     	}
 	}
 	

@@ -48,7 +48,7 @@
                         <ol class="breadcrumb">
                             <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
                             <li class="active">
-                                <i class="fa fa-question-circle"></i> Questões
+                                <i class="fa fa-question-circle"></i> Lista de Questões
                             </li>
                         </ol>
                     </div>
@@ -56,13 +56,6 @@
 	<!-- End Page Heading -->
 	
 	<h3>Quantidade de questões disponíveis: @currentPage.getTotalRowCount</h3>
-	
-
-    @if(flash.containsKey("success")) {
-        <div class="alert alert-success">
-            <strong>Feito!</strong> @flash.get("success")
-        </div>
-	} 
 
 	<div id="actions">
         
@@ -72,6 +65,16 @@
         </form>
 
 	</div>
+	
+	@if(flash.containsKey("success")) {
+			asdasdasd asd asd
+				<center>
+				<div class="alert alert-success">
+		        	<strong>Parabéns! </strong> @flash.get("success")
+		    	</div>
+		    	</center>
+	}
+	
 	
 	@if(currentPage.getTotalRowCount == 0) {
         <br>
