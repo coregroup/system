@@ -67,14 +67,22 @@
 	</div>
 	
 	@if(flash.containsKey("success")) {
-			asdasdasd asd asd
 				<center>
-				<div class="alert alert-success">
-		        	<strong>Parabéns! </strong> @flash.get("success")
-		    	</div>
+				<div class="alert alert-success alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<strong>Parabéns!</strong> @flash.get("success")
+				</div>
 		    	</center>
 	}
 	
+	@if(flash.containsKey("info")){
+				<center>
+				<div class="alert alert-info alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  					<strong>Aviso!</strong> @flash.get("info")
+				</div>
+		    	</center>		
+	}
 	
 	@if(currentPage.getTotalRowCount == 0) {
         <br>

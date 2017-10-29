@@ -67,8 +67,10 @@
 								@truefalseQuestion(question, solutionForm)
 							} else {
 								@if(question.getQuestionType.name().equals("UPLOAD")){
-								@uploadQuestion(question, solutionForm)
-							}
+									@uploadQuestion(question, solutionForm)
+								} else {
+									@codeQuestion(question, solutionForm)
+								}
 							}
 						}			
 					}

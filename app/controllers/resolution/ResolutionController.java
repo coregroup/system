@@ -19,6 +19,7 @@ import play.data.DynamicForm.Dynamic;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Http.Request;
 import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.QuestionService;
 import services.questions.impl.QuestionServiceImpl;
@@ -50,6 +51,39 @@ public class ResolutionController extends Controller {
 		QuestionService service = new QuestionServiceImpl();
 		Question question = service.findById(id);
 		return ok(views.html.resolution.index.render(question, form));
+	}
+	
+	public static Result submitCode(Long id){
+		
+		QuestionService questionService =  new QuestionServiceImpl();
+		SolutionService solutionService = new SolutionServiceImpl();
+		
+		Form<Dynamic> requestForm = form.bindFromRequest();
+		
+		Request request = request();		
+		String[] vetor = request.body().asFormUrlEncoded().get("code");
+		String code = vetor[0];
+		
+		if(code == null || code.equals("")){
+    		DynamicForm formDeErro = form.fill(requestForm.data());
+			formDeErro.reject("Você deve escrever uma resposta antes de submeter a solução.");
+			flash("warning", "Você deve escrever uma resposta antes de submeter a solução.");
+			return redirect(controllers.resolution.routes.ResolutionController.index(id));
+    	}
+		
+		String email = session().get("email");
+    	Student student = (Student) userService.findByEmail(email);
+    	
+    	Solution solution = new Solution();
+    	solution.setAnswer(code);
+    	solution.setEndTime(Calendar.getInstance()); //TODO
+    	solution.setQuestion(questionService.findById(id));
+    	solution.setUser(student);
+    	solution.setEvaluation(-1);//TODO NEGATIVO PARA SABER QUAIS QUESTÕES AINDA NÃO FORAM AVALIADAS MANUALMENTE (MUDAR APÓS JUIZ ONLINE)
+    	solutionService.save(solution);
+		
+    	flash("info", "Sua questão será avaliada manualmente pelo professor");
+		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
 	}
 	
 	/**
@@ -87,6 +121,7 @@ public class ResolutionController extends Controller {
     	solution.setEvaluation(evaluation); // TODO
     	solutionService.save(solution);
     	
+    	///////////////////////////////////////////////////////////////////////////////////////
     	if(solution.getQuestion().getCorrectionType().equals(CorrectionType.MANUAL)){
     		flash("success", "Sua resposta será corrigida MANUALMENTE pelo Professor."
     				+ "Tente agora essa nova questão!");
@@ -94,8 +129,8 @@ public class ResolutionController extends Controller {
     	}
     	
     	if(isCorrect){
-    		flash("success", "Parabéns! Você acertou a solução da questão! Agora escolha outra e continue aprendendo!");
-    		return redirect(controllers.resolution.routes.ResolutionController.listAll());
+    		flash("success", "Você acertou a solução da questão! Agora escolha outra e continue aprendendo!");
+    		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
     		
     	} else {
 			flash("error", "Resposta Incorreta! Tente Novamente.");

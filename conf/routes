@@ -99,6 +99,7 @@ GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)
 GET		/resolution/listQuestions		controllers.resolution.ResolutionController.listAll()
 GET		/resolution/listQuestions/all	controllers.resolution.ResolutionController.listAllQuestions(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 GET		/resolution/question/:id		controllers.resolution.ResolutionController.index(id: Long)
+POST	/resolution/submit/code			controllers.resolution.ResolutionController.submitCode(id: Long)
 
 POST	/resolution/submit			controllers.resolution.ResolutionController.submit(id: Long)
 GET		/resolution/next			controllers.resolution.ResolutionController.next(id: Long)
