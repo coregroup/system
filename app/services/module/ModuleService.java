@@ -6,7 +6,7 @@ import models.course.Module;
 
 public interface ModuleService {
 	
-public void save(Module module);
+	public void save(Module module);
 	
 	public void delete(Module module);
 	

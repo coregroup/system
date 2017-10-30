@@ -64,6 +64,9 @@ public class Question {
 	
 	@OneToMany
 	public List<Solution> usersSolutions;
+	
+	@OneToMany
+	public List<Hint> hints;
 
 	public Long getId() {
 		return id;
@@ -144,6 +147,13 @@ public class Question {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public List<Hint> getHints() {
+		return hints;
+	}
+
+	public void setHints(List<Hint> hints) {
+		this.hints = hints;
+	}
 	
 }

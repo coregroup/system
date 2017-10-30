@@ -89,6 +89,10 @@ POST	/question/upload/save		controllers.questions.UploadQuestionController.save(
 GET		/question/code/create		controllers.questions.CodeQuestionController.create()
 POST	/question/code/save			controllers.questions.CodeQuestionController.save()
 
+# Hints
+GET		/question/:id/hint/create	controllers.hints.HintsController.create(id: Long)
+POST	/question/hint/save			controllers.hints.HintsController.save()
+
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
 ########## Por alguma razão eu parei na linha acima #############################
@@ -101,6 +105,7 @@ GET		/resolution/listQuestions/all	controllers.resolution.ResolutionController.l
 GET		/resolution/question/:id		controllers.resolution.ResolutionController.index(id: Long)
 POST	/resolution/submit/code			controllers.resolution.ResolutionController.submitCode(id: Long)
 
+### Esses dois próximos precisam ser revistos
 POST	/resolution/submit			controllers.resolution.ResolutionController.submit(id: Long)
 GET		/resolution/next			controllers.resolution.ResolutionController.next(id: Long)
 

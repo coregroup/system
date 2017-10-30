@@ -1,0 +1,97 @@
+@(hintForm: Form[models.curriculum.Hint], question: models.curriculum.Question)
+
+@import helper._
+
+
+@dashboard.index("teacher") {
+
+<script src='@routes.Assets.at("ckeditor5-build-classic/ckeditor.js")'></script>
+
+	<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Dicas</h1>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="@controllers.questions.routes.QuestionController.index()"> Questões </a>
+                            </li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="@controllers.questions.routes.QuestionController.details(question.id)"> @question.name </a>
+                            </li>
+                            <li class="active"> Criação de Dica
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+	
+	@if(hintForm.hasGlobalErrors){
+    	<div class="alert alert-danger">
+        	@hintForm.globalError.message
+    	</div>
+    }
+    
+    
+    @form(controllers.hints.routes.HintsController.save()) {
+    
+		<div id="legend">
+			<legend class="">Criação de Nova Questão</legend>
+		</div>
+				    
+		<div class="row">
+        	<div class="col-md-8">
+        		
+        		<div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                hintForm("solutionModel"), 
+			                '_label -> "Solução Modelo",
+			                '_help -> "Utilize esse campo apenas se a dica utilizar uma solução específica."
+			          )
+				</div>
+				<div class="control-group">
+				      <!-- name -->
+				      @inputText(
+			                hintForm("partOfCode"), 
+			                '_label -> "Trecho do código",
+			                '_help -> "Utilize esse campo apenas se a dica utilizar uma solução específica."
+			          )
+				</div>
+				<div class="control-group">
+				      <!-- Level -->
+				      @select(
+                			hintForm("type"), 
+                			options(HintsType.options), 
+                			'_label -> "Tipo de dica", '_default -> "-- Escolha uma Opção --",
+                			'_showConstraints -> false
+            		  )
+				</div>
+				
+				<b>Conteúdo</b>
+			    <textarea name="content" id="editor">
+			        <p> Digite o conteúdo da dica aqui.</p>
+			    </textarea>
+			    <script>
+			        ClassicEditor
+			            .create( document.querySelector( '#editor' ) )
+			            .catch( error => {
+			                console.error( error );
+			            } );
+			    </script>
+				
+        	</div>
+        	
+        	<div class="col-md-4">
+        		<b>Enunciado da questão</b><br> @Html(question.getStatement())
+        	</div>
+      	</div>
+
+    
+    } <!-- end of form -->
+
+
+
+}
