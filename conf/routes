@@ -90,8 +90,8 @@ GET		/question/code/create		controllers.questions.CodeQuestionController.create(
 POST	/question/code/save			controllers.questions.CodeQuestionController.save()
 
 # Hints
-GET		/question/:id/hint/create	controllers.hints.HintsController.create(id: Long)
-POST	/question/hint/save			controllers.hints.HintsController.save()
+GET		/question/:id/hint/create			controllers.hints.HintsController.create(id: Long)
+POST	/question/:id/hint/save				controllers.hints.HintsController.save(id: Long)
 
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				

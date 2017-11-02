@@ -102,5 +102,11 @@ public class Hint {
 	public void setType(HintsType type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Hint [id=" + id + ", author=" + author + ", question=" + question + ", solutionModel=" + solutionModel
+				+ ", partOfCode=" + partOfCode + ", content=" + content + ", type=" + type + "]";
+	}
 	
 }

@@ -2,6 +2,15 @@
 
 @import helper._
 
+<link href='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/edit/matchbrackets.js")'></script>
+<link href='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/mode/clike/clike.js")'></script>
+<style>.CodeMirror {border: 2px inset #dee;}
+		.breakpoints {width: .8em;}
+		.breakpoint { color: #822; } </style>
 
 @dashboard.index("teacher") {
 
@@ -33,9 +42,14 @@
         	@hintForm.globalError.message
     	</div>
     }
+     @if(flash.containsKey("danger")) {
+        <div class="alert alert-danger">
+            @flash.get("danger")
+        </div>
+	}
     
     
-    @form(controllers.hints.routes.HintsController.save()) {
+    @form(controllers.hints.routes.HintsController.save(question.id)) {
     
 		<div id="legend">
 			<legend class="">Criação de Nova Questão</legend>
@@ -45,12 +59,38 @@
         	<div class="col-md-8">
         		
         		<div class="control-group">
-				      <!-- name -->
-				      @inputText(
-			                hintForm("solutionModel"), 
-			                '_label -> "Solução Modelo",
-			                '_help -> "Utilize esse campo apenas se a dica utilizar uma solução específica."
-			          )
+				      <!-- code of solution model -->
+				      	<b>Solução Modelo</b>
+				      	<div>
+							<textarea id="code" name="code"></textarea>
+						</div>
+				
+				    	<script>
+				      	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+				        	mode: "text/x-csrc",
+					        lineNumbers: true,
+				    	    indentUnit: 4,
+				        	matchBrackets: true,
+				        	styleActiveLine: true,
+				  			lineWrapping: true,
+				  			gutters: ["CodeMirror-linenumbers", "breakpoints"]
+				    	});
+				    	var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+				      	CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+				    	
+				    	editor.on("gutterClick", function(cm, n) {
+							var info = cm.lineInfo(n);
+							cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
+				      	});
+				      	
+				      	function makeMarker() {
+							var marker = document.createElement("div");
+							marker.style.color = "#822";
+							marker.innerHTML = "●";
+							return marker;
+				        }
+				    	
+				    	</script>
 				</div>
 				<div class="control-group">
 				      <!-- name -->
@@ -71,9 +111,7 @@
 				</div>
 				
 				<b>Conteúdo</b>
-			    <textarea name="content" id="editor">
-			        <p> Digite o conteúdo da dica aqui.</p>
-			    </textarea>
+			    <textarea name="content" id="editor"></textarea>
 			    <script>
 			        ClassicEditor
 			            .create( document.querySelector( '#editor' ) )
@@ -81,13 +119,16 @@
 			                console.error( error );
 			            } );
 			    </script>
+			    
+			    <br>
+				<button class="btn btn-success">Salvar</button>
 				
         	</div>
         	
         	<div class="col-md-4">
         		<b>Enunciado da questão</b><br> @Html(question.getStatement())
         	</div>
-      	</div>
+      	</div> <!-- end of row -->
 
     
     } <!-- end of form -->
