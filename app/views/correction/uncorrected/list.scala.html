@@ -1,0 +1,114 @@
+@(currentPage: com.avaje.ebean.PagingList[models.curriculum.Solution], currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    controllers.resolution.routes.TestCorrectionController.listUncorrectSolutions(newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@dashboard.index("") {
+
+		<!-- Page Heading -->
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <h1 class="page-header">Soluções</h1>
+	                        <ol class="breadcrumb">
+	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+	                            <li class="active">
+	                                <i class="fa fa-graduation-cap"></i> Soluções não avaliadas
+	                            </li>
+	                        </ol>
+	                    </div>
+	                </div>
+		<!-- End Page Heading -->
+		
+		<h3>Total de soluções não avaliadas: @currentPage.getTotalRowCount</h3>
+		
+		
+		@if(flash.containsKey("success")) {
+	        <div class="alert alert-success">
+	            <strong>Feito!</strong> @flash.get("success")
+	        </div>
+		} 
+	
+		<div id="actions">
+	        
+	        <form action="@link(0, "id")" method="GET">
+	            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Procurar por id...">
+	            <input type="submit" id="searchsubmit" value="Buscar" class="btn btn-primary">
+	        </form>
+		</div>
+		
+		@if(currentPage.getTotalRowCount == 0) {
+	        
+	        <div class="well">
+	            <em>Nenhum resultado encontrado.</em>
+	        </div>
+	        
+		} else {
+			
+			<table class="table table-striped">
+	            <thead>
+	                <tr>
+	                    @header("id", "Id da Solução")
+	                    @header("question_id", "Questão")
+	                    @header("user_id", "Usuário")
+	                </tr>
+	            </thead>
+	            <tbody>
+	
+	                @for(solution <- currentPage.getAsList()) {
+	                    <tr>
+	                        <td><a href="#">@solution.id</a></td>
+	                        <td><span class="badge">@solution.question.id</span> @solution.question.getName() </td>
+	                        <td>@solution.user.getFullname()</td>
+	                        <td>
+	                        	<a class="btn btn-success btn-xs" 
+	                        	 		href="@controllers.resolution.routes.TestCorrectionController.details(solution.id)"> <i class="fa fa-check-square" aria-hidden="true"></i> Avaliar</a>
+	                        </td>
+	                    </tr>
+	                }
+	
+	            </tbody>
+	        </table>
+			
+		}
+	
+	<!-- Custom styles for this template -->
+		<link href='@routes.Assets.at("stylesheets/sb-admin.css")' rel="stylesheet">
+	    <link href='@routes.Assets.at("stylesheets/plugins/morris.css")' rel="stylesheet">
+	    <link href='@routes.Assets.at("font-awesome/css/font-awesome.min.css")' rel="stylesheet" type="text/css">
+
+
+
+
+}

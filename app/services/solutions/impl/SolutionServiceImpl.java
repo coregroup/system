@@ -3,6 +3,10 @@
  */
 package services.solutions.impl;
 
+import java.util.List;
+
+import com.avaje.ebean.PagingList;
+
 import models.curriculum.Solution;
 import repositories.solution.SolutionRepository;
 import repositories.solution.impl.SolutionRepositoryImpl;
@@ -14,10 +18,10 @@ import services.solutions.SolutionService;
  */
 public class SolutionServiceImpl implements SolutionService {
 	
-	private SolutionRepository solutionRepository;
+	private SolutionRepository repository;
 
 	public SolutionServiceImpl() {
-		this.solutionRepository = new SolutionRepositoryImpl();
+		this.repository = new SolutionRepositoryImpl();
 	}
 
 	/* (non-Javadoc)
@@ -25,7 +29,7 @@ public class SolutionServiceImpl implements SolutionService {
 	 */
 	@Override
 	public void save(Solution solution) {
-		solutionRepository.save(solution);
+		repository.save(solution);
 	}
 
 	/* (non-Javadoc)
@@ -33,7 +37,27 @@ public class SolutionServiceImpl implements SolutionService {
 	 */
 	@Override
 	public void update(Solution solution) {
-		solutionRepository.update(solution);
+		repository.update(solution);
+	}
+
+	@Override
+	public List<Solution> findAll() {
+		return repository.findAll();
+	}
+
+	@Override
+	public Solution findById(Long id) {
+		return repository.findById(id);
+	}
+
+	@Override
+	public PagingList<Solution> page(int page, int pageSize, String sortBy, String order, String filter) {
+		return repository.page(page, pageSize, sortBy, order, filter);
+	}
+
+	@Override
+	public PagingList<Solution> pageUncorrected(int page, int pageSize, String sortBy, String order, String filter) {
+		return repository.pageUncorrected(page, pageSize, sortBy, order, filter);
 	}
 
 }

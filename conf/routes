@@ -93,6 +93,12 @@ POST	/question/code/save			controllers.questions.CodeQuestionController.save()
 GET		/question/:id/hint/create			controllers.hints.HintsController.create(id: Long)
 POST	/question/:id/hint/save				controllers.hints.HintsController.save(id: Long)
 
+# Test Correction (Solutions)
+GET			/correction/uncorrected				controllers.resolution.TestCorrectionController.listAllUncorrectSolutions()
+GET			/correction/uncorrected/all			controllers.resolution.TestCorrectionController.listUncorrectSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
+GET			/correction/details/:id				controllers.resolution.TestCorrectionController.details(id: Long)
+
+
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
 ########## Por alguma razão eu parei na linha acima #############################
