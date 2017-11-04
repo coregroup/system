@@ -21,7 +21,7 @@ public class TestCorrectionController extends Controller{
 	
 	public static Result listSolutions(int page, String sortBy, String order, String filter){
 		SolutionService service = new SolutionServiceImpl();
-		return ok(views.html.correction.uncorrected.list.render(
+		return ok(views.html.correction.list.render(
 				service.page(page, 10, sortBy, order, filter), sortBy, order, filter));
 	}
 	
@@ -31,14 +31,14 @@ public class TestCorrectionController extends Controller{
 	
 	public static Result listUncorrectSolutions(int page, String sortBy, String order, String filter){
 		SolutionService service = new SolutionServiceImpl();
-		return ok(views.html.correction.uncorrected.list.render(
+		return ok(views.html.correction.list.render(
 				service.pageUncorrected(page, 10, sortBy, order, filter), sortBy, order, filter));
 	}
 	
 	public static Result details(Long id){
 		SolutionService service = new SolutionServiceImpl();
 		Solution solution = service.findById(id);
-		return ok(views.html.correction.uncorrected.details.render(solution));
+		return ok(views.html.correction.details.render(solution));
 	}
 	
 	public static Result submitCorrect(Long id){

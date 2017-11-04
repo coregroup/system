@@ -102,7 +102,7 @@ GET			/correction/details/:id/incorrect	controllers.resolution.TestCorrectionCon
 GET			/correction/solutions				controllers.resolution.TestCorrectionController.listAllSolutions()
 GET			/correction/solutions/all			controllers.resolution.TestCorrectionController.listSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
 
-# 
+# Solutions
 
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				

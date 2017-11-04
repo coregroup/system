@@ -22,8 +22,8 @@
 	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
 	                            <li>
 	                                <i class="fa fa-graduation-cap"></i>
-	                                <a href="@controllers.resolution.routes.TestCorrectionController.listAllUncorrectSolutions()">
-	                                 	Soluções não avaliadas
+	                                <a href="@controllers.resolution.routes.TestCorrectionController.listAllSolutions()">
+	                                 	Soluções
 	                                </a>
 	                            </li>
 	                            <li class="active">
@@ -57,6 +57,17 @@
             		<strong>Autor: </strong> @solution.user.getFullname()
             		<br>
             		<strong>Data da submissão: </strong> @solution.endTime.getTime()
+            		<br>
+            		<strong>Status: </strong>
+            		@if(solution.evaluation == -1){
+                        		 	<span class="label label-warning"> Não avaliada</span>
+                        		 } else {
+                        		 	@if(solution.evaluation == 1){
+                        		 		<span class="label label-success"> Correta</span>
+                        		 	} else {
+                        		 		<span class="label label-danger"> Incorreta</span>
+                        		 	}
+					}
             	</div>
             </div>
             
