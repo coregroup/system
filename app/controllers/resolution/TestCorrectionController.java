@@ -15,6 +15,15 @@ import services.solutions.impl.SolutionServiceImpl;
  */
 public class TestCorrectionController extends Controller{
 	
+	public static Result listAllSolutions(){
+		return redirect(controllers.resolution.routes.TestCorrectionController.listSolutions(0, "id", "asc", ""));
+	}
+	
+	public static Result listSolutions(int page, String sortBy, String order, String filter){
+		SolutionService service = new SolutionServiceImpl();
+		return ok(views.html.correction.uncorrected.list.render(
+				service.page(page, 10, sortBy, order, filter), sortBy, order, filter));
+	}
 	
 	public static Result listAllUncorrectSolutions(){
 		return redirect(controllers.resolution.routes.TestCorrectionController.listUncorrectSolutions(0, "id", "asc", ""));

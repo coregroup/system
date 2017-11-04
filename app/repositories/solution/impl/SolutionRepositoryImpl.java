@@ -8,7 +8,6 @@ import java.util.List;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.PagingList;
 
-import models.curriculum.Question;
 import models.curriculum.Solution;
 import repositories.solution.SolutionRepository;
 

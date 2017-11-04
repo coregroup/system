@@ -44,14 +44,14 @@
 	                        <ol class="breadcrumb">
 	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
 	                            <li class="active">
-	                                <i class="fa fa-graduation-cap"></i> Soluções
+	                                <i class="fa fa-graduation-cap"></i> Soluções não avaliadas
 	                            </li>
 	                        </ol>
 	                    </div>
 	                </div>
 		<!-- End Page Heading -->
 		
-		<h3>Total de soluções encontradas: @currentPage.getTotalRowCount</h3>
+		<h3>Total de soluções não avaliadas: @currentPage.getTotalRowCount</h3>
 		
 		
 		@if(flash.containsKey("info")) {
@@ -106,7 +106,7 @@
                         		 }
 	                        </td>
 	                        <td>
-	                        	<a class="btn btn-primary btn-xs" 
+	                        	<a class="btn btn-success btn-xs" 
 	                        	 		href="@controllers.resolution.routes.TestCorrectionController.details(solution.id)"> <i class="fa fa-check-square" aria-hidden="true"></i> Avaliar</a>
 	                        </td>
 	                    </tr>

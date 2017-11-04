@@ -99,7 +99,10 @@ GET			/correction/uncorrected/all			controllers.resolution.TestCorrectionControl
 GET			/correction/details/:id				controllers.resolution.TestCorrectionController.details(id: Long)
 GET			/correction/details/:id/correct		controllers.resolution.TestCorrectionController.submitCorrect(id: Long)
 GET			/correction/details/:id/incorrect	controllers.resolution.TestCorrectionController.submitIncorrect(id: Long)
+GET			/correction/solutions				controllers.resolution.TestCorrectionController.listAllSolutions()
+GET			/correction/solutions/all			controllers.resolution.TestCorrectionController.listSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
 
+# 
 
 # ##################### Student Session Page
 GET		/session/:id				controllers.course.StudentSessionController.index(id:Long)				
