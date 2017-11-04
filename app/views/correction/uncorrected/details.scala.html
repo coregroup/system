@@ -1,0 +1,123 @@
+@(solution: models.curriculum.Solution)
+
+
+<link href='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/edit/matchbrackets.js")'></script>
+<link href='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/mode/clike/clike.js")'></script>
+<style>.CodeMirror {border: 2px inset #dee;}
+		.breakpoints {width: .8em;}
+		.breakpoint { color: #600; } </style>
+
+
+@dashboard.index("") {
+
+	<!-- Page Heading -->
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <h1 class="page-header">Soluções</h1>
+	                        <ol class="breadcrumb">
+	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+	                            <li>
+	                                <i class="fa fa-graduation-cap"></i>
+	                                <a href="@controllers.resolution.routes.TestCorrectionController.listAllUncorrectSolutions()">
+	                                 	Soluções não avaliadas
+	                                </a>
+	                            </li>
+	                            <li class="active">
+	                                <i class="fa fa-graduation-cap"></i> @solution.id
+	                            </li>
+	                        </ol>
+	                    </div>
+	                </div>
+	<!-- End Page Heading -->
+	
+	<div class="row">
+		<div class="col-md-12">
+			<a class="btn btn-success" id="add" href="@controllers.resolution.routes.TestCorrectionController.submitCorrect(solution.id)">
+				Solução CORRETA
+			</a>
+			<a class="btn btn-danger" id="add" href="@controllers.resolution.routes.TestCorrectionController.submitIncorrect(solution.id)">
+				Solução INCORRETA
+			</a>
+        	<br><br>
+		</div>
+	</div>
+    
+	<div class="row">
+        <div class="col-md-3">
+        	
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Detalhes</h3>
+            	</div>
+            	<div class="panel-body">
+            		<strong>Autor: </strong> @solution.user.getFullname()
+            		<br>
+            		<strong>Data da submissão: </strong> @solution.endTime.getTime()
+            	</div>
+            </div>
+            
+        </div>
+        
+        <div class="col-md-6">
+        	
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Solução do Estuudante</h3>
+            	</div>
+            	<div class="panel-body">
+				      	<div>
+							<textarea id="code" name="code"> @solution.answer </textarea>
+						</div>
+				
+				    	<script>
+				      	var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+				        	mode: "text/x-csrc",
+					        lineNumbers: true,
+				    	    indentUnit: 4,
+				        	matchBrackets: true,
+				        	styleActiveLine: true,
+				  			lineWrapping: true,
+				  			gutters: ["CodeMirror-linenumbers", "breakpoints"]
+				    	});
+				    	var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+				      	CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+				    	
+				    	editor.on("gutterClick", function(cm, n) {
+							var info = cm.lineInfo(n);
+							cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
+				      	});
+				      	
+				      	function makeMarker() {
+							var marker = document.createElement("div");
+							marker.style.color = "#822";
+							marker.innerHTML = "●";
+							return marker;
+				        }
+				    	
+				    	</script>
+				</div>
+			</div>
+        	
+        </div>
+        
+        <div class="col-md-3">
+        
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Questão</h3>
+            	</div>
+            	<div class="panel-body">
+            		@Html(solution.question.getStatement())
+            	</div>
+            </div>
+        	
+        </div>
+	</div>
+	
+	
+	
+}

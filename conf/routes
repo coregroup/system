@@ -97,6 +97,8 @@ POST	/question/:id/hint/save				controllers.hints.HintsController.save(id: Long)
 GET			/correction/uncorrected				controllers.resolution.TestCorrectionController.listAllUncorrectSolutions()
 GET			/correction/uncorrected/all			controllers.resolution.TestCorrectionController.listUncorrectSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
 GET			/correction/details/:id				controllers.resolution.TestCorrectionController.details(id: Long)
+GET			/correction/details/:id/correct		controllers.resolution.TestCorrectionController.submitCorrect(id: Long)
+GET			/correction/details/:id/incorrect	controllers.resolution.TestCorrectionController.submitIncorrect(id: Long)
 
 
 # ##################### Student Session Page
