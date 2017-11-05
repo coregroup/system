@@ -124,13 +124,13 @@ public class ResolutionController extends Controller {
     	}
     	solutionService.save(solution);
     	
-    	///////////////////////////////////////////////////////////////////////////////////////
+    	
     	if(solution.getQuestion().getCorrectionType().equals(CorrectionType.MANUAL)){
-    		flash("success", "Sua resposta será corrigida MANUALMENTE pelo Professor."
-    				+ "Tente agora essa nova questão!");
-    		return redirect(controllers.resolution.routes.ResolutionController.next(id));
+    		flash("info", "Sua questão será avaliada manualmente pelo professor");
+    		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
     	}
     	
+///////////////////////////////////////////////////////////////////////////////////////
     	if(isCorrect){
     		flash("success", "Você acertou a solução da questão! Agora escolha outra e continue aprendendo!");
     		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
