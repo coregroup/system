@@ -60,4 +60,15 @@ public class SolutionServiceImpl implements SolutionService {
 		return repository.pageUncorrected(page, pageSize, sortBy, order, filter);
 	}
 
+	@Override
+	public PagingList<Solution> page(int page, int pageSize, String sortBy, String order, String filter, Long userId) {
+		return repository.page(page, pageSize, sortBy, order, filter, userId);
+	}
+
+	@Override
+	public PagingList<Solution> page(int page, int pageSize, String sortBy, String order, String filter, Long userId,
+			double evalutaion) {
+		return repository.page(page, pageSize, sortBy, order, filter, userId, evalutaion);
+	}
+
 }

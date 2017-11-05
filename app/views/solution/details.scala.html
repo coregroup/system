@@ -1,0 +1,113 @@
+@(solutionOfStudent: models.curriculum.Solution)
+
+
+<link href='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/edit/matchbrackets.js")'></script>
+<link href='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/mode/clike/clike.js")'></script>
+<style>.CodeMirror {border: 2px inset #dee;}
+		.breakpoints {width: .8em;}
+		.breakpoint { color: #600; } </style>
+
+
+@dashboard.index("") {
+
+	<!-- Page Heading -->
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <h1 class="page-header">Soluções</h1>
+	                        <ol class="breadcrumb">
+	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+	                            <li>
+	                                <i class="fa fa-graduation-cap"></i>
+	                                <a href="@controllers.solutions.routes.SolutionController.listAllSolutions()">
+	                                 	Soluções
+	                                </a>
+	                            </li>
+	                            <li class="active">
+	                                <i class="fa fa-graduation-cap"></i> @solutionOfStudent.id
+	                            </li>
+	                        </ol>
+	                    </div>
+	                </div>
+	<!-- End Page Heading -->
+    
+	<div class="row">
+        <div class="col-md-3">
+        	
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Detalhes</h3>
+            	</div>
+            	<div class="panel-body">
+            		<strong>Autor: </strong> @solutionOfStudent.user.getFullname()
+            		<br>
+            		<strong>Data da submissão: </strong> @solutionOfStudent.endTime.getTime()
+            		<br>
+            		<strong>Status: </strong>
+            		@if(solutionOfStudent.evaluation == -1){
+                        		 	<span class="label label-warning"> Não avaliada</span>
+                        		 } else {
+                        		 	@if(solutionOfStudent.evaluation == 1){
+                        		 		<span class="label label-success"> Correta</span>
+                        		 	} else {
+                        		 		<span class="label label-danger"> Incorreta</span>
+                        		 	}
+					}
+            	</div>
+            </div>
+            
+        </div>
+        
+        <div class="col-md-6">
+        	
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Solução do Estuudante</h3>
+            	</div>
+            	<div class="panel-body">
+            		@if(solutionOfStudent.question.getQuestionType.name().equals("TEXT")){
+            			@solution.question.text(solutionOfStudent.answer)
+            		} else {
+            			@if(solutionOfStudent.question.getQuestionType.name().equals("PARAGRAPH_TEXT")){
+							@solution.question.paragraph(solutionOfStudent.answer)
+						} else {
+							@if(solutionOfStudent.question.getQuestionType.name().equals("MULTIPLE_CHOICE")){
+								@solution.question.multipleChoice(solutionOfStudent.answer)
+							} else {
+								@if(solutionOfStudent.question.getQuestionType.name().equals("TRUE_FALSE")){
+									@solution.question.trueFalse(solutionOfStudent.answer)
+								} else {
+									@if(solutionOfStudent.question.getQuestionType.name().equals("UPLOAD")){
+										
+									} else {
+										@solution.question.code(solutionOfStudent.answer)
+									}
+								}
+							}
+						}
+					}
+				</div>
+			</div>
+        	
+        </div>
+        
+        <div class="col-md-3">
+        
+        	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Questão</h3>
+            	</div>
+            	<div class="panel-body">
+            		@Html(solutionOfStudent.question.getStatement())
+            	</div>
+            </div>
+        	
+        </div>
+	</div>
+	
+	
+	
+}

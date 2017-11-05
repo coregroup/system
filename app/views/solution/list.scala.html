@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    controllers.resolution.routes.TestCorrectionController.listUncorrectSolutions(newPage, sortBy, order, currentFilter)
+    controllers.solutions.routes.SolutionController.listSolutions(newPage, sortBy, order, currentFilter)
     
 }
 
@@ -44,7 +44,7 @@
 	                        <ol class="breadcrumb">
 	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
 	                            <li class="active">
-	                                <i class="fa fa-graduation-cap"></i> Soluções não avaliadas
+	                                <i class="fa fa-graduation-cap"></i> Soluções
 	                            </li>
 	                        </ol>
 	                    </div>
@@ -84,13 +84,14 @@
 	                    @header("user_id", "Usuário")
 	                    @header("user_id", "Email")
 	                    @header("evaluation", "Status")
+	                    @header("end_time", "Data de Submissão")
 	                </tr>
 	            </thead>
 	            <tbody>
 	
 	                @for(solution <- currentPage.getAsList()) {
 	                    <tr>
-	                        <td><a href="#">@solution.id</a></td>
+	                        <td><a href="@controllers.solutions.routes.SolutionController.details(solution.id)">@solution.id</a></td>
 	                        <td><span class="badge">@solution.question.id</span> @solution.question.getName() </td>
 	                        <td>@solution.user.getFullname()</td>
 	                        <td>@solution.user.getEmail()</td>
@@ -105,10 +106,7 @@
                         		 	}
                         		 }
 	                        </td>
-	                        <td>
-	                        	<a class="btn btn-success btn-xs" 
-	                        	 		href="@controllers.resolution.routes.TestCorrectionController.details(solution.id)"> <i class="fa fa-check-square" aria-hidden="true"></i> Avaliar</a>
-	                        </td>
+	                        <td>@solution.endTime.getTime()</td>
 	                    </tr>
 	                }
 	

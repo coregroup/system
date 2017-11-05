@@ -61,4 +61,21 @@ public class SolutionRepositoryImpl implements SolutionRepository {
 		        .findPagingList(pageSize);
 	}
 
+	@Override
+	public PagingList<Solution> page(int page, int pageSize, String sortBy, String order, String filter, Long userId) {
+		return Ebean.find(Solution.class).where().eq("user_id", userId.toString())
+				.ilike("id", "%" + filter + "%")
+		        .orderBy(sortBy + " " + order)
+		        .findPagingList(pageSize);
+	}
+
+	@Override
+	public PagingList<Solution> page(int page, int pageSize, String sortBy, String order, String filter, Long userId,
+			double evalutaion) {
+		return Ebean.find(Solution.class).where().eq("user_id", userId.toString()).eq("evaluation", Double.toString(evalutaion))
+				.ilike("id", "%" + filter + "%")
+		        .orderBy(sortBy + " " + order)
+		        .findPagingList(pageSize);
+	}
+
 }

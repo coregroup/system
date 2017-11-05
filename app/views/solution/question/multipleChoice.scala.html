@@ -1,0 +1,19 @@
+@(answer: String)
+
+@if(answer.equals("1")){
+	<span class="badge">A</span></a>
+} else {
+	@if(answer.equals("2")){
+		<span class="badge">B</span></a>
+	} else {
+		@if(answer.equals("3")){
+			<span class="badge">C</span></a>
+		} else {
+			@if(answer.equals("4")){
+				<span class="badge">D</span></a>
+			} else {
+				<span class="badge">E</span></a>
+			}
+		}
+	}	
+}
