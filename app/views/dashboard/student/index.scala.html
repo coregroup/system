@@ -21,11 +21,18 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Seu Desempenho</h3>
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Suas Soluções </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="text-right">
-                                    <a href="#">Ver Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+                                <div class="list-group">
+                                    <a href="@controllers.solutions.routes.SolutionController.listAllUncorrectSolutions()" class="list-group-item">
+                                        <span class="badge badge-secondary">Ver todas</span>
+                                        Soluções sem correção
+                                    </a>
+                                    <a href="@controllers.solutions.routes.SolutionController.listAllSolutions()" class="list-group-item">
+                                        <span class="badge badge-secondary">Ver todas</span>
+                                        Todas as soluções
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -42,32 +49,31 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Listas de Exercícios </h3>
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Seu Desempenho</h3>
                             </div>
                             <div class="panel-body">
+                            	<div class="list-group">
+                            		Ainda não é possível gerar gráficos de desempenho.
+                            	</div>
                                 <div class="text-right">
                                     <a href="#">Ver Detalhes <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
-                        	</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Suas Soluções </h3>
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Listas de Exercícios </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="list-group">
-                                    <a href="@controllers.solutions.routes.SolutionController.listAllUncorrectSolutions()" class="list-group-item">
-                                        <span class="badge badge-secondary">Ver todas</span>
-                                        Soluções sem correção
-                                    </a>
-                                    <a href="@controllers.solutions.routes.SolutionController.listAllSolutions()" class="list-group-item">
-                                        <span class="badge badge-secondary">Ver todas</span>
-                                        Todas as soluções
-                                    </a>
+                            	<div class="list-group">
+                            		Nenhuma lista cadastrada.
+                            	</div>
+                                <div class="text-right">
+                                    <a href="#">Ver todas <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
-                            </div>
+                        	</div>
                         </div>
                     </div>
                     
