@@ -119,6 +119,9 @@ public class ResolutionController extends Controller {
     	boolean isCorrect = evaluator.evaluate(solution);
     	double evaluation = (isCorrect) ? 1 : 0; //TODO
     	solution.setEvaluation(evaluation); // TODO
+    	if(solution.getQuestion().getCorrectionType().equals(CorrectionType.MANUAL)){
+    		solution.setEvaluation(-1);
+    	}
     	solutionService.save(solution);
     	
     	///////////////////////////////////////////////////////////////////////////////////////
