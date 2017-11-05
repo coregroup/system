@@ -26,7 +26,7 @@ public class TextQuestionServiceImpl implements TextQuestionService {
 	@Override
 	public void save(Question question) {
 		question.setQuestionType(QuestionType.TEXT);
-		String newStatement = "<pre>" + question.getStatement() + "</pre>";
+		String newStatement = "<p>" + question.getStatement() + "</p>";
 		question.setStatement(newStatement);
 		this.repository.save(question);
 	}
