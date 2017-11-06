@@ -76,7 +76,6 @@
 					}
 				}
         	
-        	
         </div>
         <div class="col-md-4">
         	<div class="panel panel-default">
@@ -88,7 +87,10 @@
         			<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
         			<strong>Tipo: </strong> @question.questionType <br>
             	</div>
-           	</div>        	
+           	</div>
+           	
+           	@hint.index()
+           	
         </div>
       </div>
 
