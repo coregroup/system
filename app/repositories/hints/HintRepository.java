@@ -22,5 +22,7 @@ public interface HintRepository {
 	public List<Hint> findAll();
 	
 	public Hint findById(Long id);
+	
+	public List<Hint> findByQuestion(Long questionId);
 
 }

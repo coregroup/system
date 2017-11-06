@@ -3,11 +3,16 @@
  */
 package controllers.questions;
 
+import java.util.List;
+
 import controllers.authentication.UserAuthenticatedSecured;
+import models.curriculum.Hint;
 import models.curriculum.Question;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import services.hints.HintService;
+import services.hints.impl.HintServiceImpl;
 import services.questions.QuestionService;
 import services.questions.impl.QuestionServiceImpl;
 
@@ -31,7 +36,10 @@ public class QuestionController extends Controller{
 	public static Result details(Long id){
 		QuestionService service = new QuestionServiceImpl();
 		Question question = service.findById(id);
-		return ok(views.html.question.details.render(question));
+		HintService hintService = new HintServiceImpl();
+		List<Hint> hints = hintService.findByQuestion(id);
+		
+		return ok(views.html.question.details.render(question, hints));
 	}
 	
 	public static Result selectType(){

@@ -1,4 +1,14 @@
-@(question: models.curriculum.Question)
+@(question: models.curriculum.Question, hints: List[models.curriculum.Hint])
+
+<link href='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/edit/matchbrackets.js")'></script>
+<link href='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/mode/clike/clike.js")'></script>
+<style>.CodeMirror {border: 2px inset #dee;}
+		.breakpoints {width: .8em;}
+		.breakpoint { color: #600; } </style>
 
 @dashboard.index("") {
 
@@ -35,10 +45,12 @@
         	
       <div class="row">
         <div class="col-md-8">
-        	<strong>Descrição: </strong><br>
+        	<h3>Enunciado: </h3><br>
         	@Html(question.getStatement())
         </div>
+        
         <div class="col-md-4">
+        
         	<div class="panel panel-default">
             	<div class="panel-heading">
              	 	<h3 class="panel-title">Detalhes</h3>
@@ -54,10 +66,80 @@
         				<span class="label label-success">Sim</span>
         			} else { <span class="label label-danger">Não</span> }
             	</div>
-           	</div>        	
+           	</div>
+           	        	
         </div>
+        
       </div>
-	
+      
+      <h3>Dicas disponíveis: </h3>
+      <div class="row">
+      		<table class="table table-striped table-bordered">
+      			<thead> 
+      				<tr> 
+      					<th>Disponível</th> 
+      					<th>Conteúdo</th> 
+      					<th>Trecho do Código</th>
+      					<th>Solução Modelo</th> 
+      				</tr> 
+      			</thead> 
+      			<tbody>
+      				@for(hint <- hints){
+	      				<tr> 
+	      					<td width="5%"> 
+	      						@if(hint.available==true){ 
+	      							<span class="label label-success">Sim</span>
+	      						} else {
+	      							<span class="label label-danger">Não</span>
+	      						}
+	      					</td>
+	      					<td width="25%"> @Html(hint.content) </td> 
+	      					<td width="10%"> @hint.partOfCode </td> 
+	      					<td>
+	      						@if(hint.solutionModel.equals("")){
+	      							Essa dica não possui solução modelo.
+	      						} else {
+	      							
+	      							<div>
+										<textarea id="solutionModel" name="solutionModel"> @hint.solutionModel </textarea>
+									</div>
+									
+									<script>
+									      	var editor = CodeMirror.fromTextArea(document.getElementById("solutionModel"), {
+										        	mode: "text/x-csrc",
+											        lineNumbers: true,
+										    	    indentUnit: 4,
+										        	matchBrackets: true,
+										       		styleActiveLine: true,
+										  			lineWrapping: true,
+										  			readOnly: true,
+										  			gutters: ["CodeMirror-linenumbers", "breakpoints"]
+									    	});
+									    	var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+									      	CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+													    	
+									    	editor.on("gutterClick", function(cm, n) {
+													var info = cm.lineInfo(n);
+													cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
+									      	});
+												      	
+									      	function makeMarker() {
+												var marker = document.createElement("div");
+												marker.style.color = "#822";
+												marker.innerHTML = "●";
+												return marker;
+									        }
+													    	
+									</script>
+	      							
+	      						}
+	      					
+	      					</td> 
+	      				</tr>
+      				}
+      			</tbody> 
+      		</table>
+      </div>
 	
 	
 }

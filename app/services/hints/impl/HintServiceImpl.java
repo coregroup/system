@@ -64,4 +64,9 @@ public class HintServiceImpl implements HintService {
 		return repository.findById(id);
 	}
 
+	@Override
+	public List<Hint> findByQuestion(Long questionId) {
+		return repository.findByQuestion(questionId);
+	}
+
 }

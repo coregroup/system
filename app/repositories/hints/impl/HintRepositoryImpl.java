@@ -59,4 +59,10 @@ public class HintRepositoryImpl implements HintRepository {
 		return hint;
 	}
 
+	@Override
+	public List<Hint> findByQuestion(Long questionId) {
+		List<Hint> hints = Ebean.find(Hint.class).where().eq("question_id", questionId.toString()).findList();
+		return hints;
+	}
+
 }

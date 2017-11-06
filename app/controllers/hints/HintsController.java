@@ -99,7 +99,7 @@ public class HintsController extends Controller{
 		hintService.save(hint);
 		
 		//System.out.println("\n\n Request: " + request.body().toString());
-		return ok(views.html.question.details.render(question));
+		return ok(views.html.question.details.render(question, hintService.findByQuestion(id)));
 	}
 
 }

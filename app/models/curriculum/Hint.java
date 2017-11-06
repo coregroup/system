@@ -42,6 +42,8 @@ public class Hint {
 	@Required
 	@Enumerated(EnumType.STRING)
 	public HintsType type;
+	
+	public boolean available;
 
 	/*
 	 * Getters and Setters
@@ -101,6 +103,14 @@ public class Hint {
 
 	public void setType(HintsType type) {
 		this.type = type;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	@Override
