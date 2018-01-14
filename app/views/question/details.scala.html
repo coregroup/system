@@ -101,11 +101,11 @@
 	      						} else {
 	      							
 	      							<div>
-										<textarea id="solutionModel" name="solutionModel"> @hint.solutionModel </textarea>
+										<textarea id="@hint.id" name="@hint.id"> @hint.solutionModel </textarea>
 									</div>
 									
 									<script>
-									      	var editor = CodeMirror.fromTextArea(document.getElementById("solutionModel"), {
+									      	var editor = CodeMirror.fromTextArea(document.getElementById("@hint.id"), {
 										        	mode: "text/x-csrc",
 											        lineNumbers: true,
 										    	    indentUnit: 4,
