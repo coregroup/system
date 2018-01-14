@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.1",
   "commons-io" % "commons-io" % "2.0"
 )
+
+unmanagedBase := baseDirectory.value / "lib"
