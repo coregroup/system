@@ -24,4 +24,6 @@ public interface HintService {
 	public Hint findById(Long id);
 	
 	public List<Hint> findByQuestion(Long questionId);
+	
+	public List<Hint> findByQuestionAndType(Long questionId, String type);
 }
