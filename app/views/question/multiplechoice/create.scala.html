@@ -4,6 +4,8 @@
 
 @dashboard.index("teacher") {
 
+<script src='@routes.Assets.at("ckeditor5-build-classic/ckeditor.js")'></script>
+
 
 <!-- Page Heading -->
                 <div class="row">
@@ -63,12 +65,15 @@
 				 
 				    <div class="control-group">
 				      <!-- Statement -->
-				      @textarea(
-			                questionForm("statement"), 
-			                '_label -> "Enunciado", 
-			                'rows -> 5,
-    						'cols -> 60
-			          )
+				      <b>Escreva o enunciado da questão.</b>
+					    <textarea name="statement" id="editor"></textarea>
+					    <script>
+					        ClassicEditor
+					            .create( document.querySelector( '#editor' ) )
+					            .catch( error => {
+					                console.error( error );
+					            } );
+					    </script>
 				    </div>
 				    
 				    <div class="control-group">

@@ -43,8 +43,12 @@ public class TrueFalseQuestionController extends Controller{
 		Request request = request();
     	String name = requestForm.data().get("name");
     	String level = requestForm.data().get("level");
-    	String statement = requestForm.data().get("statement");
+    	
     	String answer = requestForm.data().get("answer");
+    	
+    	//statement
+    	String[] vetorContent = request.body().asFormUrlEncoded().get("statement");
+    	String statement = vetorContent[0];
     	
     	TopicService topicService = new TopicServiceImpl();
 		List<Topic> topics = topicService.findAll();

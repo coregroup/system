@@ -45,13 +45,17 @@ public class MultipleChoiceQuestionController extends Controller{
 		Request request = request();
     	String name = requestForm.data().get("name");
     	String level = requestForm.data().get("level");
-    	String statement = requestForm.data().get("statement");
+   
     	String answer = requestForm.data().get("answer");
     	String a = requestForm.data().get("optionA");
     	String b = requestForm.data().get("optionB");
     	String c = requestForm.data().get("optionC");
     	String d = requestForm.data().get("optionD");
     	String e = requestForm.data().get("optionE");
+    	
+    	//statement
+    	String[] vetorContent = request.body().asFormUrlEncoded().get("statement");
+    	String statement = vetorContent[0];
     	
     	
     	TopicService topicService = new TopicServiceImpl();

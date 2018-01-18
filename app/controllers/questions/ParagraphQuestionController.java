@@ -45,6 +45,10 @@ public class ParagraphQuestionController extends Controller{
 		Request request = request();
 		TopicService topicService = new TopicServiceImpl();
 		
+		//statement
+		String[] vetorContent = request.body().asFormUrlEncoded().get("statement");
+		String statement = vetorContent[0];
+		
 		if(questionForm.hasErrors()){
 			questionForm.reject("* ALGUM CAMPO OBRIGATÓRIO NÃO FOI PREENCHIDO");
 			return badRequest(views.html.question.paragraph.create.render(questionForm, topicService.findAll()));
@@ -70,6 +74,7 @@ public class ParagraphQuestionController extends Controller{
 		Question question = questionForm.get();
 		question.setAvailable(true);
 		question.setTopics(selectedTopics);
+		question.setStatement(statement);
 		questionService.save(question);
 		
 		flash("success", "Questão cadastrada com sucesso!");

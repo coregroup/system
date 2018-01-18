@@ -50,6 +50,10 @@ public class CodeQuestionController extends Controller{
 		Request request = request();
 		TopicService topicService = new TopicServiceImpl();
 		
+		//statement
+		String[] vetorContent = request.body().asFormUrlEncoded().get("statement");
+		String statement = vetorContent[0];
+		
 		if(questionForm.hasErrors()){
 			questionForm.reject("* ALGUM CAMPO OBRIGATÓRIO NÃO FOI PREENCHIDO");
 			return badRequest(views.html.question.code.create.render(questionForm, topicService.findAll()));
@@ -80,6 +84,7 @@ public class CodeQuestionController extends Controller{
 		
 		CodeQuestionService questionService = new CodeQuestionServiceImpl();
 		Question question = questionForm.get();
+		question.setStatement(statement);
 		question.setAvailable(true);
 		question.setTopics(selectedTopics);
 		String exinput = questionForm.data().get("exinput");
