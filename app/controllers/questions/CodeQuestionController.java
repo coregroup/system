@@ -49,9 +49,9 @@ public class CodeQuestionController extends Controller{
 		Form<Question> questionForm = form(Question.class).bindFromRequest();
 		Request request = request();
 		TopicService topicService = new TopicServiceImpl();
-		
+
 		//statement
-		String[] vetorContent = request.body().asFormUrlEncoded().get("statement");
+		String[] vetorContent = request.body().asMultipartFormData().asFormUrlEncoded().get("statement");
 		String statement = vetorContent[0];
 		
 		if(questionForm.hasErrors()){
