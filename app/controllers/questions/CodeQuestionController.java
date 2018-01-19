@@ -54,10 +54,13 @@ public class CodeQuestionController extends Controller{
 		String[] vetorContent = request.body().asMultipartFormData().asFormUrlEncoded().get("statement");
 		String statement = vetorContent[0];
 		
+		/* Não permite que o statement seja maior que 1023 caracteres, isso foi mudado no banco e no 
+		 * código mas ainda persiste aqui (talvez porque a mudança no código não foi propagada,
+		 * nesse caso apagar o banco seria a solução?)
 		if(questionForm.hasErrors()){
 			questionForm.reject("* ALGUM CAMPO OBRIGATÓRIO NÃO FOI PREENCHIDO");
 			return badRequest(views.html.question.code.create.render(questionForm, topicService.findAll()));
-		}
+		}*/
 		
 		if(request.body().asMultipartFormData().asFormUrlEncoded().get("listTopics")==null){
 			questionForm.reject("* OS TÓPICOS DA QUESTÃO NÃO FORAM ESCOLHIDOS");

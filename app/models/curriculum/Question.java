@@ -49,7 +49,7 @@ public class Question {
 	
 	@Required
 	@MinLength(value = 6)
-	@MaxLength(value = 1023)
+	@MaxLength(value = 5000)
 	public String statement;
 	
 	public String answer;
