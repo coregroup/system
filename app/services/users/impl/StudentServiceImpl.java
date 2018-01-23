@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	public void save(Student student) {
-		student.setActive(true);
+		student.setActive(false);
 		this.repository.save(student);
 	}
 

@@ -100,6 +100,7 @@ public class SessionController extends Controller {
 		
 		Student student = studentService.findByEmail(email);		
 		student.sessions.add(s);
+		student.setActive(true);
 		studentService.update(student);
 		
 		flash("success", "O aluno " + student.getFullname() + " foi adicionado a turma " + s.name + " com sucesso!");
