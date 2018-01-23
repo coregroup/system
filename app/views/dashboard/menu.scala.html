@@ -14,7 +14,7 @@
 <!-- Top Menu Items -->
             <ul class="nav navbar-left top-nav">
                 <li class="@("active".when(userType == "student"))"><a href="@routes.DashboardController.studentDashboard()">Estudante</a></li>
-            	<li class="@("active".when(userType == "teacher"))"><a href="@routes.DashboardController.teacherDashboard()">Professor</a></li>
+            	
             </ul>
             
             <ul class="nav navbar-right top-nav">
@@ -24,9 +24,7 @@
                         <li>
                             <a href="@routes.ProfileController.view()"><i class="fa fa-fw fa-user"></i> Perfil</a>
                         </li>
-                        <li>
-                            <a href="@controllers.pedagogical.routes.PlanningController.index()"><i class="fa fa-fw fa-envelope"></i> Módulos</a>
-                        </li>
+                        
                         <li class="divider"></li>
                         <li>
                             <a href="@routes.LoginController.logout()"><i class="fa fa-fw fa-power-off"></i> Sair</a>
