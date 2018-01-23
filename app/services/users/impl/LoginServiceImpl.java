@@ -25,7 +25,11 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public User exists(String email, String password) {
+		
 		User user = userRepository.findByEmail(email);
+		
+		if(user == null)
+			return null;
 		
 		if(user.getType().equals(Student.class.getSimpleName()))
 			user = (User) studentRepository.exists(email, password);

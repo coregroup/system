@@ -44,7 +44,7 @@ public class LoginController extends Controller{
     	}
     	else {
     		DynamicForm formDeErro = form.fill(requestForm.data());
-    		formDeErro.reject("O email ou senha estão incorretos");
+    		formDeErro.reject("O email ou senha estão incorretos. Ou usuário não existe. Ou você ainda não tem autorização para login.");
     		return forbidden(views.html.login.render(formDeErro));
     	}
     }
