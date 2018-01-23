@@ -21,7 +21,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void save(Teacher teacher) {
-		teacher.setActive(true);
+		teacher.setActive(false);
 		teacherRepository.save(teacher);
 	}
 
