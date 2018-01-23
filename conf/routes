@@ -65,6 +65,9 @@ GET		/question/list				controllers.questions.QuestionController.list(p:Int ?= 0,
 GET		/question/details/:id		controllers.questions.QuestionController.details(id:Long)
 GET		/question/new				controllers.questions.QuestionController.selectType()
 
+GET		/question/edit/:id			controllers.questions.QuestionController.edit(id:Long)
+POST	/question/edit/update		controllers.questions.QuestionController.update(id:Long)
+
 # Text Question
 GET		/question/text/create		controllers.questions.TextQuestionController.create()
 POST	/question/text/save			controllers.questions.TextQuestionController.save()

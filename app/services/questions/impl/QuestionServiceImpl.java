@@ -45,4 +45,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return repository.page(page, pageSize, sortBy, order, filter);
 	}
 
+	@Override
+	public void update(Question question) {
+		repository.update(question);
+	}
+
 }

@@ -20,5 +20,7 @@ public interface QuestionService {
 	public Question findById(Long id);
 	
 	public PagingList<Question> page(int page, int pageSize, String sortBy, String order, String filter);
+	
+	public void update(Question question);
 
 }

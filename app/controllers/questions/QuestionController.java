@@ -3,11 +3,16 @@
  */
 package controllers.questions;
 
+import static play.data.Form.form;
+
 import java.util.List;
 
+import controllers.routes;
 import controllers.authentication.UserAuthenticatedSecured;
 import models.curriculum.Hint;
 import models.curriculum.Question;
+import models.users.Student;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -44,6 +49,24 @@ public class QuestionController extends Controller{
 	
 	public static Result selectType(){
 		return ok(views.html.question.selectType.render());
+	}
+	
+	public static Result edit(Long id){
+		QuestionService service = new QuestionServiceImpl();
+		Question question = service.findById(id);
+		Form<Question> questionForm = form(Question.class).fill(question);		
+		return ok(views.html.question.edit.render(questionForm, question));
+	}
+	
+	public static Result update(Long id){
+		Form<Question> questionForm = form(Question.class).bindFromRequest();
+		QuestionService service = new QuestionServiceImpl();
+		Question question = service.findById(id);
+		question.setName(questionForm.field("name").value());
+		question.setStatement(questionForm.field("statement").value());
+		service.update(question);
+		
+		return redirect(controllers.questions.routes.QuestionController.details(id));
 	}
 
 }
