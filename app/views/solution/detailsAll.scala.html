@@ -1,0 +1,92 @@
+@(solutions: List[models.curriculum.Solution])
+
+
+<link href='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/lib/codemirror.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/edit/matchbrackets.js")'></script>
+<link href='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.css")' rel="stylesheet">
+<script src='@routes.Assets.at("codemirror-5.31.0/addon/hint/show-hint.js")'></script>
+<script src='@routes.Assets.at("codemirror-5.31.0/mode/clike/clike.js")'></script>
+<style>.CodeMirror {border: 2px inset #dee;}
+		.breakpoints {width: .8em;}
+		.breakpoint { color: #600; } </style>
+
+
+@dashboard.index("") {
+
+	<!-- Page Heading -->
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        <h1 class="page-header">Soluções</h1>
+	                        <ol class="breadcrumb">
+	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+	                            <li>
+	                                <i class="fa fa-graduation-cap"></i>
+	                                <a href="@controllers.solutions.routes.SolutionController.listAllSolutions()">
+	                                 	Soluções
+	                                </a>
+	                            </li>
+	                            <li class="active">
+	                                <i class="fa fa-graduation-cap"></i> @solutions.get(0).getQuestion().getName()
+	                            </li>
+	                        </ol>
+	                    </div>
+	                </div>
+	<!-- End Page Heading -->
+    
+	<div class="row">
+        <div class="col-md-4">
+            
+            <div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title"><strong>Questão:</strong> @solutions.get(0).getQuestion().getName()</h3>
+            	</div>
+            	<div class="panel-body">
+            		@Html(solutions.get(0).getQuestion().getStatement())
+            	</div>
+            </div>
+            
+        </div>
+        
+        <div class="col-md-8">
+        	
+        	<h3><strong>Histórico de resolução</strong></h3>
+			<strong>Autor: </strong> @solutions.get(0).user.getFullname()
+            <br>
+            <strong>Quantidade de submissões: </strong> @solutions.size()
+            <br>
+            <strong>Data da última submissão: </strong> @solutions.get(solutions.size()-1).endTime.getTime()
+            <br>
+            <strong>Status da última submissão: </strong>
+            @if(solutions.get(solutions.size()-1).evaluation == -1){
+            	<span class="label label-warning"> Não avaliada</span>
+            } else {
+            	@if(solutions.get(solutions.size()-1).evaluation == 1){
+                	<span class="label label-success"> Correta</span>
+                } else {
+                	<span class="label label-danger"> Incorreta</span>
+                }
+			}
+			
+			<br><br>
+			<strong>Clique para ver detalhes das soluções submetidas</strong>
+			<br>
+			@for(solutionOfStudent <- solutions){
+					@if(solutionOfStudent.evaluation == -1){
+		            	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="font-size:30px;color:#FFA500"></span>
+		            } else {
+		            	@if(solutionOfStudent.evaluation == 1){
+		                	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true" style="font-size:30px;color:green"></span>
+		                } else {
+		                	<span class="glyphicon glyphicon-remove-sign" aria-hidden="true" style="font-size:30px;color:red"></span>
+		                }
+					}
+				
+				<a href="@controllers.solutions.routes.SolutionController.details(solutionOfStudent.getId())">Detalhes</a> 
+			}       	
+        </div>
+	</div>
+	
+	
+	
+}

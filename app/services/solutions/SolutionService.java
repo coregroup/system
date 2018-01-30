@@ -21,6 +21,8 @@ public interface SolutionService {
 	
 	public List<Solution> findAll();
 	
+	public List<Solution> findByUser(Long userId);
+	
 	public Solution findById(Long id);
 	
 	public PagingList<Solution> pageUncorrected(int page, int pageSize, String sortBy, String order, String filter);

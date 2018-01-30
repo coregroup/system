@@ -21,10 +21,7 @@
 	                        <ol class="breadcrumb">
 	                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
 	                            <li>
-	                                <i class="fa fa-graduation-cap"></i>
-	                                <a href="@controllers.solutions.routes.SolutionController.listAllSolutions()">
-	                                 	Soluções
-	                                </a>
+	                                <i class="fa fa-graduation-cap"></i> Soluções
 	                            </li>
 	                            <li class="active">
 	                                <i class="fa fa-graduation-cap"></i> @solutionOfStudent.id
@@ -35,7 +32,7 @@
 	<!-- End Page Heading -->
     
 	<div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
         	
         	<div class="panel panel-default">
             	<div class="panel-heading">
@@ -59,13 +56,22 @@
             	</div>
             </div>
             
+            <div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Questão</h3>
+            	</div>
+            	<div class="panel-body">
+            		@Html(solutionOfStudent.question.getStatement())
+            	</div>
+            </div>
+            
         </div>
         
-        <div class="col-md-6">
+        <div class="col-md-8">
         	
         	<div class="panel panel-default">
             	<div class="panel-heading">
-             	 	<h3 class="panel-title">Solução do Estuudante</h3>
+             	 	<h3 class="panel-title">Solução do Estudante</h3>
             	</div>
             	<div class="panel-body">
             		@if(solutionOfStudent.question.getQuestionType.name().equals("TEXT")){
@@ -91,19 +97,6 @@
 					}
 				</div>
 			</div>
-        	
-        </div>
-        
-        <div class="col-md-3">
-        
-        	<div class="panel panel-default">
-            	<div class="panel-heading">
-             	 	<h3 class="panel-title">Questão</h3>
-            	</div>
-            	<div class="panel-body">
-            		@Html(solutionOfStudent.question.getStatement())
-            	</div>
-            </div>
         	
         </div>
 	</div>

@@ -71,4 +71,9 @@ public class SolutionServiceImpl implements SolutionService {
 		return repository.page(page, pageSize, sortBy, order, filter, userId, evalutaion);
 	}
 
+	@Override
+	public List<Solution> findByUser(Long userId) {
+		return repository.findByUser(userId);
+	}
+
 }

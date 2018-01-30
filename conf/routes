@@ -107,7 +107,7 @@ GET			/correction/solutions/all			controllers.resolution.TestCorrectionControlle
 
 # Solutions
 GET			/solutions							controllers.solutions.SolutionController.listAllSolutions()
-GET			/solutions/all						controllers.solutions.SolutionController.listSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
+GET			/solutions/question/:id				controllers.solutions.SolutionController.detailsAll(id: Long)
 GET			/solutions/uncorrected				controllers.solutions.SolutionController.listAllUncorrectSolutions()
 GET			/solutions/uncorrected/all			controllers.solutions.SolutionController.listUncorrectSolutions(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
 GET			/solutions/details/:id				controllers.solutions.SolutionController.details(id: Long)

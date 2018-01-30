@@ -78,4 +78,10 @@ public class SolutionRepositoryImpl implements SolutionRepository {
 		        .findPagingList(pageSize);
 	}
 
+	@Override
+	public List<Solution> findByUser(Long userId) {
+		List<Solution> solutions = Ebean.find(Solution.class).where().eq("user_id", userId.toString()).findList();
+		return solutions;
+	}
+
 }

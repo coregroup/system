@@ -1,0 +1,67 @@
+@(solutions: List[models.curriculum.Solution], questions: List[models.curriculum.Question])
+
+
+@dashboard.index("") {
+
+<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+	    	<h1 class="page-header">Soluções</h1>
+	        <ol class="breadcrumb">
+	        	<li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+	        	<li class="active">
+	        		<i class="fa fa-graduation-cap"></i> Soluções
+	        	</li>
+	        </ol>
+		</div>
+	</div>
+<!-- End Page Heading -->
+		
+
+<div class="panel panel-default">
+	<div class=panel-heading>
+		Panel heading
+	</div>
+	<div class=panel-body> 
+		<p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	</div>
+	<table class=table> 
+		<thead> 
+			<tr> 
+				<th>Id</th> 
+				<th>Questão</th>
+				<th>Nível</th>
+				<th>Tipo</th> 
+				<th>Status da última solução</th> 
+				<th>Ver todas as soluções</th> 
+			</tr> 
+		</thead> 
+		<tbody>
+			@for(question <- questions){ 
+				<tr> 
+					<th scope=row>@question.getId()</th>
+					<td>@question.getName()</td> 
+					<td>@question.getLevel()</td>
+					<td>@question.getQuestionType()</td>
+					@for(solution <- solutions){
+						@if(solution.getQuestion().getId()==question.getId()){
+							@if(solution.isEvaluation() == -1){
+                        		 	<td><span class="label label-warning"> Não avaliada</span></td>
+                        	} else {
+                        		 	@if(solution.evaluation == 1){
+                        		 		<td><span class="label label-success"> Correta</span></td>
+                        		 	} else {
+                        		 		<td><span class="label label-danger"> Incorreta</span></td>
+                        		 	}
+                        	}
+						}
+					}
+					<td>mdo</td> 
+				</tr> 
+			}
+		</tbody> 
+	</table> 
+</div>
+
+
+}
