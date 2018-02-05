@@ -73,8 +73,11 @@ public class HintsController extends Controller{
     	
     	if(requestForm.data().get("type").equals("IMAGE")){
     		content = content.substring(3, (content.length()-4));// retirado do <p> do inicio e do </p> do final
-    		content = "<img src=\""+ content + "\" />";
+    		//content = "<img src=\""+ content + "\" />"; TODO ANTIGO HTML USADO
+    		content = content.replace("&lt;", "<");
+    		content = content.replace("&gt;", ">");
     	}
+    	
     	if(requestForm.data().get("type").equals("VIDEO")){
     		content = content.substring(3, (content.length()-4));// retirado do <p> do inicio e do </p> do final
     		content = content.substring(32);
