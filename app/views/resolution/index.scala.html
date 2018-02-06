@@ -1,4 +1,4 @@
-@(question: models.curriculum.Question, solutionForm: DynamicForm)
+@(question: models.curriculum.Question, solutionForm: DynamicForm, feedback: models.curriculum.Hint)
 
 @import helper._
 
@@ -51,8 +51,20 @@
 		    	</div>
 		    	</center>
 	  		}
+	  	
+
+	  	<div class="panel panel-default">
+            	<div class="panel-heading">
+             	 	<h3 class="panel-title">Detalhes</h3>
+            	</div>
+            	<div class="panel-body">
+              		<strong>Nível: </strong> @question.level <br>
+        			<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
+        			<strong>Tipo: </strong> @question.questionType <br>
+            	</div>
+        </div>    
 	
-        <div class="col-md-8">
+        
         	
         		@if(question.getQuestionType.name().equals("TEXT")){
 					@textQuestion(question, solutionForm)
@@ -69,29 +81,15 @@
 								@if(question.getQuestionType.name().equals("UPLOAD")){
 									@uploadQuestion(question, solutionForm)
 								} else {
-									@codeQuestion(question, solutionForm)
+									@codeQuestion(question, solutionForm, feedback)
 								}
 							}
 						}			
 					}
 				}
         	
-        </div>
-        <div class="col-md-4">
-        	<div class="panel panel-default">
-            	<div class="panel-heading">
-             	 	<h3 class="panel-title">Detalhes</h3>
-            	</div>
-            	<div class="panel-body">
-              		<strong>Nível: </strong> @question.level <br>
-        			<strong>Tópicos: </strong> @for(topic <- question.topics){ @topic.name, } <br>
-        			<strong>Tipo: </strong> @question.questionType <br>
-            	</div>
-           	</div>
-           	
-           	@hint.index()
-           	
-        </div>
+        
+       
       </div>
 
 

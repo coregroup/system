@@ -29,7 +29,7 @@ public class Modulo1Controller extends Controller{
 		TopicService topicService = new TopicServiceImpl();
 		Topic topic = topicService.findById(new Long(5));
 		Question question = planning.nextQuestion(topic);
-		
+		return TODO;
 		///////////////////////
 //		String email = session().get("email");
 //    	User student = userService.findByEmail(email);
@@ -52,7 +52,7 @@ public class Modulo1Controller extends Controller{
 		///////////////////
 		
 		
-		return ok(views.html.resolution.index.render(question, form));
+		//return ok(views.html.resolution.index.render(question, form));
 	}
 
 }

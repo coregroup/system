@@ -67,8 +67,7 @@ public abstract class User {
 	private Gender gender;
 	
 	@OneToMany
-	public List<Solution> solutions;
-	
+	public List<Solution> solutions;	
 	
 
 	/**

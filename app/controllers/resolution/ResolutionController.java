@@ -5,12 +5,14 @@ package controllers.resolution;
 
 import its.domain.Evaluator;
 import its.domain.impl.EvaluatorImpl;
+import its.feedback.Feedback;
 import its.pedagogical.Planning;
 import its.pedagogical.impl.PlanningImpl;
 
 import java.util.Calendar;
 
 import models.CorrectionType;
+import models.curriculum.Hint;
 import models.curriculum.Question;
 import models.curriculum.Solution;
 import models.users.Student;
@@ -50,7 +52,13 @@ public class ResolutionController extends Controller {
 	public static Result index(Long id){
 		QuestionService service = new QuestionServiceImpl();
 		Question question = service.findById(id);
-		return ok(views.html.resolution.index.render(question, form));
+		
+		String email = session().get("email");
+    	Student student = (Student) userService.findByEmail(email);
+		Feedback feedback = new Feedback();
+		feedback.startLog(question, student);
+		
+		return ok(views.html.resolution.index.render(question, form, null));
 	}
 	
 	public static Result submitCode(Long id){
@@ -64,27 +72,63 @@ public class ResolutionController extends Controller {
 		String[] vetor = request.body().asFormUrlEncoded().get("code");
 		String code = vetor[0];
 		
-		if(code == null || code.equals("")){
-    		DynamicForm formDeErro = form.fill(requestForm.data());
-			formDeErro.reject("Você deve escrever uma resposta antes de submeter a solução.");
-			flash("warning", "Você deve escrever uma resposta antes de submeter a solução.");
-			return redirect(controllers.resolution.routes.ResolutionController.index(id));
-    	}
+		Question question = questionService.findById(id);
 		
 		String email = session().get("email");
     	Student student = (Student) userService.findByEmail(email);
-    	
-    	Solution solution = new Solution();
-    	solution.setAnswer(code);
-    	solution.setEndTime(Calendar.getInstance()); //TODO
-    	solution.setQuestion(questionService.findById(id));
-    	solution.setUser(student);
-    	solution.setEvaluation(-1);//TODO NEGATIVO PARA SABER QUAIS QUESTÕES AINDA NÃO FORAM AVALIADAS MANUALMENTE (MUDAR APÓS JUIZ ONLINE)
-    	solutionService.save(solution);
 		
-    	flash("info", "Sua questão será avaliada manualmente pelo professor");
-		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
+		///////////////////////////////////////////////
+		String[] postAction = request().body().asFormUrlEncoded().get("action");
+		  if (postAction == null || postAction.length == 0) {
+			  return badRequest("You must provide a valid action");
+		  } else {
+		    String action = postAction[0];
+		    if ("text".equals(action)) {
+		    	System.out.println("\n" + "texto" + "\n");
+		    } else if ("video".equals(action)) {
+		    	System.out.println("\n" + "video" + "\n");
+		    } else if ("flow".equals(action)){
+		    	//inicio do flow
+		    	
+		    	System.out.println("\n" + "flow" + "\n");
+		    	Feedback feedback = new Feedback();
+		    	Hint hint = feedback.getImageFeedback(question, code, student);
+		    	System.out.println("\n" + hint.content + "\n");
+		    	return forbidden(views.html.resolution.index.render(question, form, hint));
+		    	//fim do flow
+		    	
+		    } else if ("code".equals(action)){
+		    	//inicio do code
+		    	if(code == null || code.equals("")){
+		    		DynamicForm formDeErro = form.fill(requestForm.data());
+					formDeErro.reject("Você deve escrever uma resposta antes de submeter a solução.");
+					flash("warning", "Você deve escrever uma resposta antes de submeter a solução.");
+					return redirect(controllers.resolution.routes.ResolutionController.index(id));
+		    	}
+		    	
+		    	Solution solution = new Solution();
+		    	solution.setAnswer(code);
+		    	solution.setEndTime(Calendar.getInstance()); //TODO
+		    	solution.setQuestion(questionService.findById(id));
+		    	solution.setUser(student);
+		    	solution.setEvaluation(-1);//TODO NEGATIVO PARA SABER QUAIS QUESTÕES AINDA NÃO FORAM AVALIADAS MANUALMENTE (MUDAR APÓS JUIZ ONLINE)
+		    	solutionService.save(solution);
+				
+		    	flash("info", "Sua questão será avaliada manualmente pelo professor");
+				return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
+				// Fim do code
+		    } else {
+		    	return badRequest("This action is not allowed");
+		    }
+		  }
+		  return TODO;
+		  ///////////////////////////////////////////////////////////
 	}
+	
+	/*
+	public static Result submitCodeFeedback(Long id, Long feedback){
+		return TODO;
+	}*/
 	
 	/**
 	 * 
@@ -105,7 +149,7 @@ public class ResolutionController extends Controller {
     		DynamicForm formDeErro = form.fill(requestForm.data());
 			formDeErro.reject("Você deve escrever uma resposta antes de submeter a solução.");
 			flash("warning", "Você deve escrever uma resposta antes de submeter a solução.");
-			return forbidden(views.html.resolution.index.render(questionService.findById(id), formDeErro));
+			return forbidden(views.html.resolution.index.render(questionService.findById(id), formDeErro, null));
     	}
     	
     	String email = session().get("email");
@@ -130,7 +174,7 @@ public class ResolutionController extends Controller {
     		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
     	}
     	
-///////////////////////////////////////////////////////////////////////////////////////
+    	///////////////////////////////////////////////////////////////////////////////////////
     	if(isCorrect){
     		flash("success", "Você acertou a solução da questão! Agora escolha outra e continue aprendendo!");
     		return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));
@@ -142,7 +186,7 @@ public class ResolutionController extends Controller {
 	}
 	
 	public static Result next(Long id){
-		QuestionService questionService = new QuestionServiceImpl();
+		/*QuestionService questionService = new QuestionServiceImpl();
 		Question question = questionService.findById(id);
 		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
 		Question nextQuestion = planning.nextQuestion(question.getTopics().get(0), id);
@@ -150,7 +194,7 @@ public class ResolutionController extends Controller {
 			flash("success", "Você finalizou todas as questões do módulo!");
 			return redirect(controllers.pedagogical.routes.PlanningController.index());
 		}
-		return ok(views.html.resolution.index.render(nextQuestion, form));
+		return ok(views.html.resolution.index.render(nextQuestion, form));*/
 //		Planning planning = new PlanningImpl(new QuestionRepositoryImpl());
 //		Question question = planning.nextQuestion(id);
 //		if(question == null){
@@ -158,6 +202,7 @@ public class ResolutionController extends Controller {
 //			return TODO;
 //		}
 //		return ok(views.html.resolution.index.render(question, form));
+		return TODO;
 	}
 
 }

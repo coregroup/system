@@ -1,4 +1,4 @@
-@(question: models.curriculum.Question, solutionForm: DynamicForm)
+@(question: models.curriculum.Question, solutionForm: DynamicForm, feedback: models.curriculum.Hint)
 
 @import helper._
 
@@ -13,6 +13,7 @@
 		.breakpoints {width: .8em;}
 		.breakpoint { color: #822; } </style>
 
+<div class="col-md-7">
 
 @form(controllers.resolution.routes.ResolutionController.submitCode(question.getId())) {
 	<fieldset>
@@ -58,9 +59,13 @@
 
     </article>		
 		<br>
-		<button class="btn btn-success">Submeter Solução</button>
+		<button class="btn btn-success" type="submit" name="action" value="code">Submeter Solução</button>
 	</fieldset>
-	
+
+</div>
+<div class="col-md-5">
+	@hint.index(feedback)         	
+</div>
 
 	
 }
