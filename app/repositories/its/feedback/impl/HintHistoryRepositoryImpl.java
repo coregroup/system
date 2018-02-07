@@ -79,8 +79,8 @@ public class HintHistoryRepositoryImpl implements HintHistoryRepository {
 
 	@Override
 	public List<HintHistory> findAllByUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		List<HintHistory> histories = Ebean.find(HintHistory.class).where().eq("user_id", user.getId().toString()).findList();
+		return histories;
 	}
 
 }

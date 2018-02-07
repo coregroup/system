@@ -76,6 +76,16 @@ public class ResolutionController extends Controller {
 		
 		String email = session().get("email");
     	Student student = (Student) userService.findByEmail(email);
+    	
+    	String[] firstLine = request.body().asFormUrlEncoded().get("firstLine");
+    	String[] lastLine = request.body().asFormUrlEncoded().get("lastLine");
+    	int line1 = 0;
+    	int line2 = 0;
+    	
+    	if(!firstLine[0].equals("") && !lastLine[0].equals("")){
+    		line1 = Integer.parseInt(firstLine[0]);
+    		line2 = Integer.parseInt(lastLine[0]);
+    	}
 		
 		///////////////////////////////////////////////
 		String[] postAction = request().body().asFormUrlEncoded().get("action");
@@ -84,16 +94,18 @@ public class ResolutionController extends Controller {
 		  } else {
 		    String action = postAction[0];
 		    if ("text".equals(action)) {
+		    	//inicio do text
 		    	System.out.println("\n" + "texto" + "\n");
+		    	Feedback feedback = new Feedback();
+		    	Hint hint = feedback.getTextFeedback(question, code, student, line1, line2);
+		    	return forbidden(views.html.resolution.index.render(question, form, hint));
+		    	//fim do text
 		    } else if ("video".equals(action)) {
 		    	System.out.println("\n" + "video" + "\n");
 		    } else if ("flow".equals(action)){
 		    	//inicio do flow
-		    	
-		    	System.out.println("\n" + "flow" + "\n");
 		    	Feedback feedback = new Feedback();
 		    	Hint hint = feedback.getImageFeedback(question, code, student);
-		    	System.out.println("\n" + hint.content + "\n");
 		    	return forbidden(views.html.resolution.index.render(question, form, hint));
 		    	//fim do flow
 		    	

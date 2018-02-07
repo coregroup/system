@@ -1,8 +1,12 @@
 @(feedback: models.curriculum.Hint)
 
 <h3>Escola um tipo de ajuda!</h3>
-<strong>Você pode receber dicas para criar o algoritmo ou para corrigir erros.	</strong>
+<strong>Indique a primeira e última linha do trecho de código que você deseja ajuda, ou deixa os campus em branco e receba uma ajuda mais
+geral sobre a solução da questão</strong>
 <br>
+Inicio: <input type="text" name="firstLine" id="firstLine">
+Fim: <input type="text" name="lastLine" id="lastLine">
+<br><br>
 <button class="btn btn-primary" type="submit" name="action" value="text">Texto</button>
 <button class="btn btn-primary" type="submit" name="action" value="video">Video</button>
 <button class="btn btn-primary" type="submit" name="action" value="flow">Fluxograma</button>
@@ -10,5 +14,7 @@
 <div class="pre-scrollable"> 
 	@if(feedback!=null){
 		@Html(feedback.getContent())
+	} else {
+		Não foi possível selecionar uma nova dica. Reveja o histórico de dicas!
 	}
 </div>

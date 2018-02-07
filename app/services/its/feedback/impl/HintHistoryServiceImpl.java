@@ -84,8 +84,7 @@ public class HintHistoryServiceImpl implements HintHistoryService {
 
 	@Override
 	public List<HintHistory> findAllByUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAllByUser(user);
 	}
 
 }
