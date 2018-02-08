@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import its.feedback.sim.CodeSimilarity;
+import its.feedback.sim.c.ASTSimImpl;
 import its.feedback.sim.c.CosineImpl;
 import its.feedback.sim.c.KeywordSimImpl;
 import models.HintsType;
@@ -34,7 +35,8 @@ public class Feedback {
 	
 	public Feedback() {
 		super();
-		this.similarity = new KeywordSimImpl();
+		//this.similarity = new KeywordSimImpl();
+		this.similarity = new ASTSimImpl();
 		this.service = new HintServiceImpl();
 		this.hintHistoryService = new HintHistoryServiceImpl();
 	}
