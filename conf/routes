@@ -95,6 +95,7 @@ POST	/question/code/save			controllers.questions.CodeQuestionController.save()
 # Hints
 GET		/question/:id/hint/create			controllers.hints.HintsController.create(id: Long)
 POST	/question/:id/hint/save				controllers.hints.HintsController.save(id: Long)
+GET		/question/:id/records				controllers.hints.FeedbackController.getRecords(id: Long)
 
 # Test Correction (Solutions)
 GET			/correction/uncorrected				controllers.resolution.TestCorrectionController.listAllUncorrectSolutions()

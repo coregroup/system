@@ -18,8 +18,8 @@ public class KeywordSimImpl implements CodeSimilarity {
 	 */
 	@Override
 	public double similarity(String modelo, String code) {
-		int qntModelo;
-		int qntCode;
+		int qntModelo = 0;
+		int qntCode = 0;
 		int totalModelo = 0;
 		double comuns = 0;
 		SearchKeys search = new SearchKeys();
@@ -28,6 +28,7 @@ public class KeywordSimImpl implements CodeSimilarity {
 		for (Map.Entry<String, String> word : keys.entrySet()) {
 			qntModelo = search.countExpression(modelo, word.getValue());
 			qntCode = search.countExpression(code, word.getValue());
+			//System.out.println("** " + word.getValue() + " | qntModelo = " + qntModelo + " | qntCode = " + qntCode);
 			totalModelo += qntModelo;
 			if(qntModelo <= qntCode)
 				comuns += qntModelo;

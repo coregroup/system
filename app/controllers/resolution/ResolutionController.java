@@ -125,6 +125,9 @@ public class ResolutionController extends Controller {
 		    	solution.setUser(student);
 		    	solution.setEvaluation(-1);//TODO NEGATIVO PARA SABER QUAIS QUESTÕES AINDA NÃO FORAM AVALIADAS MANUALMENTE (MUDAR APÓS JUIZ ONLINE)
 		    	solutionService.save(solution);
+		    	
+		    	Feedback feedback = new Feedback();
+		    	feedback.finishLog(solution.getQuestion(), student, solution);
 				
 		    	flash("info", "Sua questão será avaliada manualmente pelo professor");
 				return redirect(controllers.resolution.routes.ResolutionController.listAllQuestions(0, "name", "asc", ""));

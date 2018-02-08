@@ -1,0 +1,28 @@
+@(listRecords: List[models.its.HintHistory])
+
+<!-- Bootstrap core CSS -->
+    <link href='@routes.Assets.at("stylesheets/bootstrap.min.css")' rel="stylesheet">
+    
+<h2 id=panels-tables>Histórico de Dicas para a questão @listRecords.get(0).getQuestion().getId()
+<code>@listRecords.get(0).getQuestion().getName()</code>
+</h2>
+
+<table class=table> 
+			<thead> 
+				<tr> 
+					<th>#</th> 
+					<th>Conteúdo da Dica</th> 
+				</tr> 
+			</thead> 
+			
+			<tbody>
+				@for(record <- listRecords){
+					@if(record.getHint()!=null){
+						<tr> 
+							<th scope=row>#</th> 
+							<td>@Html(record.getHint().getContent())</td>
+						</tr> 
+					}
+				}
+			</tbody> 
+</table>

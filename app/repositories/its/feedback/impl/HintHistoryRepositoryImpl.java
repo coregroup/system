@@ -83,4 +83,10 @@ public class HintHistoryRepositoryImpl implements HintHistoryRepository {
 		return histories;
 	}
 
+	@Override
+	public List<HintHistory> findAllByUserAndQuestion(User user, Long questionId) {
+		List<HintHistory> records = Ebean.find(HintHistory.class).where().eq("user_id", user.getId().toString()).eq("question_id", questionId.toString()).findList();
+		return records;
+	}
+
 }

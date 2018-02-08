@@ -29,5 +29,7 @@ public interface HintHistoryRepository {
 	public List<HintHistory> findByHint(Long hintId);
 	
 	public List<HintHistory> findAllByUser(User user);
+	
+	public List<HintHistory> findAllByUserAndQuestion(User user, Long questionId);
 
 }

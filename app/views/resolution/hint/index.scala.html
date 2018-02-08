@@ -1,4 +1,4 @@
-@(feedback: models.curriculum.Hint)
+@(feedback: models.curriculum.Hint, question: models.curriculum.Question)
 
 <h3>Escola um tipo de ajuda!</h3>
 <strong>Indique a primeira e última linha do trecho de código que você deseja ajuda, ou deixa os campus em branco e receba uma ajuda mais
@@ -10,11 +10,13 @@ Fim: <input type="text" name="lastLine" id="lastLine">
 <button class="btn btn-primary" type="submit" name="action" value="text">Texto</button>
 <button class="btn btn-primary" type="submit" name="action" value="video">Video</button>
 <button class="btn btn-primary" type="submit" name="action" value="flow">Fluxograma</button>
+<a href="@controllers.hints.routes.FeedbackController.getRecords(question.getId())" target="_blank" class="btn btn-info">Histórico de Dicas</a>
+
 <br><br>
 <div class="pre-scrollable"> 
 	@if(feedback!=null){
 		@Html(feedback.getContent())
 	} else {
-		Não foi possível selecionar uma nova dica. Reveja o histórico de dicas!
+		<strong>Não foi possível selecionar uma nova dica. Reveja o histórico de dicas!</strong>
 	}
 </div>

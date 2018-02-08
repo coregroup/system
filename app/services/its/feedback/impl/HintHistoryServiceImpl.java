@@ -87,4 +87,9 @@ public class HintHistoryServiceImpl implements HintHistoryService {
 		return repository.findAllByUser(user);
 	}
 
+	@Override
+	public List<HintHistory> findAllByUserAndQuestion(User user, Long questionId) {
+		return repository.findAllByUserAndQuestion(user, questionId);
+	}
+
 }

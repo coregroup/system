@@ -14,6 +14,7 @@ import its.feedback.sim.c.KeywordSimImpl;
 import models.HintsType;
 import models.curriculum.Hint;
 import models.curriculum.Question;
+import models.curriculum.Solution;
 import models.its.HintHistory;
 import models.users.Student;
 import services.hints.HintService;
@@ -192,6 +193,20 @@ public class Feedback {
 		hintHistory.setSolutionInProgress(null);
 		hintHistory.setPartOfSolution(null);
 		hintHistory.setFinished(false);
+		hintHistory.setTime(Calendar.getInstance());
+		hintHistoryService.save(hintHistory);
+	}
+	
+	public void finishLog(Question question, Student user, Solution solution){
+		HintHistory hintHistory = new HintHistory();
+		hintHistory.setHint(null);
+		hintHistory.setStudent(user);
+		hintHistory.setSession(null);
+		hintHistory.setQuestion(question);
+		hintHistory.setFinalSolution(solution);
+		hintHistory.setSolutionInProgress(solution.getAnswer());
+		hintHistory.setPartOfSolution(null);
+		hintHistory.setFinished(true);
 		hintHistory.setTime(Calendar.getInstance());
 		hintHistoryService.save(hintHistory);
 	}
