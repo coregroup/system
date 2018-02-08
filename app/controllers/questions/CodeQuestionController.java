@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.CorrectionType;
 import models.curriculum.Question;
 import models.curriculum.Topic;
@@ -22,6 +23,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Http.Request;
 import play.mvc.Http.RequestBody;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.questions.CodeQuestionService;
 import services.questions.impl.CodeQuestionServiceImpl;
 import services.topics.TopicService;
@@ -31,6 +33,7 @@ import services.topics.impl.TopicServiceImpl;
  * @author priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class CodeQuestionController extends Controller{
 	
 	private static Form<Question> codeQuestionForm = Form.form(Question.class);

@@ -41,6 +41,37 @@ public class Feedback {
 		this.hintHistoryService = new HintHistoryServiceImpl();
 	}
 	
+	public Hint getVideoFeedback(Question question, String code, Student user, int firstLine, int lastLine){
+		List<Hint> hints = service.findByQuestionAndType(question.getId(), HintsType.VIDEO.name());
+		List<HintHistory> log = new ArrayList<>();
+		
+		log = hintHistoryService.findAllByUser(user);
+		
+		Hint hint;
+		
+		if(code.isEmpty() || code.equals("")){
+			hint = getWhenCodeEmpty(code, hints, log);
+			save(question, code, null, user, hint);
+			return hint;
+		} else {
+			String partOfcode;
+			
+			if(firstLine!=0 && lastLine!=0){
+				List<String> allLines = Arrays.asList(code.split("\n"));
+				List<String> selectedLines = new ArrayList<>();
+				for (int i = firstLine-1; i < lastLine; i++) {
+					selectedLines.add(allLines.get(i));
+				}
+				partOfcode = String.join("\n", selectedLines);
+			} else {
+				partOfcode = code;
+			}
+			hint = getByPartOfCode(partOfcode, hints, log);
+			save(question, code, partOfcode, user, hint);
+			return hint;
+		}
+	}
+	
 	public Hint getTextFeedback(Question question, String code, Student user, int firstLine, int lastLine){
 		List<Hint> hints = service.findByQuestionAndType(question.getId(), HintsType.TEXT.name());
 		List<HintHistory> log = new ArrayList<>();
@@ -160,10 +191,6 @@ public class Feedback {
 		hintHistory.setFinished(false);
 		hintHistory.setTime(Calendar.getInstance());
 		hintHistoryService.save(hintHistory);
-	}
-	
-	public void getVideoFeedback(String code){
-		
 	}
 	
 	public Hint getImageFeedback(Question question, String code, Student user){

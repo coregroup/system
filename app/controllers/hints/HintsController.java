@@ -5,6 +5,7 @@ package controllers.hints;
 
 import static play.data.Form.form;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.HintsType;
 import models.curriculum.Hint;
 import models.curriculum.Question;
@@ -15,6 +16,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.hints.HintService;
 import services.hints.impl.HintServiceImpl;
 import services.questions.QuestionService;
@@ -26,6 +28,7 @@ import services.users.impl.UserServiceImpl;
  * @author priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class HintsController extends Controller{
 	
 	private static DynamicForm form = Form.form();

@@ -3,16 +3,19 @@ package controllers.solutions;
 import java.util.ArrayList;
 import java.util.List;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.curriculum.Question;
 import models.curriculum.Solution;
 import models.users.Student;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.solutions.SolutionService;
 import services.solutions.impl.SolutionServiceImpl;
 import services.users.UserService;
 import services.users.impl.UserServiceImpl;
 
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class SolutionController extends Controller{
 	
 	public static Result listAllSolutions(){

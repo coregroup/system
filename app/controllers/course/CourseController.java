@@ -2,13 +2,16 @@ package controllers.course;
 
 import static play.data.Form.form;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.course.Course;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.course.CourseService;
 import services.course.impl.CourseServiceImpl;
 
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class CourseController extends Controller{
 	
 	private static Form<Course> courseForm = Form.form(Course.class);	

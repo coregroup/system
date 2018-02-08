@@ -8,12 +8,14 @@ import static play.data.Form.form;
 import java.util.Calendar;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import controllers.authentication.UserAuthenticatedSecured;
 import models.course.Session;
 import models.users.Student;
 import models.users.Teacher;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import repositories.users.impl.StudentRepositoryImpl;
 import services.course.CourseService;
 import services.course.impl.CourseServiceImpl;
@@ -28,6 +30,7 @@ import services.users.impl.UserServiceImpl;
  * @author priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class SessionController extends Controller {
 	
 	private static Form<Session> sessionForm = Form.form(Session.class);

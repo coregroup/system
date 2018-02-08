@@ -11,6 +11,7 @@ import its.pedagogical.impl.PlanningImpl;
 
 import java.util.Calendar;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.CorrectionType;
 import models.curriculum.Hint;
 import models.curriculum.Question;
@@ -21,6 +22,7 @@ import play.data.DynamicForm.Dynamic;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import play.mvc.Http.Request;
 import repositories.questions.impl.QuestionRepositoryImpl;
 import services.questions.QuestionService;
@@ -34,6 +36,7 @@ import services.users.impl.UserServiceImpl;
  * @author Priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class ResolutionController extends Controller {
 	
 	private static DynamicForm form = Form.form();
@@ -102,6 +105,9 @@ public class ResolutionController extends Controller {
 		    	//fim do text
 		    } else if ("video".equals(action)) {
 		    	System.out.println("\n" + "video" + "\n");
+		    	Feedback feedback = new Feedback();
+		    	Hint hint = feedback.getVideoFeedback(question, code, student, line1, line2);
+		    	return forbidden(views.html.resolution.index.render(question, form, hint));
 		    } else if ("flow".equals(action)){
 		    	//inicio do flow
 		    	Feedback feedback = new Feedback();
@@ -136,7 +142,7 @@ public class ResolutionController extends Controller {
 		    	return badRequest("This action is not allowed");
 		    }
 		  }
-		  return TODO;
+		  //return TODO;
 		  ///////////////////////////////////////////////////////////
 	}
 	

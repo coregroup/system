@@ -5,10 +5,12 @@ package controllers.hints;
 
 import java.util.List;
 
+import controllers.authentication.UserAuthenticatedSecured;
 import models.its.HintHistory;
 import models.users.Student;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import services.its.feedback.HintHistoryService;
 import services.its.feedback.impl.HintHistoryServiceImpl;
 import services.users.UserService;
@@ -18,6 +20,7 @@ import services.users.impl.UserServiceImpl;
  * @author priscylla
  *
  */
+@Security.Authenticated(UserAuthenticatedSecured.class)
 public class FeedbackController extends Controller{
 	
 	private static UserService userService = new UserServiceImpl();
