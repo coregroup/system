@@ -10,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import models.Knowledge;
+import models.curriculum.Topic;
 import play.data.validation.Constraints.Required;
 
 /**
@@ -33,6 +35,9 @@ public class StudentModelUnit {
 	
 	@ManyToOne
 	public StudentModel studentModel;
+	
+	@ManyToOne
+	public Topic topic;
 	
 	@Required
 	public double mastered;
@@ -56,6 +61,14 @@ public class StudentModelUnit {
 		this.knowledge = knowledge;
 	}
 
+	public StudentModel getStudentModel() {
+		return studentModel;
+	}
+
+	public void setStudentModel(StudentModel studentModel) {
+		this.studentModel = studentModel;
+	}
+
 	public double getMastered() {
 		return mastered;
 	}
@@ -71,6 +84,13 @@ public class StudentModelUnit {
 	public void setNotmastered(double notmastered) {
 		this.notmastered = notmastered;
 	}
-	
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
 
 }
