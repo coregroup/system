@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.avaje.ebean.Ebean;
 
-import models.its.StudentModel;
 import models.its.StudentModelUnit;
 import repositories.its.studentmodel.StudentModelUnitRepository;
 
