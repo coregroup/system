@@ -8,8 +8,10 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import models.course.Session;
+import models.its.StudentModel;
 
 
 /**
@@ -25,6 +27,9 @@ public class Student extends User{
 	@ManyToMany(mappedBy="students")
 	public List<Session> sessions;
 	
+	@OneToMany
+	public StudentModel studentModel;
+	
 	@Override
 	public String getType() {
 		return Student.class.getSimpleName();
@@ -38,4 +43,13 @@ public class Student extends User{
 		this.sessions = sessions;
 	}
 
+	public StudentModel getStudentModel() {
+		return studentModel;
+	}
+
+	public void setStudentModel(StudentModel studentModel) {
+		this.studentModel = studentModel;
+	}
+
+	
 }
