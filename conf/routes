@@ -136,7 +136,10 @@ GET		/modules					controllers.pedagogical.PlanningController.index()
 GET		/modules/one				controllers.experimento.Modulo1Controller.index()
 
 # Modelo do Estudante
-GET		/model/star					controllers.studentmodel.StarModelController.index()
+GET		/model/star				controllers.studentmodel.StarModelController.index()
+GET		/model/table				controllers.studentmodel.TableModelController.index()
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
