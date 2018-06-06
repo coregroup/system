@@ -1,17 +1,34 @@
-@(studentModel : models.its.StudentModel)
+@(studentModel : models.its.StudentModel, valores: List[Double])
 
-@import helper._ 
-
-<head>
-	<script src='@routes.Assets.at("studentmodel/javascripts/Chart.bundle.js")'></script>
-	<script src='@routes.Assets.at("studentmodel/javascripts/utils.js")'></script>
-</head>
-
-@dashboard.index("student") {
-
+	
+	
+	@import helper._
+	
+	<head>
+		<script
+			src='@routes.Assets.at("studentmodel/javascripts/Chart.bundle.js")'></script>
+		<script src='@routes.Assets.at("studentmodel/javascripts/utils.js")'></script>
+	</head>
+	
+	@dashboard.index("student") {
+	
 	<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Modelo: Vertical Bar</h1>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="#">Modelo do Estudante</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+	<!-- End Page Heading -->
+	
 	<div class="container" style="padding-top: 10px;" align="center">
-		<div id="container" style="width: 75%;">
+		<div id="container" style="width: 90%;">
 			<canvas id="canvas"></canvas>
 		</div>
 		<div align="left">
@@ -20,12 +37,109 @@
 			<button class="btn btn-dark" id="removeData">Ocultar assunto</button>
 		</div>
 	</div>
-	<script src='@routes.Assets.at("studentmodel/javascripts/verticalBar.js")'></script>
-	<script src='@routes.Assets.at("studentmodel/javascripts/jquery-3.2.1.slim.min.js")'></script>
-	<script src='@routes.Assets.at("studentmodel/javascripts/popper.min.js")'></script>
-	<script src='@routes.Assets.at("studentmodel/bootstrap/js/bootstrap.min.js")'></script>
+	<script>
+		
+		var MONTHS = [@for(unit <- studentModel.getStudentModelUnits()){
+			'@unit.topic.getName()',
+		} 
+			
+		];
 	
-	<!-- End Page Heading -->
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels : [ 
+				'@studentModel.getStudentModelUnits.get(0).getTopic.getName()',
+				'@studentModel.getStudentModelUnits.get(1).getTopic.getName()',
+				'@studentModel.getStudentModelUnits.get(2).getTopic.getName()'
+			] ,
+			datasets : [
+					{
+						label : 'Aluno',
+						backgroundColor : color(window.chartColors.red).alpha(0.5)
+								.rgbString(),
+						borderColor : window.chartColors.red,
+						borderWidth : 1,
+						data : [@for(valor <- valores){
+								'@valor.toString()',
+							}
+							]
+					},
+					{
+						label : 'Turma',
+						backgroundColor : color(window.chartColors.blue).alpha(0.5)
+								.rgbString(),
+						borderColor : window.chartColors.blue,
+						borderWidth : 1,
+						data : [ 70, 92, 80, 90, 97, 75 ]
+					},
+					{
+						label : 'Conteúdos Ministrados',
+						backgroundColor : color(window.chartColors.green)
+								.alpha(0.5).rgbString(),
+						borderColor : window.chartColors.green,
+						borderWidth : 1,
+						data : [ 100, 100, 100, 100, 100, 100 ]
+					} ]
+		};
+	
+		window.onload = function() {
+			var ctx = document.getElementById("canvas").getContext("2d");
+			window.myBar = new Chart(ctx, {
+				type : 'bar',
+				data : barChartData,
+				options : {
+					responsive : true,
+					legend : {
+						position : 'right',
+					},
+					title : {
+						display : true,
+						text : 'Modelo de Gráfico'
+					}
+				}
+			});
+	
+		};
+	
+		document
+				.getElementById('addData')
+				.addEventListener(
+						'click',
+						function() {
+							if (barChartData.datasets.length > 0) {
+								if (barChartData.labels.length < @studentModel.getStudentModelUnits.size()) {
+									var month = MONTHS[barChartData.labels.length
+											% (MONTHS.length)];
+									barChartData.labels.push(month);
+								} else {
+									window
+											.alert("Não existe mais nenhum assunto cadastrado");
+								}
+								window.myBar.update();
+							}
+						});
+	
+		document.getElementById('removeData').addEventListener('click', function() {
+			barChartData.labels.splice(-1, 1); // remove the label first
+	
+			window.myBar.update();
+		});
+	
+		Chart.scaleService.updateScaleDefaults('linear', {
+			ticks : {
+				min : 0,
+				max : 100
+			}
+		});
+	</script>
+	<script
+		src='@routes.Assets.at("studentmodel/javascripts/jquery-3.2.1.slim.min.js")'></script>
+	<script
+		src='@routes.Assets.at("studentmodel/javascripts/popper.min.js")'></script>
+	<script
+		src='@routes.Assets.at("studentmodel/bootstrap/js/bootstrap.min.js")'></script>
+	
+
 
 
 }
