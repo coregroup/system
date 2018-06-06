@@ -136,10 +136,11 @@ GET		/modules					controllers.pedagogical.PlanningController.index()
 GET		/modules/one				controllers.experimento.Modulo1Controller.index()
 
 # Modelo do Estudante
-GET		/model/star				controllers.studentmodel.StarModelController.index()
+GET		/model/star					controllers.studentmodel.StarModelController.index()
 GET		/model/table				controllers.studentmodel.TableModelController.index()
-GET		/model/verticalColumn			controllers.studentmodel.VerticalColumnModelController.index()
 GET		/model/verticalBar			controllers.studentmodel.VerticalBarModelController.index()
+GET		/model/horizontalBar		controllers.studentmodel.HorizontalBarModelController.index()
+
 
 
 

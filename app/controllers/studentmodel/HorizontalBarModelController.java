@@ -9,12 +9,14 @@ import services.its.studentmodel.StudentModelService;
 import services.its.studentmodel.impl.StudentModelServiceImpl;
 
 @Security.Authenticated(UserAuthenticatedSecured.class)
-public class VerticalColumnModelController extends Controller {
-	
-	public static Result index() {
-	StudentModelService service = new StudentModelServiceImpl();
-	StudentModel studentModel = service.findById(new Long(1));
-	return ok(views.html.studentmodel.verticalColumn.render());
-	}
+public class HorizontalBarModelController extends Controller {
 
+	public static Result index() {
+		StudentModelService service = new StudentModelServiceImpl();
+		StudentModel studentModel =  service.findById(new Long(1));
+		return ok(views.html.studentmodel.horizontalBar.render(studentModel));
+
+		
+	}
+		
 }

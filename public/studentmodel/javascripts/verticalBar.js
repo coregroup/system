@@ -2,7 +2,7 @@ var MONTHS = [ "Expressões", "Estruturas", "Entrada e Saída de Dados",
 				"Tipo de Dados", "Declaração", "Recursividade" ];
 
 var MONTHS = [ 
-	@for()
+	
 ];
 		var color = Chart.helpers.color;
 		var barChartData = {
