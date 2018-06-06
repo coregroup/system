@@ -138,6 +138,7 @@ GET		/modules/one				controllers.experimento.Modulo1Controller.index()
 # Modelo do Estudante
 GET		/model/star				controllers.studentmodel.StarModelController.index()
 GET		/model/table				controllers.studentmodel.TableModelController.index()
+GET		/model/verticalBar		controllers.studentmodel.VerticalBarModelController.index()
 
 
 
