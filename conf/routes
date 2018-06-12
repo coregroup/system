@@ -140,6 +140,8 @@ GET		/model/star					controllers.studentmodel.StarModelController.index()
 GET		/model/table				controllers.studentmodel.TableModelController.index()
 GET		/model/verticalBar			controllers.studentmodel.VerticalBarModelController.index()
 GET		/model/horizontalBar		controllers.studentmodel.HorizontalBarModelController.index()
+GET		/model/radar				controllers.studentmodel.RadarModelController.index()
+
 
 
 

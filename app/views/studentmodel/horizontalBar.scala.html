@@ -1,4 +1,4 @@
-@(studentModel : models.its.StudentModel)
+@(studentModel : models.its.StudentModel, value: List[Double])
 
 @import helper._
 
@@ -33,99 +33,106 @@
                     <button class="btn btn-dark" id="removeData">Ocultar assunto</button>
                 </div>
             </div>
-            <script>
-            var MONTHS = ["Expressões", "Estruturas", "Entrada e Saída de Dados", "Tipo de Dados", "Declaração", "Recursividade"];
-var color = Chart.helpers.color;
-var horizontalBarChartData = {
-    labels: ["Expressões", "Estruturas", "Entrada e Saída de Dados"],
-    datasets: [{
-        label: 'Aluno',
-        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-        borderColor: window.chartColors.red,
-        borderWidth: 1,
-        data: [        	      
-            40,        
-            92,
-            85,
-            95,
-            92,
-            74    
-        ]
-    }, {
-        label: 'Turma',
-        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-        borderColor: window.chartColors.blue,
-        data: [
-            70,
-            92,
-            80,
-            90,
-            97,
-            75
-        ]
-    }]
+	        <script>
+                var MONTHS = [@for(unit <- studentModel.getStudentModelUnits()){
+        			'@unit.topic.getName()',
+        		} 
+                ];
+                var color = Chart.helpers.color;
+                var horizontalBarChartData = {
+                    labels: [
+                    	'@studentModel.getStudentModelUnits.get(0).getTopic.getName()',
+        				'@studentModel.getStudentModelUnits.get(1).getTopic.getName()',
+        				'@studentModel.getStudentModelUnits.get(2).getTopic.getName()'
+        				],
+                    datasets: [{
+                        label: 'Aluno',
+                        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.red,
+                        borderWidth: 1,
+                        data: [
+                        	@for(valores <- value){
+								'@valores.toString()',
+							}
+                        ]
+                    }, {
+                        label: 'Turma',
+                        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                        borderColor: window.chartColors.blue,
+                        data: [
+                            70,
+                            92,
+                            80,
+                            90,
+                            97,
+                            75,
+                            
+                        ]
+                    }]
 
-};
+                };
 
-window.onload = function() {
-    var ctx = document.getElementById("canvas").getContext("2d");
-    window.myHorizontalBar = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: horizontalBarChartData,
-        options: {
-            // Elements options apply to all of the options unless overridden in a dataset
-            // In this case, we are setting the border of each horizontal bar to be 2px wide
-            elements: {
-                rectangle: {
-                    borderWidth: 2,
-                }
-            },
-            responsive: true,
-            legend: {
-                position: 'right',
-            },
-            title: {
-                display: true,
-                text: 'Modelo de gráfico Horizontal'
-            }
-        }
-    });
+                window.onload = function() {
+                    var ctx = document.getElementById("canvas").getContext("2d");
+                    window.myHorizontalBar = new Chart(ctx, {
+                        type: 'horizontalBar',
+                        data: horizontalBarChartData,
+                        options: {
+                            // Elements options apply to all of the options unless overridden in a dataset
+                            // In this case, we are setting the border of each horizontal bar to be 2px wide
+                            elements: {
+                                rectangle: {
+                                    borderWidth: 2,
+                                }
+                            },
+                            responsive: true,
+                            legend: {
+                                position: 'right',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Modelo de gráfico Horizontal'
+                            }
+                        }
+                    });
 
-};
-
-
-var colorNames = Object.keys(window.chartColors);
-
-document.getElementById('addData').addEventListener('click', function() {
-    if (horizontalBarChartData.datasets.length > 0) {
-        if (horizontalBarChartData.labels.length < 6) {
-        var month = MONTHS[horizontalBarChartData.labels.length % MONTHS.length];
-        horizontalBarChartData.labels.push(month);
-
-        window.myHorizontalBar.update();
-        }
-        else{
-            window.alert("Não existe mais nenhum assunto cadastrado");
-        }
-    }
-});
+                };
 
 
-document.getElementById('removeData').addEventListener('click', function() {
-    horizontalBarChartData.labels.splice(-1, 1); // remove the label first
+                var colorNames = Object.keys(window.chartColors);
 
-    window.myHorizontalBar.update();
-});
+                document.getElementById('addData').addEventListener('click', function() {
+                    if (horizontalBarChartData.datasets.length > 0) {
+                        if (horizontalBarChartData.labels.length < @studentModel.studentModelUnits.size()) {
+                        var month = MONTHS[horizontalBarChartData.labels.length % MONTHS.length];
+                        horizontalBarChartData.labels.push(month);
 
-Chart.scaleService.updateScaleDefaults('linear', {
-    ticks: {
-        min: 0,
-        max: 100
-    }
-});          
-</script>
-    <!--  <script src='@routes.Assets.at("studentmodel/javascripts/horizontalBar.js")'></script>-->      
+                        window.myHorizontalBar.update();
+                        }
+                        else{
+                            window.alert("Não existe mais nenhum assunto cadastrado");
+                        }
+                    }
+                });
+
+
+                document.getElementById('removeData').addEventListener('click', function() {
+                    horizontalBarChartData.labels.splice(-1, 1); // remove the label first
+
+                    window.myHorizontalBar.update();
+                });
+
+                Chart.scaleService.updateScaleDefaults('linear', {
+                    ticks: {
+                        min: 0,
+                        max: 100
+                    }
+                });
+
+            </script>
  	<script src='@routes.Assets.at("studentmodel/javascripts/jquery-3.2.1.slim.min.js")'></script>
 	<script src='@routes.Assets.at("studentmodel/javascripts/popper.min.js")'></script>
 	<script src='@routes.Assets.at("studentmodel/bootstrap/js/bootstrap.min.js")'></script>
+	
+	
 }

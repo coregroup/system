@@ -1,0 +1,102 @@
+@(studentModel : models.its.StudentModel, valores: List[Double])
+
+@import helper._
+
+<head>
+
+	<script src='@routes.Assets.at("studentmodel/javascripts/Chart.bundle.js")'></script>
+	<script src='@routes.Assets.at("studentmodel/javascripts/utils.js")'></script>
+
+</head>
+
+@dashboard.index("student") {
+
+<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Modelo: Radar</h1>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-dashboard"></i><a href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+                            <li>
+                                <i class="fa fa-question-circle"></i>
+                                <a href="#"> Modelo do Estudante </a>
+                            </li>        
+                        </ol>
+                    </div>
+                </div>         
+	<!-- End Page Heading -->
+	
+	<div class="container" style="padding-top: 10px;" align="center">	
+                <div style="width:60%">
+                    <canvas id="canvas"></canvas>
+                </div>
+            </div>
+	
+	
+	   <script>
+            var randomScalingFactor = function() {
+                return Math.round(Math.random() * 100);
+            };
+
+            var color = Chart.helpers.color;
+            var config = {
+                type: 'radar',
+                data: {
+                    labels: [@for(unit <- studentModel.getStudentModelUnits()){
+            			'@unit.topic.getName()',
+            		} ],
+                    datasets: [{
+                        label: "Aluno",
+                        backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
+                        borderColor: window.chartColors.red,
+                        pointBackgroundColor: window.chartColors.red,
+                        data: [
+                        	@for(valor <- valores){
+								'@valor.toString()',
+							}
+
+                        ]
+                    }, {
+                        label: "Turma",
+                        backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
+                        borderColor: window.chartColors.blue,
+                        pointBackgroundColor: window.chartColors.blue,
+                        data: [
+                            
+                            67,
+                            93,
+                            76,
+                            50,
+                            32,
+                            77
+                        ]
+                    },]
+                },
+                options: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Gráfico Radar'
+                    },
+                    scale: {
+                      ticks: {
+                        beginAtZero: true
+                      }
+                    }
+                }
+            };
+
+            window.onload = function() {
+                window.myRadar = new Chart(document.getElementById("canvas"), config);
+            };
+
+           
+            </script>
+	<script src='@routes.Assets.at("studentmodel/javascripts/jquery-3.2.1.slim.min.js")'></script>
+	<script src='@routes.Assets.at("studentmodel/javascripts/popper.min.js")'></script>
+	<script src='@routes.Assets.at("studentmodel/bootstrap/js/bootstrap.min.js")'></script>
+	
+	
+}
