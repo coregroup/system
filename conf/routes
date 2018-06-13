@@ -141,6 +141,8 @@ GET		/model/table				controllers.studentmodel.TableModelController.index()
 GET		/model/verticalBar			controllers.studentmodel.VerticalBarModelController.index()
 GET		/model/horizontalBar		controllers.studentmodel.HorizontalBarModelController.index()
 GET		/model/radar				controllers.studentmodel.RadarModelController.index()
+#GET		/model/gaugeConnectors		controllers.studentmodel.GaugeConnectorsModelController.index()
+
 
 
 
