@@ -141,11 +141,8 @@ GET		/model/table				controllers.studentmodel.TableModelController.index()
 GET		/model/verticalBar			controllers.studentmodel.VerticalBarModelController.index()
 GET		/model/horizontalBar		controllers.studentmodel.HorizontalBarModelController.index()
 GET		/model/radar				controllers.studentmodel.RadarModelController.index()
-
-GET		/model/gaugeConnectors		controllers.studentmodel.GaugeConnectorsModelController.index()
-
-
 GET		/model/treemap				controllers.studentmodel.TreemapModelController.index()
+GET		/model/smile				controllers.studentmodel.SmileModelController.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

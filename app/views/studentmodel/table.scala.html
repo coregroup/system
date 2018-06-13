@@ -1,6 +1,6 @@
 @(studentModel : models.its.StudentModel)
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src='@routes.Assets.at("studentmodel/javascripts/loader.js")'></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['table']});
       google.charts.setOnLoadCallback(drawTable);
