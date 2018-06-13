@@ -1,0 +1,53 @@
+@(studentModel : models.its.StudentModel)
+
+@import helper._ 
+
+<head>
+	<link href='@routes.Assets.at("studentmodel/gauge.css")' rel="stylesheet"/>
+	<script src='@routes.Assets.at("studentmodel/javascripts/jquery.min.js")'></script>
+</head>
+
+@dashboard.index("student") {
+
+<!-- Page Heading -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Modelo: Gauge</h1>
+			<ol class="breadcrumb">
+				<li><i class="fa fa-dashboard"></i><a
+					href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+				<li><i class="fa fa-question-circle"></i> <a href="#">Modelo
+						do Estudante</a></li>
+			</ol>
+		</div>
+	</div>
+	<!-- End Page Heading -->
+
+	@for(unit <- studentModel.getStudentModelUnits()){
+	<div class="container" style="display: inline-block; width: 200px;">
+		<div class="guage-holder">    
+			<div class="circle-mask">
+				<div class="circle">
+					<div class="circle-inner"></div> 
+	      		</div>
+	    	</div>
+	    	<div class="percentage"></div>
+	    	<span>@unit.topic.getName()</span>
+	    	<div class="gauge-copy"></div>
+	  	</div>
+	</div>
+	<script>
+      $(function(){
+        var dVal = @unit.getMastered() * 100;
+        var newVal = dVal * 1.8 - 45;
+        $('.circle-inner, .gauge-copy').css({
+          'transform' : 'rotate(' + newVal + 'deg)' 
+        });
+        $('.gauge-copy').css({
+          'transform' : 'translate(-50%, -50%) rotate(' + dVal * 1.8 + 'deg)'
+        });
+        $('.percentage').text(dVal + ' %');
+      });
+    </script>
+	}
+}
