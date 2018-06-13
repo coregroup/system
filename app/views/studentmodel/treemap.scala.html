@@ -1,0 +1,64 @@
+@(studentModel : models.its.StudentModel)
+
+@import helper._ 
+
+<head>
+
+    <title>Mapa</title>
+    <link href='@routes.Assets.at("studentmodel/font-awesome-4.7.0/css/font-awesome.min.css")' rel="stylesheet"/>
+    <script type="text/javascript"  src='@routes.Assets.at("studentmodel/javascripts/loader.js")'></script>
+    
+    <script type="text/javascript">
+		google.charts.load('current', {
+			'packages' : [ 'treemap' ]
+		});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+					[ 'Location', 'Parent', 'Market trade volume (size)',
+							'Market increase/decrease (color)' ],
+					[ 'Programação', null, 0, 0 ],
+					@for(unit <- studentModel.getStudentModelUnits()){
+						[ '@unit.topic.getName()', '@unit.topic.getFatherTopic.getName()', 10, @unit.getMastered() ],
+					}		
+					]);
+	
+			tree = new google.visualization.TreeMap(document
+					.getElementById('chart_div'));
+	
+			tree.draw(data, {
+				minColor : '#f00',
+				midColor : '#ddd',
+				maxColor : '#0d0',
+				headerHeight : 15,
+				fontColor : 'black',
+				showScale : true
+			});
+	
+		}
+	</script>
+    
+</head>
+
+@dashboard.index("student") {
+
+<!-- Page Heading -->
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">Modelo: TreeMap</h1>
+		<ol class="breadcrumb">
+			<li><i class="fa fa-dashboard"></i><a
+				href="@routes.DashboardController.dashboard()"> Dashboard</a></li>
+			<li><i class="fa fa-question-circle"></i> <a href="#">Modelo
+					do Estudante</a></li>
+		</ol>
+	</div>
+</div>
+<!-- End Page Heading -->
+
+<div class="container" style="padding-top: 10px;" align="center">
+      <div id="chart_div" style="width: 1000px; height: 600px;"></div>
+      <input class="btn btn-dark" type="button" value="Recarregar" onClick="history.go(0)">
+</div>
+
+}
